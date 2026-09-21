@@ -1,0 +1,36 @@
+TBT TOURS & TRAVEL - GA4 WHATSAPP TRACKING
+
+Google Analytics property: TBT TOURS & TRAVEL
+Measurement ID: G-9CV67QT4X3
+
+EVENTS ADDED
+
+1. whatsapp_click
+   Records every WhatsApp link/button click on every website page.
+   The homepage booking form also records one whatsapp_click when submitted.
+
+2. enquiry_submit
+   Records submission of the homepage Quick WhatsApp Booking form.
+   No guest name, phone number, pickup location, date or notes are sent to Analytics.
+
+MARK THE BOOKING ACTION AS A KEY EVENT
+
+1. Open Google Analytics.
+2. Open the TBT TOURS & TRAVEL property.
+3. Go to Admin, then Key events.
+4. Choose New key event.
+5. Enter this exact event name: whatsapp_click
+6. Save it.
+
+Keep enquiry_submit as a normal event. This prevents one booking-form submission
+from being counted twice as a booking conversion.
+
+TEST AFTER NETLIFY DEPLOYMENT
+
+1. Open the website in a private browser window.
+2. Open Google Analytics Realtime.
+3. Click one WhatsApp button.
+4. Submit the Quick WhatsApp Booking form once.
+5. Confirm whatsapp_click and enquiry_submit appear in Realtime.
+
+Normal Analytics reports can take up to 24 hours to show new events.
