@@ -154,33 +154,38 @@ button,input,select,textarea{font:inherit}
   </script>
 
   <style id="popular-services-spacing">
-    #popular-bali-services{padding-top:86px;padding-bottom:92px}
-    #popular-bali-services .section-heading{max-width:760px;margin-bottom:40px}
-    #popular-bali-services .section-heading p:last-child{margin-top:14px}
+    #popular-bali-services{padding-top:92px;padding-bottom:100px}
+    #popular-bali-services .section-heading{max-width:760px;margin-bottom:48px}
+    #popular-bali-services .section-heading p:last-child{margin-top:16px}
     #popular-bali-services .feature-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:28px 24px;
+      column-gap:32px;
+      row-gap:34px;
       align-items:stretch;
     }
     #popular-bali-services .feature-card{
       display:flex;
       flex-direction:column;
-      gap:10px;
-      min-height:150px;
-      padding:28px 26px;
+      gap:14px;
+      min-height:164px;
+      padding:30px 28px;
       border-radius:22px;
     }
-    #popular-bali-services .feature-card strong{font-size:1.08rem;line-height:1.3}
-    #popular-bali-services .feature-card span{line-height:1.65}
+    #popular-bali-services .feature-card strong{font-size:1.1rem;line-height:1.35}
+    #popular-bali-services .feature-card span{line-height:1.7}
     @media(max-width:900px){
-      #popular-bali-services .feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+      #popular-bali-services .feature-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        column-gap:26px;
+        row-gap:28px;
+      }
     }
     @media(max-width:620px){
-      #popular-bali-services{padding-top:64px;padding-bottom:70px}
-      #popular-bali-services .section-heading{margin-bottom:30px}
-      #popular-bali-services .feature-grid{grid-template-columns:1fr;gap:18px}
-      #popular-bali-services .feature-card{min-height:0;padding:24px 22px}
+      #popular-bali-services{padding-top:68px;padding-bottom:76px}
+      #popular-bali-services .section-heading{margin-bottom:34px}
+      #popular-bali-services .feature-grid{grid-template-columns:1fr;gap:22px}
+      #popular-bali-services .feature-card{min-height:0;padding:26px 24px;gap:12px}
     }
   </style>
 
