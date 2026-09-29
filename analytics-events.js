@@ -82,11 +82,13 @@
       link_text: label
     });
 
-    // Treat opening WhatsApp from a booking CTA as a lead initiation.
-    // This uses Google's recommended lead-generation event name.
+    // Keep the same click_source parameter on generate_lead as whatsapp_click.
+    // This makes the exact CTA source visible consistently in GA4 Realtime/DebugView.
     sendAnalyticsEvent('generate_lead', {
+      click_source: source,
       lead_source: 'whatsapp_' + source,
-      contact_method: 'whatsapp'
+      contact_method: 'whatsapp',
+      link_text: label
     });
 
     if (link.href.indexOf('wa.me/') !== -1) {
@@ -122,8 +124,10 @@
     });
 
     sendAnalyticsEvent('generate_lead', {
+      click_source: 'booking_form',
       lead_source: 'quick_whatsapp_booking_form',
       contact_method: 'whatsapp',
+      link_text: 'Send details on WhatsApp',
       service: serviceValue
     });
 
