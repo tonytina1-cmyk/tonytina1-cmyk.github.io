@@ -82,8 +82,7 @@
       link_text: label
     });
 
-    // Keep the same click_source parameter on generate_lead as whatsapp_click.
-    // This makes the exact CTA source visible consistently in GA4 Realtime/DebugView.
+    // Treat opening WhatsApp as lead initiation, not a confirmed message sent.
     sendAnalyticsEvent('generate_lead', {
       click_source: source,
       lead_source: 'whatsapp_' + source,
@@ -112,9 +111,14 @@
     var service = document.getElementById('service');
     var serviceValue = service ? service.value : 'unknown';
 
-    sendAnalyticsEvent('enquiry_submit', {
+    // This form does not send an email or a WhatsApp message itself. It opens
+    // WhatsApp with a pre-filled message, so record a handoff rather than a
+    // confirmed enquiry submission. This prevents false enquiry_submit alerts.
+    sendAnalyticsEvent('whatsapp_form_open', {
       form_id: 'waForm',
       form_name: 'quick_whatsapp_booking',
+      click_source: 'booking_form',
+      handoff_status: 'whatsapp_opened',
       service: serviceValue
     });
 
