@@ -161,6 +161,15 @@
     hero.parentNode.insertBefore(section, hero.nextSibling);
   }
 
+  function prioritiseHomepageSections() {
+    if (!isHomepage()) return;
+    var tours = document.getElementById('tours');
+    var transfers = document.getElementById('transfers');
+    if (!tours || !transfers || tours.parentNode !== transfers.parentNode) return;
+    if (transfers.nextElementSibling === tours) return;
+    tours.parentNode.insertBefore(transfers, tours);
+  }
+
   function addQuickChoices() {
     if (!isHomepage() || document.getElementById('tbt-quick-choices')) return;
     var tours = document.getElementById('tours');
@@ -214,6 +223,7 @@
     if (isHomepage()) addHomepageStyles();
     createMeetBudiSection();
     addQuickChoices();
+    prioritiseHomepageSections();
     insertNuanuTourCard();
     enhanceWhatsAppBookingForm();
   }
