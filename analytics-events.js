@@ -89,7 +89,55 @@
     }
   }
 
+  function findBudiIntroSection() {
+    var direct = document.querySelector('#meet-budi, #about-budi, #budi, #about');
+    if (direct && !direct.closest('header')) return direct;
+
+    var headings = document.querySelectorAll('main h2, main h3, section h2, section h3');
+    for (var i = 0; i < headings.length; i += 1) {
+      var text = (headings[i].textContent || '').trim().toLowerCase();
+      if (text.indexOf('meet budi') !== -1 || text.indexOf('about budi') !== -1 || text.indexOf('budi bali driver') !== -1 || text.indexOf('your bali driver') !== -1) {
+        var section = headings[i].closest('section');
+        if (section && section.id !== 'tours' && section.id !== 'transfers' && section.id !== 'contact') return section;
+      }
+    }
+    return null;
+  }
+
+  function improveHomepageFlow() {
+    var path = window.location.pathname;
+    if (path !== '/' && path !== '/index.html') return;
+
+    var tours = document.getElementById('tours');
+    if (!tours || !tours.parentNode) return;
+
+    var budiIntro = findBudiIntroSection();
+    if (budiIntro && budiIntro !== tours && budiIntro.parentNode === tours.parentNode) {
+      tours.parentNode.insertBefore(budiIntro, tours);
+    }
+
+    if (document.getElementById('tbt-quick-choices')) return;
+
+    var quick = document.createElement('section');
+    quick.id = 'tbt-quick-choices';
+    quick.setAttribute('aria-label', 'Choose your Bali service');
+    quick.style.cssText = 'max-width:1080px;margin:22px auto 34px;padding:0 20px;';
+    quick.innerHTML =
+      '<div style="text-align:center;margin-bottom:16px;">' +
+        '<div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#1d6f4a;">HOW CAN BUDI HELP?</div>' +
+        '<h2 style="margin:7px 0 0;font-family:Playfair Display,serif;font-size:clamp(25px,4vw,34px);line-height:1.15;color:#071b2d;">Choose what you need</h2>' +
+      '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">' +
+        '<a data-lead-source="quick_private_driver" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20in%20Bali." target="_blank" rel="noopener" style="display:block;padding:18px;border-radius:18px;background:#071b2d;color:#fff;text-decoration:none;text-align:center;font-weight:800;box-shadow:0 10px 28px rgba(7,27,45,.12);">Private Driver<br><span style="font-size:13px;font-weight:500;opacity:.82;">Chat with Budi</span></a>' +
+        '<a href="#transfers" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Airport Transfers<br><span style="font-size:13px;font-weight:500;color:#66717f;">Pickup &amp; drop-off</span></a>' +
+        '<a href="#tours" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Bali Tours<br><span style="font-size:13px;font-weight:500;color:#66717f;">Explore with Budi</span></a>' +
+      '</div>';
+
+    tours.parentNode.insertBefore(quick, tours);
+  }
+
   function initialisePageEnhancements() {
+    improveHomepageFlow();
     insertNuanuTourCard();
     enhanceWhatsAppBookingForm();
   }
@@ -112,7 +160,6 @@
       link_text: label
     });
 
-    // Treat opening WhatsApp as lead initiation, not a confirmed message sent.
     sendAnalyticsEvent('generate_lead', {
       click_source: source,
       lead_source: 'whatsapp_' + source,
@@ -141,9 +188,6 @@
     var service = document.getElementById('service');
     var serviceValue = service ? service.value : 'unknown';
 
-    // This form does not send an email or a WhatsApp message itself. It opens
-    // WhatsApp with a pre-filled message, so record a handoff rather than a
-    // confirmed enquiry submission. This prevents false enquiry_submit alerts.
     sendAnalyticsEvent('whatsapp_form_open', {
       form_id: 'waForm',
       form_name: 'quick_whatsapp_booking',
