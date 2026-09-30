@@ -55,13 +55,14 @@
     var style = document.createElement('style');
     style.id = 'tbt-home-layout-style';
     style.textContent =
-      '.tbt-compact-hero{min-height:auto!important;padding-bottom:34px!important;}' +
+      '.tbt-compact-hero{min-height:auto!important;padding-bottom:30px!important;background-size:100% auto!important;background-position:center center!important;background-repeat:no-repeat!important;background-color:#071b2d!important;}' +
       '.tbt-compact-hero h1{margin-bottom:16px!important;}' +
-      '#meet-budi{background:#fff!important;color:#071b2d!important;padding:54px 20px 42px!important;position:relative;z-index:2;}' +
-      '#meet-budi .tbt-budi-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.1fr);gap:42px;align-items:center;}' +
-      '#meet-budi .tbt-budi-photo{border-radius:24px;overflow:hidden;box-shadow:0 16px 40px rgba(7,27,45,.14);background:#f3f3f3;}' +
-      '#meet-budi .tbt-budi-photo img{display:block!important;width:100%!important;height:auto!important;max-height:520px!important;object-fit:cover!important;margin:0!important;border-radius:0!important;}' +
-      '@media(max-width:760px){.tbt-compact-hero{padding-top:48px!important;padding-bottom:26px!important}.tbt-compact-hero h1{font-size:clamp(42px,12vw,64px)!important;line-height:1.02!important}#meet-budi{padding:34px 18px 30px!important}#meet-budi .tbt-budi-inner{grid-template-columns:1fr!important;gap:24px!important}#meet-budi .tbt-budi-photo img{max-height:430px!important}}';
+      '#meet-budi{background:#fff!important;color:#071b2d!important;padding:42px 20px 32px!important;position:relative;z-index:2;}' +
+      '#meet-budi .tbt-budi-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.1fr);gap:32px;align-items:center;}' +
+      '#meet-budi .tbt-budi-photo{border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(7,27,45,.13);background:#f3f3f3;}' +
+      '#meet-budi .tbt-budi-photo img{display:block!important;width:100%!important;height:auto!important;max-height:470px!important;object-fit:cover!important;object-position:center center!important;margin:0!important;border-radius:0!important;}' +
+      '#meet-budi a[data-lead-source="meet_budi"]{position:relative;z-index:3;}' +
+      '@media(max-width:760px){.tbt-compact-hero{padding-top:42px!important;padding-bottom:24px!important;background-size:auto 100%!important;background-position:center center!important}.tbt-compact-hero h1{font-size:clamp(42px,12vw,64px)!important;line-height:1.02!important}#meet-budi{padding:30px 18px 26px!important}#meet-budi .tbt-budi-inner{grid-template-columns:1fr!important;gap:20px!important}#meet-budi .tbt-budi-photo img{max-height:390px!important;object-fit:cover!important}}';
     document.head.appendChild(style);
   }
 
@@ -138,10 +139,10 @@
     var copy = document.createElement('div');
     copy.innerHTML =
       '<div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#1d6f4a;margin-bottom:8px;">YOUR LOCAL BALI DRIVER</div>' +
-      '<h2 style="font-family:Playfair Display,serif;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 16px;color:#071b2d;">Meet Budi</h2>' +
-      '<p style="font-size:18px;line-height:1.65;color:#4f5d68;margin:0 0 16px;">Explore Bali with Budi, a friendly local private driver offering personal service, flexible itineraries and local knowledge. From airport pickups to full-day adventures, your trip can be shaped around what you want to see and do.</p>' +
-      '<p style="font-size:16px;line-height:1.6;color:#4f5d68;margin:0 0 22px;">Chat directly with Budi about your dates, pickup point and plans — no payment is needed just to enquire.</p>' +
-      '<a data-lead-source="meet_budi" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20or%20tour%20in%20Bali." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:14px 22px;font-weight:800;background:#1faa59;color:#fff;text-decoration:none;">Chat with Budi on WhatsApp</a>';
+      '<h2 style="font-family:Playfair Display,serif;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 14px;color:#071b2d;">Meet Budi</h2>' +
+      '<p style="font-size:18px;line-height:1.58;color:#4f5d68;margin:0 0 13px;">Explore Bali with Budi, a friendly local private driver offering personal service, flexible itineraries and local knowledge. From airport pickups to full-day adventures, your trip can be shaped around what you want to see and do.</p>' +
+      '<p style="font-size:16px;line-height:1.55;color:#4f5d68;margin:0 0 18px;">Chat directly with Budi about your dates, pickup point and plans — no payment is needed just to enquire.</p>' +
+      '<a data-lead-source="meet_budi" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20or%20tour%20in%20Bali." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:13px 21px;font-weight:800;background:#1faa59;color:#fff;text-decoration:none;">Chat with Budi on WhatsApp</a>';
     inner.appendChild(copy);
     section.appendChild(inner);
     hero.parentNode.insertBefore(section, hero.nextSibling);
@@ -155,7 +156,7 @@
     var quick = document.createElement('section');
     quick.id = 'tbt-quick-choices';
     quick.setAttribute('aria-label', 'Choose your Bali service');
-    quick.style.cssText = 'max-width:1080px;margin:28px auto 38px;padding:0 20px;';
+    quick.style.cssText = 'max-width:1080px;margin:24px auto 34px;padding:0 20px;';
     quick.innerHTML =
       '<div style="text-align:center;margin-bottom:16px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#1d6f4a;">HOW CAN BUDI HELP?</div><h2 style="margin:7px 0 0;font-family:Playfair Display,serif;font-size:clamp(25px,4vw,34px);line-height:1.15;color:#071b2d;">Choose what you need</h2></div>' +
       '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">' +
