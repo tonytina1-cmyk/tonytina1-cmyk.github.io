@@ -64,10 +64,40 @@
     tours.appendChild(card);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', insertNuanuTourCard);
-  } else {
+  function enhanceWhatsAppBookingForm() {
+    var form = document.getElementById('waForm');
+    if (!form || document.getElementById('waForm-send-note')) return;
+
+    var submit = form.querySelector('button[type="submit"], input[type="submit"]');
+    if (submit) {
+      if (submit.tagName === 'INPUT') {
+        submit.value = 'Continue to WhatsApp';
+      } else {
+        submit.textContent = 'Continue to WhatsApp';
+      }
+    }
+
+    var note = document.createElement('p');
+    note.id = 'waForm-send-note';
+    note.style.cssText = 'margin:10px 0 0;font-size:13px;line-height:1.45;color:#66717f;text-align:center;';
+    note.textContent = 'WhatsApp will open with your trip details ready. Please press Send in WhatsApp to complete your enquiry with Budi.';
+
+    if (submit && submit.parentNode) {
+      submit.parentNode.insertBefore(note, submit.nextSibling);
+    } else {
+      form.appendChild(note);
+    }
+  }
+
+  function initialisePageEnhancements() {
     insertNuanuTourCard();
+    enhanceWhatsAppBookingForm();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialisePageEnhancements);
+  } else {
+    initialisePageEnhancements();
   }
 
   document.addEventListener('click', function (event) {
@@ -124,14 +154,14 @@
 
     sendAnalyticsEvent('whatsapp_click', {
       click_source: 'booking_form',
-      link_text: 'Send details on WhatsApp'
+      link_text: 'Continue to WhatsApp'
     });
 
     sendAnalyticsEvent('generate_lead', {
       click_source: 'booking_form',
       lead_source: 'quick_whatsapp_booking_form',
       contact_method: 'whatsapp',
-      link_text: 'Send details on WhatsApp',
+      link_text: 'Continue to WhatsApp',
       service: serviceValue
     });
 
