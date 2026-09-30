@@ -65,20 +65,21 @@
     document.head.appendChild(style);
   }
 
-  function findBudiPhoto(hero) {
-    var images = hero ? hero.querySelectorAll('img') : document.querySelectorAll('main img, body img');
+  function findBudiPhoto() {
+    var images = document.querySelectorAll('main img, body img');
     var best = null;
     var bestScore = 0;
     for (var i = 0; i < images.length; i += 1) {
       var img = images[i];
-      if (img.closest('header')) continue;
+      if (img.closest('header') || img.closest('#meet-budi')) continue;
       var clue = ((img.alt || '') + ' ' + (img.src || '')).toLowerCase();
       var rect = img.getBoundingClientRect();
-      var area = Math.max(rect.width, img.width || 0) * Math.max(rect.height, img.height || 0);
+      var area = Math.max(rect.width, img.naturalWidth || img.width || 0) * Math.max(rect.height, img.naturalHeight || img.height || 0);
       var score = area;
       if (clue.indexOf('budi') !== -1) score += 10000000;
       if (clue.indexOf('driver') !== -1) score += 5000000;
       if (clue.indexOf('tanah') !== -1) score += 3000000;
+      if (clue.indexOf('van') !== -1) score += 2000000;
       if (rect.width < 180 || rect.height < 180) score = score / 10;
       if (score > bestScore) {
         bestScore = score;
@@ -88,21 +89,22 @@
     return best;
   }
 
-  function hideOriginalBudiPhoto(photo, hero) {
-    if (!photo || !hero || !hero.contains(photo)) return;
+  function hideOriginalBudiPhoto(photo) {
+    if (!photo) return;
     var node = photo;
-    while (node.parentElement && node.parentElement !== hero) {
+    var levels = 0;
+    while (node.parentElement && levels < 3) {
       var parent = node.parentElement;
-      if (parent.querySelectorAll('img').length === 1 && parent.textContent.trim().length < 180) {
+      if (parent === document.body || parent.tagName === 'MAIN' || parent.tagName === 'SECTION') break;
+      if (parent.querySelectorAll('img').length === 1 && parent.textContent.trim().length < 120) {
         node = parent;
+        levels += 1;
       } else {
         break;
       }
     }
-    if (node !== hero) {
-      node.style.setProperty('display', 'none', 'important');
-      node.setAttribute('data-tbt-original-budi-photo', 'hidden');
-    }
+    node.style.setProperty('display', 'none', 'important');
+    node.setAttribute('data-tbt-original-budi-photo', 'hidden');
   }
 
   function createMeetBudiSection() {
@@ -111,14 +113,14 @@
     if (!hero || !hero.parentNode) return;
     hero.classList.add('tbt-compact-hero');
 
-    var originalPhoto = findBudiPhoto(hero);
+    var originalPhoto = findBudiPhoto();
     var photoClone = originalPhoto ? originalPhoto.cloneNode(true) : null;
     if (photoClone) {
       photoClone.removeAttribute('style');
       photoClone.removeAttribute('width');
       photoClone.removeAttribute('height');
       photoClone.loading = 'eager';
-      hideOriginalBudiPhoto(originalPhoto, hero);
+      hideOriginalBudiPhoto(originalPhoto);
     }
 
     var section = document.createElement('section');
