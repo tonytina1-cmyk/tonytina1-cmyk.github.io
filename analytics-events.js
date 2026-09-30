@@ -3,13 +3,21 @@
 
   function sendAnalyticsEvent(eventName, parameters) {
     if (typeof window.gtag !== 'function') return;
-    window.gtag('event', eventName, Object.assign({ page_path: window.location.pathname, transport_type: 'beacon' }, parameters || {}));
+    window.gtag('event', eventName, Object.assign({
+      page_path: window.location.pathname,
+      transport_type: 'beacon'
+    }, parameters || {}));
+  }
+
+  function isHomepage() {
+    return window.location.pathname === '/' || window.location.pathname === '/index.html';
   }
 
   function getClickLocation(link) {
     if (link.dataset && link.dataset.leadSource) return link.dataset.leadSource;
     if (link.closest('header')) return 'header';
     if (link.classList.contains('floating-wa')) return 'floating_button';
+    if (link.closest('#meet-budi')) return 'meet_budi';
     if (link.closest('#tours')) return 'tour_section';
     if (link.closest('#transfers')) return 'transfer_section';
     if (link.closest('#contact')) return 'contact_section';
@@ -26,7 +34,9 @@
       var message = original.searchParams.get('text');
       if (message) safeUrl.searchParams.set('text', message);
       return safeUrl.toString();
-    } catch (error) { return url; }
+    } catch (error) {
+      return url;
+    }
   }
 
   function getHomepageHero() {
@@ -34,77 +44,131 @@
     for (var i = 0; i < headings.length; i += 1) {
       var text = (headings[i].textContent || '').toLowerCase();
       if (text.indexOf('bali private driver') !== -1 && text.indexOf('custom tours') !== -1) {
-        return headings[i].closest('section, .hero, [class*="hero"]');
+        return headings[i].closest('section, .hero, [class*="hero"]') || headings[i].parentElement;
       }
     }
     return null;
   }
 
-  function compactHomepageHero() {
-    var path = window.location.pathname;
-    if (path !== '/' && path !== '/index.html') return;
-    var hero = getHomepageHero();
-    if (!hero) return;
-    hero.classList.add('tbt-compact-hero');
-    if (!document.getElementById('tbt-compact-hero-style')) {
-      var style = document.createElement('style');
-      style.id = 'tbt-compact-hero-style';
-      style.textContent = '.tbt-compact-hero{min-height:auto!important;padding-bottom:34px!important}.tbt-compact-hero h1{margin-bottom:16px!important}@media(max-width:700px){.tbt-compact-hero{padding-top:48px!important;padding-bottom:26px!important}.tbt-compact-hero h1{font-size:clamp(42px,12vw,64px)!important;line-height:1.02!important}}';
-      document.head.appendChild(style);
+  function addHomepageStyles() {
+    if (document.getElementById('tbt-home-layout-style')) return;
+    var style = document.createElement('style');
+    style.id = 'tbt-home-layout-style';
+    style.textContent =
+      '.tbt-compact-hero{min-height:auto!important;padding-bottom:34px!important;}' +
+      '.tbt-compact-hero h1{margin-bottom:16px!important;}' +
+      '#meet-budi{background:#fff!important;color:#071b2d!important;padding:54px 20px 42px!important;position:relative;z-index:2;}' +
+      '#meet-budi .tbt-budi-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.1fr);gap:42px;align-items:center;}' +
+      '#meet-budi .tbt-budi-photo{border-radius:24px;overflow:hidden;box-shadow:0 16px 40px rgba(7,27,45,.14);background:#f3f3f3;}' +
+      '#meet-budi .tbt-budi-photo img{display:block!important;width:100%!important;height:auto!important;max-height:520px!important;object-fit:cover!important;margin:0!important;border-radius:0!important;}' +
+      '@media(max-width:760px){.tbt-compact-hero{padding-top:48px!important;padding-bottom:26px!important}.tbt-compact-hero h1{font-size:clamp(42px,12vw,64px)!important;line-height:1.02!important}#meet-budi{padding:34px 18px 30px!important}#meet-budi .tbt-budi-inner{grid-template-columns:1fr!important;gap:24px!important}#meet-budi .tbt-budi-photo img{max-height:430px!important}}';
+    document.head.appendChild(style);
+  }
+
+  function findBudiPhoto(hero) {
+    var images = hero ? hero.querySelectorAll('img') : document.querySelectorAll('main img, body img');
+    var best = null;
+    var bestScore = 0;
+    for (var i = 0; i < images.length; i += 1) {
+      var img = images[i];
+      if (img.closest('header')) continue;
+      var clue = ((img.alt || '') + ' ' + (img.src || '')).toLowerCase();
+      var rect = img.getBoundingClientRect();
+      var area = Math.max(rect.width, img.width || 0) * Math.max(rect.height, img.height || 0);
+      var score = area;
+      if (clue.indexOf('budi') !== -1) score += 10000000;
+      if (clue.indexOf('driver') !== -1) score += 5000000;
+      if (clue.indexOf('tanah') !== -1) score += 3000000;
+      if (rect.width < 180 || rect.height < 180) score = score / 10;
+      if (score > bestScore) {
+        bestScore = score;
+        best = img;
+      }
+    }
+    return best;
+  }
+
+  function hideOriginalBudiPhoto(photo, hero) {
+    if (!photo || !hero || !hero.contains(photo)) return;
+    var node = photo;
+    while (node.parentElement && node.parentElement !== hero) {
+      var parent = node.parentElement;
+      if (parent.querySelectorAll('img').length === 1 && parent.textContent.trim().length < 180) {
+        node = parent;
+      } else {
+        break;
+      }
+    }
+    if (node !== hero) {
+      node.style.setProperty('display', 'none', 'important');
+      node.setAttribute('data-tbt-original-budi-photo', 'hidden');
     }
   }
 
   function createMeetBudiSection() {
-    var path = window.location.pathname;
-    if (path !== '/' && path !== '/index.html') return;
-    if (document.getElementById('meet-budi')) return;
+    if (!isHomepage() || document.getElementById('meet-budi')) return;
     var hero = getHomepageHero();
     if (!hero || !hero.parentNode) return;
+    hero.classList.add('tbt-compact-hero');
 
-    var images = hero.querySelectorAll('img');
-    var budiImage = null;
-    for (var i = images.length - 1; i >= 0; i -= 1) {
-      var img = images[i];
-      var clue = ((img.alt || '') + ' ' + (img.src || '')).toLowerCase();
-      if (clue.indexOf('budi') !== -1 || clue.indexOf('driver') !== -1 || clue.indexOf('tanah') !== -1) {
-        budiImage = img;
-        break;
-      }
+    var originalPhoto = findBudiPhoto(hero);
+    var photoClone = originalPhoto ? originalPhoto.cloneNode(true) : null;
+    if (photoClone) {
+      photoClone.removeAttribute('style');
+      photoClone.removeAttribute('width');
+      photoClone.removeAttribute('height');
+      photoClone.loading = 'eager';
+      hideOriginalBudiPhoto(originalPhoto, hero);
     }
-    if (!budiImage && images.length) budiImage = images[images.length - 1];
-    if (!budiImage) return;
 
     var section = document.createElement('section');
     section.id = 'meet-budi';
-    section.style.cssText = 'background:#fff;color:#071b2d;padding:54px 20px 42px;';
     var inner = document.createElement('div');
-    inner.style.cssText = 'max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.1fr);gap:42px;align-items:center;';
+    inner.className = 'tbt-budi-inner';
 
-    var photo = document.createElement('div');
-    photo.style.cssText = 'border-radius:24px;overflow:hidden;box-shadow:0 16px 40px rgba(7,27,45,.14);background:#f3f3f3;';
-    budiImage.style.cssText += ';display:block;width:100%;height:auto;max-height:520px;object-fit:cover;margin:0!important;border-radius:0!important;';
-    photo.appendChild(budiImage);
+    if (photoClone) {
+      var photoWrap = document.createElement('div');
+      photoWrap.className = 'tbt-budi-photo';
+      photoWrap.appendChild(photoClone);
+      inner.appendChild(photoWrap);
+    }
 
     var copy = document.createElement('div');
-    copy.innerHTML = '<div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#1d6f4a;margin-bottom:8px;">YOUR LOCAL BALI DRIVER</div><h2 style="font-family:Playfair Display,serif;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 16px;color:#071b2d;">Meet Budi</h2><p style="font-size:18px;line-height:1.65;color:#4f5d68;margin:0 0 16px;">Explore Bali with Budi, a friendly local private driver offering personal service, flexible itineraries and local knowledge. From airport pickups to full-day adventures, your trip can be shaped around what you want to see and do.</p><p style="font-size:16px;line-height:1.6;color:#4f5d68;margin:0 0 22px;">Chat directly with Budi about your dates, pickup point and plans — no payment is needed just to enquire.</p><a data-lead-source="meet_budi" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20or%20tour%20in%20Bali." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:14px 22px;font-weight:800;background:#1faa59;color:#fff;text-decoration:none;">Chat with Budi on WhatsApp</a>';
-
-    inner.appendChild(photo);
+    copy.innerHTML =
+      '<div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#1d6f4a;margin-bottom:8px;">YOUR LOCAL BALI DRIVER</div>' +
+      '<h2 style="font-family:Playfair Display,serif;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 16px;color:#071b2d;">Meet Budi</h2>' +
+      '<p style="font-size:18px;line-height:1.65;color:#4f5d68;margin:0 0 16px;">Explore Bali with Budi, a friendly local private driver offering personal service, flexible itineraries and local knowledge. From airport pickups to full-day adventures, your trip can be shaped around what you want to see and do.</p>' +
+      '<p style="font-size:16px;line-height:1.6;color:#4f5d68;margin:0 0 22px;">Chat directly with Budi about your dates, pickup point and plans — no payment is needed just to enquire.</p>' +
+      '<a data-lead-source="meet_budi" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20or%20tour%20in%20Bali." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:14px 22px;font-weight:800;background:#1faa59;color:#fff;text-decoration:none;">Chat with Budi on WhatsApp</a>';
     inner.appendChild(copy);
     section.appendChild(inner);
     hero.parentNode.insertBefore(section, hero.nextSibling);
+  }
 
-    if (!document.getElementById('tbt-meet-budi-style')) {
-      var style = document.createElement('style');
-      style.id = 'tbt-meet-budi-style';
-      style.textContent = '@media(max-width:760px){#meet-budi{padding:34px 18px 30px!important}#meet-budi>div{grid-template-columns:1fr!important;gap:24px!important}#meet-budi img{max-height:430px!important}}';
-      document.head.appendChild(style);
+  function addQuickChoices() {
+    if (!isHomepage() || document.getElementById('tbt-quick-choices')) return;
+    var tours = document.getElementById('tours');
+    if (!tours || !tours.parentNode) return;
+    var meet = document.getElementById('meet-budi');
+    var quick = document.createElement('section');
+    quick.id = 'tbt-quick-choices';
+    quick.setAttribute('aria-label', 'Choose your Bali service');
+    quick.style.cssText = 'max-width:1080px;margin:28px auto 38px;padding:0 20px;';
+    quick.innerHTML =
+      '<div style="text-align:center;margin-bottom:16px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#1d6f4a;">HOW CAN BUDI HELP?</div><h2 style="margin:7px 0 0;font-family:Playfair Display,serif;font-size:clamp(25px,4vw,34px);line-height:1.15;color:#071b2d;">Choose what you need</h2></div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">' +
+      '<a data-lead-source="quick_private_driver" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20in%20Bali." target="_blank" rel="noopener" style="display:block;padding:18px;border-radius:18px;background:#071b2d;color:#fff;text-decoration:none;text-align:center;font-weight:800;box-shadow:0 10px 28px rgba(7,27,45,.12);">Private Driver<br><span style="font-size:13px;font-weight:500;opacity:.82;">Chat with Budi</span></a>' +
+      '<a href="#transfers" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Airport Transfers<br><span style="font-size:13px;font-weight:500;color:#66717f;">Pickup &amp; drop-off</span></a>' +
+      '<a href="#tours" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Bali Tours<br><span style="font-size:13px;font-weight:500;color:#66717f;">Explore with Budi</span></a></div>';
+    if (meet && meet.parentNode === tours.parentNode) {
+      tours.parentNode.insertBefore(quick, meet.nextSibling);
+    } else {
+      tours.parentNode.insertBefore(quick, tours);
     }
   }
 
   function insertNuanuTourCard() {
-    var path = window.location.pathname;
-    if (path !== '/' && path !== '/index.html') return;
-    if (document.getElementById('nuanu-tour-home-card')) return;
+    if (!isHomepage() || document.getElementById('nuanu-tour-home-card')) return;
     var tours = document.getElementById('tours');
     if (!tours) return;
     var card = document.createElement('div');
@@ -118,53 +182,31 @@
     var form = document.getElementById('waForm');
     if (!form || document.getElementById('waForm-send-note')) return;
     var submit = form.querySelector('button[type="submit"], input[type="submit"]');
-    if (submit) { if (submit.tagName === 'INPUT') submit.value = 'Continue to WhatsApp'; else submit.textContent = 'Continue to WhatsApp'; }
+    if (submit) {
+      if (submit.tagName === 'INPUT') submit.value = 'Continue to WhatsApp';
+      else submit.textContent = 'Continue to WhatsApp';
+    }
     var note = document.createElement('p');
     note.id = 'waForm-send-note';
     note.style.cssText = 'margin:10px 0 0;font-size:13px;line-height:1.45;color:#66717f;text-align:center;';
     note.textContent = 'WhatsApp will open with your trip details ready. Please press Send in WhatsApp to complete your enquiry with Budi.';
-    if (submit && submit.parentNode) submit.parentNode.insertBefore(note, submit.nextSibling); else form.appendChild(note);
-  }
-
-  function findBudiIntroSection() {
-    var direct = document.querySelector('#meet-budi, #about-budi, #budi, #about');
-    if (direct && !direct.closest('header')) return direct;
-    var headings = document.querySelectorAll('main h2, main h3, section h2, section h3');
-    for (var i = 0; i < headings.length; i += 1) {
-      var text = (headings[i].textContent || '').trim().toLowerCase();
-      if (text.indexOf('meet budi') !== -1 || text.indexOf('about budi') !== -1 || text.indexOf('budi bali driver') !== -1 || text.indexOf('your bali driver') !== -1) {
-        var section = headings[i].closest('section');
-        if (section && section.id !== 'tours' && section.id !== 'transfers' && section.id !== 'contact') return section;
-      }
-    }
-    return null;
-  }
-
-  function improveHomepageFlow() {
-    var path = window.location.pathname;
-    if (path !== '/' && path !== '/index.html') return;
-    var tours = document.getElementById('tours');
-    if (!tours || !tours.parentNode) return;
-    var budiIntro = findBudiIntroSection();
-    if (budiIntro && budiIntro !== tours && budiIntro.parentNode === tours.parentNode) tours.parentNode.insertBefore(budiIntro, tours);
-    if (document.getElementById('tbt-quick-choices')) return;
-    var quick = document.createElement('section');
-    quick.id = 'tbt-quick-choices';
-    quick.setAttribute('aria-label', 'Choose your Bali service');
-    quick.style.cssText = 'max-width:1080px;margin:22px auto 34px;padding:0 20px;';
-    quick.innerHTML = '<div style="text-align:center;margin-bottom:16px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#1d6f4a;">HOW CAN BUDI HELP?</div><h2 style="margin:7px 0 0;font-family:Playfair Display,serif;font-size:clamp(25px,4vw,34px);line-height:1.15;color:#071b2d;">Choose what you need</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;"><a data-lead-source="quick_private_driver" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20in%20Bali." target="_blank" rel="noopener" style="display:block;padding:18px;border-radius:18px;background:#071b2d;color:#fff;text-decoration:none;text-align:center;font-weight:800;box-shadow:0 10px 28px rgba(7,27,45,.12);">Private Driver<br><span style="font-size:13px;font-weight:500;opacity:.82;">Chat with Budi</span></a><a href="#transfers" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Airport Transfers<br><span style="font-size:13px;font-weight:500;color:#66717f;">Pickup &amp; drop-off</span></a><a href="#tours" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Bali Tours<br><span style="font-size:13px;font-weight:500;color:#66717f;">Explore with Budi</span></a></div>';
-    if (budiIntro && budiIntro.parentNode === tours.parentNode) tours.parentNode.insertBefore(quick, budiIntro.nextSibling); else tours.parentNode.insertBefore(quick, tours);
+    if (submit && submit.parentNode) submit.parentNode.insertBefore(note, submit.nextSibling);
+    else form.appendChild(note);
   }
 
   function initialisePageEnhancements() {
-    compactHomepageHero();
+    if (isHomepage()) addHomepageStyles();
     createMeetBudiSection();
-    improveHomepageFlow();
+    addQuickChoices();
     insertNuanuTourCard();
     enhanceWhatsAppBookingForm();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialisePageEnhancements); else initialisePageEnhancements();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialisePageEnhancements);
+  } else {
+    initialisePageEnhancements();
+  }
 
   document.addEventListener('click', function (event) {
     var link = event.target.closest('a[href*="api.whatsapp.com/send"], a[href*="wa.me/"]');
@@ -172,30 +214,64 @@
     var source = getClickLocation(link);
     var label = (link.textContent || '').trim().slice(0, 100);
     sendAnalyticsEvent('whatsapp_click', { click_source: source, link_text: label });
-    sendAnalyticsEvent('generate_lead', { click_source: source, lead_source: 'whatsapp_' + source, contact_method: 'whatsapp', link_text: label });
+    sendAnalyticsEvent('generate_lead', {
+      click_source: source,
+      lead_source: 'whatsapp_' + source,
+      contact_method: 'whatsapp',
+      link_text: label
+    });
     if (link.href.indexOf('wa.me/') !== -1) link.href = getSafeWhatsAppUrl(link.href);
   }, true);
 
   document.addEventListener('click', function (event) {
     var link = event.target.closest('a[data-booking-app]');
     if (!link) return;
-    sendAnalyticsEvent('booking_app_click', { click_source: getClickLocation(link), link_text: (link.textContent || '').trim().slice(0, 100) });
+    sendAnalyticsEvent('booking_app_click', {
+      click_source: getClickLocation(link),
+      link_text: (link.textContent || '').trim().slice(0, 100)
+    });
   }, true);
 
   document.addEventListener('submit', function (event) {
     if (!event.target.matches('#waForm')) return;
     var service = document.getElementById('service');
     var serviceValue = service ? service.value : 'unknown';
-    sendAnalyticsEvent('whatsapp_form_open', { form_id: 'waForm', form_name: 'quick_whatsapp_booking', click_source: 'booking_form', handoff_status: 'whatsapp_opened', service: serviceValue });
-    sendAnalyticsEvent('whatsapp_click', { click_source: 'booking_form', link_text: 'Continue to WhatsApp' });
-    sendAnalyticsEvent('generate_lead', { click_source: 'booking_form', lead_source: 'quick_whatsapp_booking_form', contact_method: 'whatsapp', link_text: 'Continue to WhatsApp', service: serviceValue });
+
+    sendAnalyticsEvent('whatsapp_form_open', {
+      form_id: 'waForm',
+      form_name: 'quick_whatsapp_booking',
+      click_source: 'booking_form',
+      handoff_status: 'whatsapp_opened',
+      service: serviceValue
+    });
+    sendAnalyticsEvent('whatsapp_click', {
+      click_source: 'booking_form',
+      link_text: 'Continue to WhatsApp'
+    });
+    sendAnalyticsEvent('generate_lead', {
+      click_source: 'booking_form',
+      lead_source: 'quick_whatsapp_booking_form',
+      contact_method: 'whatsapp',
+      link_text: 'Continue to WhatsApp',
+      service: serviceValue
+    });
+
     event.preventDefault();
     event.stopImmediatePropagation();
     var date = document.getElementById('date');
     var guests = document.getElementById('guests');
     var pickup = document.getElementById('pickup');
     var notes = document.getElementById('notes');
-    var message = "Hi Budi, I'd like to enquire about a " + serviceValue + '.\n\n' + 'Date: ' + (date && date.value ? date.value : 'Not sure yet') + '\n' + 'Guests: ' + (guests && guests.value ? guests.value : 'Not sure yet') + '\n' + 'Pickup: ' + (pickup && pickup.value ? pickup.value : 'Not sure yet') + '\n' + 'Places / notes: ' + (notes && notes.value ? notes.value : 'No extra notes') + '\n\n' + 'Please let me know availability and price. Thank you.';
-    window.open('https://api.whatsapp.com/send?phone=6285738148276&text=' + encodeURIComponent(message), '_blank', 'noopener');
+    var message = "Hi Budi, I'd like to enquire about a " + serviceValue + '.\n\n' +
+      'Date: ' + (date && date.value ? date.value : 'Not sure yet') + '\n' +
+      'Guests: ' + (guests && guests.value ? guests.value : 'Not sure yet') + '\n' +
+      'Pickup: ' + (pickup && pickup.value ? pickup.value : 'Not sure yet') + '\n' +
+      'Places / notes: ' + (notes && notes.value ? notes.value : 'No extra notes') + '\n\n' +
+      'Please let me know availability and price. Thank you.';
+    window.open(
+      'https://api.whatsapp.com/send?phone=6285738148276&text=' + encodeURIComponent(message),
+      '_blank',
+      'noopener'
+    );
   }, true);
 }());
