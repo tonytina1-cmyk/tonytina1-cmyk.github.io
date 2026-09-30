@@ -29,24 +29,74 @@
     } catch (error) { return url; }
   }
 
-  function compactHomepageHero() {
-    var path = window.location.pathname;
-    if (path !== '/' && path !== '/index.html') return;
+  function getHomepageHero() {
     var headings = document.querySelectorAll('h1');
-    var hero = null;
     for (var i = 0; i < headings.length; i += 1) {
       var text = (headings[i].textContent || '').toLowerCase();
       if (text.indexOf('bali private driver') !== -1 && text.indexOf('custom tours') !== -1) {
-        hero = headings[i].closest('section, .hero, [class*="hero"]');
-        break;
+        return headings[i].closest('section, .hero, [class*="hero"]');
       }
     }
+    return null;
+  }
+
+  function compactHomepageHero() {
+    var path = window.location.pathname;
+    if (path !== '/' && path !== '/index.html') return;
+    var hero = getHomepageHero();
     if (!hero) return;
     hero.classList.add('tbt-compact-hero');
     if (!document.getElementById('tbt-compact-hero-style')) {
       var style = document.createElement('style');
       style.id = 'tbt-compact-hero-style';
-      style.textContent = '.tbt-compact-hero{min-height:auto!important;padding-bottom:42px!important}.tbt-compact-hero h1{margin-bottom:16px!important}@media(max-width:700px){.tbt-compact-hero{padding-top:54px!important;padding-bottom:30px!important}.tbt-compact-hero h1{font-size:clamp(42px,12vw,64px)!important;line-height:1.02!important}}';
+      style.textContent = '.tbt-compact-hero{min-height:auto!important;padding-bottom:34px!important}.tbt-compact-hero h1{margin-bottom:16px!important}@media(max-width:700px){.tbt-compact-hero{padding-top:48px!important;padding-bottom:26px!important}.tbt-compact-hero h1{font-size:clamp(42px,12vw,64px)!important;line-height:1.02!important}}';
+      document.head.appendChild(style);
+    }
+  }
+
+  function createMeetBudiSection() {
+    var path = window.location.pathname;
+    if (path !== '/' && path !== '/index.html') return;
+    if (document.getElementById('meet-budi')) return;
+    var hero = getHomepageHero();
+    if (!hero || !hero.parentNode) return;
+
+    var images = hero.querySelectorAll('img');
+    var budiImage = null;
+    for (var i = images.length - 1; i >= 0; i -= 1) {
+      var img = images[i];
+      var clue = ((img.alt || '') + ' ' + (img.src || '')).toLowerCase();
+      if (clue.indexOf('budi') !== -1 || clue.indexOf('driver') !== -1 || clue.indexOf('tanah') !== -1) {
+        budiImage = img;
+        break;
+      }
+    }
+    if (!budiImage && images.length) budiImage = images[images.length - 1];
+    if (!budiImage) return;
+
+    var section = document.createElement('section');
+    section.id = 'meet-budi';
+    section.style.cssText = 'background:#fff;color:#071b2d;padding:54px 20px 42px;';
+    var inner = document.createElement('div');
+    inner.style.cssText = 'max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.1fr);gap:42px;align-items:center;';
+
+    var photo = document.createElement('div');
+    photo.style.cssText = 'border-radius:24px;overflow:hidden;box-shadow:0 16px 40px rgba(7,27,45,.14);background:#f3f3f3;';
+    budiImage.style.cssText += ';display:block;width:100%;height:auto;max-height:520px;object-fit:cover;margin:0!important;border-radius:0!important;';
+    photo.appendChild(budiImage);
+
+    var copy = document.createElement('div');
+    copy.innerHTML = '<div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#1d6f4a;margin-bottom:8px;">YOUR LOCAL BALI DRIVER</div><h2 style="font-family:Playfair Display,serif;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 16px;color:#071b2d;">Meet Budi</h2><p style="font-size:18px;line-height:1.65;color:#4f5d68;margin:0 0 16px;">Explore Bali with Budi, a friendly local private driver offering personal service, flexible itineraries and local knowledge. From airport pickups to full-day adventures, your trip can be shaped around what you want to see and do.</p><p style="font-size:16px;line-height:1.6;color:#4f5d68;margin:0 0 22px;">Chat directly with Budi about your dates, pickup point and plans — no payment is needed just to enquire.</p><a data-lead-source="meet_budi" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20or%20tour%20in%20Bali." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:14px 22px;font-weight:800;background:#1faa59;color:#fff;text-decoration:none;">Chat with Budi on WhatsApp</a>';
+
+    inner.appendChild(photo);
+    inner.appendChild(copy);
+    section.appendChild(inner);
+    hero.parentNode.insertBefore(section, hero.nextSibling);
+
+    if (!document.getElementById('tbt-meet-budi-style')) {
+      var style = document.createElement('style');
+      style.id = 'tbt-meet-budi-style';
+      style.textContent = '@media(max-width:760px){#meet-budi{padding:34px 18px 30px!important}#meet-budi>div{grid-template-columns:1fr!important;gap:24px!important}#meet-budi img{max-height:430px!important}}';
       document.head.appendChild(style);
     }
   }
@@ -103,11 +153,12 @@
     quick.setAttribute('aria-label', 'Choose your Bali service');
     quick.style.cssText = 'max-width:1080px;margin:22px auto 34px;padding:0 20px;';
     quick.innerHTML = '<div style="text-align:center;margin-bottom:16px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#1d6f4a;">HOW CAN BUDI HELP?</div><h2 style="margin:7px 0 0;font-family:Playfair Display,serif;font-size:clamp(25px,4vw,34px);line-height:1.15;color:#071b2d;">Choose what you need</h2></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;"><a data-lead-source="quick_private_driver" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20in%20Bali." target="_blank" rel="noopener" style="display:block;padding:18px;border-radius:18px;background:#071b2d;color:#fff;text-decoration:none;text-align:center;font-weight:800;box-shadow:0 10px 28px rgba(7,27,45,.12);">Private Driver<br><span style="font-size:13px;font-weight:500;opacity:.82;">Chat with Budi</span></a><a href="#transfers" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Airport Transfers<br><span style="font-size:13px;font-weight:500;color:#66717f;">Pickup &amp; drop-off</span></a><a href="#tours" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Bali Tours<br><span style="font-size:13px;font-weight:500;color:#66717f;">Explore with Budi</span></a></div>';
-    tours.parentNode.insertBefore(quick, tours);
+    if (budiIntro && budiIntro.parentNode === tours.parentNode) tours.parentNode.insertBefore(quick, budiIntro.nextSibling); else tours.parentNode.insertBefore(quick, tours);
   }
 
   function initialisePageEnhancements() {
     compactHomepageHero();
+    createMeetBudiSection();
     improveHomepageFlow();
     insertNuanuTourCard();
     enhanceWhatsAppBookingForm();
