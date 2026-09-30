@@ -121,12 +121,30 @@
     node.setAttribute('data-tbt-original-budi-photo', 'hidden');
   }
 
+  function removeRedundantMeetBudiButton() {
+    var meet = document.getElementById('meet-budi');
+    if (!meet) return;
+    var links = meet.querySelectorAll('a');
+    for (var i = 0; i < links.length; i += 1) {
+      var label = (links[i].textContent || '').toLowerCase();
+      if (label.indexOf('chat with budi') !== -1 || links[i].dataset.leadSource === 'meet_budi') {
+        links[i].remove();
+      }
+    }
+  }
+
   function createMeetBudiSection() {
-    if (!isHomepage() || document.getElementById('meet-budi')) return;
+    if (!isHomepage()) return;
     var hero = getHomepageHero();
     if (!hero || !hero.parentNode) return;
+
     createTopHeroImage(hero);
     hero.classList.add('tbt-compact-hero');
+
+    if (document.getElementById('meet-budi')) {
+      removeRedundantMeetBudiButton();
+      return;
+    }
 
     var originalPhoto = findBudiPhoto();
     var photoClone = originalPhoto ? originalPhoto.cloneNode(true) : null;
