@@ -45,6 +45,8 @@
     .cta{margin:28px 0 12px;padding:28px;border-radius:20px;background:var(--ink);color:#fff}.cta h2{margin-top:0}.cta .btn{background:#fff;color:var(--ink)}
     footer{padding:30px 6%;background:var(--ink);color:#fff}footer a{color:#fff}
     @media(max-width:650px){header{align-items:flex-start;flex-direction:column}.nav a{margin:0 14px 0 0}.hero h1{font-size:2.7rem}main{padding-top:42px}}
+    a:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+    @media(max-width:650px){.hero{padding:12px 0 24px}.hero h1{font-size:2.25rem}.lead{font-size:1.08rem}.btn{max-width:100%;text-align:center}.cards,.route{grid-template-columns:1fr}}
   </style>
   <script type="application/ld+json">
   {
@@ -78,26 +80,25 @@
 <body>
 <header>
   <a class="brand" href="/">TBT Tours & Travel <small>by Budi Bali Driver</small></a>
-  <nav class="nav"><a href="/#tours">Tours</a><a href="/#transfers">Transfers</a><a href="/#contact">Contact</a></nav>
+  <nav class="nav"><a href="/tours.html">Tours</a><a href="/bali-airport-transfers/">Transfers</a><a href="/#contact">Contact</a></nav>
 </header>
 
 <main>
   <section class="hero">
     <p class="eyebrow">UBUD PRIVATE DRIVER • CUSTOM DAY TOUR • LOCAL BALI EXPERIENCE</p>
     <h1>Ubud Private Driver & Custom Day Tour</h1>
-    <p class="lead">Explore Ubud with Budi, your friendly local Bali driver. Build a private day around the rice terraces, temples, waterfalls, villages, food and culture you actually want to experience — with flexible timing and your own private vehicle.</p>
-    <a class="btn" data-lead-source="ubud_hero" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20an%20Ubud%20private%20driver%20day%20tour." target="_blank" rel="noopener">Plan my Ubud tour on WhatsApp</a>
-    <a class="btn outline" href="/">View all Bali tours</a>
+    <p class="lead">Rice terraces, temples or waterfalls—choose the stops you enjoy and plan a private Ubud day with Budi. Send your date and hotel to check availability and get a quote.</p>
+    <a class="btn" data-lead-source="ubud_hero" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I'd%20like%20a%20quote%20for%20a%20private%20Ubud%20day%20tour.%0A%0ADate%3A%20%0AGuests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APlaces%20we'd%20like%20to%20visit%3A%20%0A%0APlease%20confirm%20availability%2C%20pickup%20and%20return%20times%2C%20the%20total%20price%20for%20our%20group%2C%20and%20which%20entrance%20fees%2C%20meals%20or%20activities%20are%20included.%20Thank%20you." target="_blank" rel="noopener">Check availability &amp; get a quote</a>
+    <a class="btn outline" href="/tours.html">View all Bali tours</a>
   </section>
 
-  <section>
-    <h2>A private Ubud tour built around you</h2>
-    <p>Ubud and Central Bali have far more to see than can comfortably fit into one rushed itinerary. With a private driver, you can choose the experiences that matter most to you, spend longer at your favourite stops and skip the places that do not interest you.</p>
+  <section aria-labelledby="tour-overview">
+    <h2 id="tour-overview">Your Ubud day at a glance</h2>
     <div class="cards">
-      <div class="card"><strong>Private driver for your group</strong><span>Your own vehicle and driver for a more relaxed, personal day.</span></div>
-      <div class="card"><strong>Flexible Ubud itinerary</strong><span>Choose your preferred sights or ask Budi to help arrange a practical route.</span></div>
-      <div class="card"><strong>Hotel or villa pickup</strong><span>Pickup can be arranged from many Bali areas depending on your location.</span></div>
-      <div class="card"><strong>Local recommendations</strong><span>Get help with timing, route planning and extra stops that suit your interests.</span></div>
+      <div class="card"><strong>Private for your group</strong><span>Your own vehicle and driver, with stops chosen around your interests.</span></div>
+      <div class="card"><strong>Hotel or villa pickup</strong><span>Send your accommodation location so Budi can confirm pickup arrangements.</span></div>
+      <div class="card"><strong>Flexible route and timing</strong><span>Agree the pickup time and expected return with Budi based on your starting point and chosen stops.</span></div>
+      <div class="card"><strong>Quote before you book</strong><span>Share your date, group size and wish list to confirm availability and the total price.</span></div>
     </div>
   </section>
 
@@ -122,10 +123,10 @@
     <p>The exact route depends on your pickup point, traffic, opening times and the places you choose. Entrance fees, meals and activity charges can vary by itinerary, so confirm your plan with Budi before the day.</p>
   </section>
 
-  <section>
-    <h2>Why explore Ubud with a private driver?</h2>
-    <p>A private driver gives you more control over the day than a fixed group itinerary. You can change the order of stops, take a break when you want, ask for local suggestions and avoid spending your holiday trying to work out routes, parking and transport between attractions.</p>
-    <p>TBT Tours & Travel is built around direct, simple communication with Budi. You can send your ideas by WhatsApp, confirm your pickup details and plan the day around your own interests. If you want to combine a creative modern Bali experience with coastal scenery, also see the <a href="/nuanu-creative-city-tanah-lot-tour/">Nuanu Creative City & Tanah Lot tour</a>.</p>
+  <section aria-labelledby="quote-details">
+    <h2 id="quote-details">What to confirm in your quote</h2>
+    <p>Ask Budi to confirm the total price for your group, the agreed stops, pickup and return arrangements, and exactly what is included.</p>
+    <p class="note"><strong>Entrance fees, meals and activities:</strong> costs depend on your itinerary. Confirm which are included in the quote and which you would pay separately before booking.</p>
   </section>
 
   <section class="faq">
@@ -139,8 +140,8 @@
 
   <section class="cta">
     <h2>Plan your Ubud day with Budi</h2>
-    <p>Send your travel date, pickup location and a few places you would like to visit. Budi can help turn them into a comfortable private Ubud itinerary.</p>
-    <a class="btn" data-lead-source="ubud_cta" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20an%20Ubud%20private%20driver%20day%20tour." target="_blank" rel="noopener">WhatsApp Budi</a>
+    <p>Tap below, then fill in your date, number of guests, hotel and preferred stops in WhatsApp. Budi can confirm the route, timing and quote before you book.</p>
+    <a class="btn" data-lead-source="ubud_cta" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I'd%20like%20a%20quote%20for%20a%20private%20Ubud%20day%20tour.%0A%0ADate%3A%20%0AGuests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APlaces%20we'd%20like%20to%20visit%3A%20%0A%0APlease%20confirm%20availability%2C%20pickup%20and%20return%20times%2C%20the%20total%20price%20for%20our%20group%2C%20and%20which%20entrance%20fees%2C%20meals%20or%20activities%20are%20included.%20Thank%20you." target="_blank" rel="noopener">Ask Budi for an Ubud quote</a>
   </section>
 
   <section class="more">
