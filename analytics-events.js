@@ -224,6 +224,10 @@
   function addHomepageWarmth() {
     if (!isHomepage()) return;
     document.body.classList.add('tbt-home-warm');
+    var duplicateQuick = document.getElementById('tbt-quick-choices');
+    if (duplicateQuick) duplicateQuick.remove();
+    var duplicateNuanu = document.getElementById('nuanu-tour-home-card');
+    if (duplicateNuanu) duplicateNuanu.remove();
 
     if (!document.getElementById('tbt-home-warm-style')) {
       var style = document.createElement('style');
@@ -234,6 +238,7 @@
         'body.tbt-home-warm #why{background:#f5efe5!important;}' +
         'body.tbt-home-warm #reviews{background:#fffaf2!important;}' +
         'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(7,27,45,.08);border-color:#e7e0d4;min-height:0!important;height:auto!important;}' +
+        'body.tbt-home-warm #tours,body.tbt-home-warm #transfers{align-self:start!important;height:auto!important;min-height:0!important;}' +
         'body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;align-self:start!important;}' +
         '#tbt-quick-choices{grid-column:1/-1!important;width:100%!important;}' +
         '#tbt-trust-row{grid-column:1/-1!important;width:min(1080px,calc(100% - 40px))!important;max-width:1080px;margin:8px auto 42px!important;padding:0!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;}' +
@@ -255,16 +260,16 @@
     }
 
     if (!document.getElementById('tbt-trust-row')) {
-      var quick = document.getElementById('tbt-quick-choices');
       var tours = document.getElementById('tours');
       var trust = document.createElement('section');
       trust.id = 'tbt-trust-row';
       trust.setAttribute('aria-label', 'Why travel with Budi');
       trust.innerHTML =
-        '<div class="tbt-trust-card"><strong>Private Driver</strong><span>Your own comfortable vehicle and personal service.</span></div>' +
+        '<div class="tbt-trust-card"><strong>Personal Service</strong><span>Friendly, direct help from Budi from enquiry to your day in Bali.</span></div>' +
         '<div class="tbt-trust-card"><strong>Flexible Day</strong><span>Adjust the timing and stops to suit your holiday.</span></div>' +
         '<div class="tbt-trust-card"><strong>Local Knowledge</strong><span>Friendly Bali advice from Budi along the way.</span></div>';
-      if (quick && quick.parentNode) quick.parentNode.insertBefore(trust, quick.nextSibling);
+      var whySection = document.getElementById('why');
+      if (whySection && whySection.parentNode) whySection.parentNode.insertBefore(trust, whySection);
       else if (tours && tours.parentNode) tours.parentNode.insertBefore(trust, tours);
     }
 
@@ -309,9 +314,7 @@
   function initialisePageEnhancements() {
     if (isHomepage()) addHomepageStyles();
     createMeetBudiSection();
-    addQuickChoices();
     prioritiseHomepageSections();
-    insertNuanuTourCard();
     addHomepageWarmth();
     enhanceWhatsAppBookingForm();
   }
