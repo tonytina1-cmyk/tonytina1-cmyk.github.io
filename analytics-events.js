@@ -221,6 +221,73 @@
     tours.appendChild(card);
   }
 
+  function addHomepageWarmth() {
+    if (!isHomepage()) return;
+    document.body.classList.add('tbt-home-warm');
+
+    if (!document.getElementById('tbt-home-warm-style')) {
+      var style = document.createElement('style');
+      style.id = 'tbt-home-warm-style';
+      style.textContent =
+        'body.tbt-home-warm main{background:#fffdf9;}' +
+        'body.tbt-home-warm #tours{background:#fffdf9!important;}' +
+        'body.tbt-home-warm #why{background:#f5efe5!important;}' +
+        'body.tbt-home-warm #reviews{background:#fffaf2!important;}' +
+        'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(7,27,45,.08);border-color:#e7e0d4;}' +
+        '#tbt-trust-row{max-width:1080px;margin:8px auto 42px;padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}' +
+        '#tbt-trust-row .tbt-trust-card{background:#fff7ec;border:1px solid #eadfce;border-radius:18px;padding:20px;text-align:center;}' +
+        '#tbt-trust-row strong{display:block;color:#071b2d;font-size:17px;margin-bottom:5px;}' +
+        '#tbt-trust-row span{color:#65717c;font-size:14px;line-height:1.45;}' +
+        '#tbt-bali-band{position:relative;overflow:hidden;min-height:300px;margin:0;background:#071b2d;background-size:cover;background-position:center;display:flex;align-items:center;}' +
+        '#tbt-bali-band:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,27,45,.88),rgba(7,27,45,.42));}' +
+        '#tbt-bali-band .tbt-bali-band-inner{position:relative;z-index:1;width:min(1080px,calc(100% - 40px));margin:0 auto;color:#fff;padding:48px 0;}' +
+        '#tbt-bali-band h2{font-family:Playfair Display,serif;font-size:clamp(36px,5vw,58px);line-height:1.05;margin:0 0 12px;max-width:660px;}' +
+        '#tbt-bali-band p{max-width:620px;color:#d8e1e8;font-size:18px;line-height:1.55;margin:0;}' +
+        '#tbt-wa-strip{background:#0b2a41;color:#fff;padding:30px 20px;}' +
+        '#tbt-wa-strip .tbt-wa-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;}' +
+        '#tbt-wa-strip h3{font-family:Playfair Display,serif;font-size:clamp(28px,4vw,40px);margin:0 0 6px;}' +
+        '#tbt-wa-strip p{margin:0;color:#c6d4df;}' +
+        '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;background:#1faa59;color:#fff;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
+        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr;margin-bottom:30px}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip a{width:100%}}';
+      document.head.appendChild(style);
+    }
+
+    if (!document.getElementById('tbt-trust-row')) {
+      var quick = document.getElementById('tbt-quick-choices');
+      var tours = document.getElementById('tours');
+      var trust = document.createElement('section');
+      trust.id = 'tbt-trust-row';
+      trust.setAttribute('aria-label', 'Why travel with Budi');
+      trust.innerHTML =
+        '<div class="tbt-trust-card"><strong>Private Driver</strong><span>Your own comfortable vehicle and personal service.</span></div>' +
+        '<div class="tbt-trust-card"><strong>Flexible Day</strong><span>Adjust the timing and stops to suit your holiday.</span></div>' +
+        '<div class="tbt-trust-card"><strong>Local Knowledge</strong><span>Friendly Bali advice from Budi along the way.</span></div>';
+      if (quick && quick.parentNode) quick.parentNode.insertBefore(trust, quick.nextSibling);
+      else if (tours && tours.parentNode) tours.parentNode.insertBefore(trust, tours);
+    }
+
+    if (!document.getElementById('tbt-bali-band')) {
+      var why = document.getElementById('why');
+      var band = document.createElement('section');
+      band.id = 'tbt-bali-band';
+      var heroImage = document.getElementById('tbt-hero-image');
+      if (heroImage && heroImage.style.backgroundImage) band.style.backgroundImage = heroImage.style.backgroundImage;
+      band.innerHTML =
+        '<div class="tbt-bali-band-inner"><div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#f0c66a;margin-bottom:10px;">SEE BALI YOUR WAY</div><h2>More than a ride — your local Bali experience.</h2><p>From airport pickup to full-day exploring, Budi keeps the day personal, flexible and easy.</p></div>';
+      if (why && why.parentNode) why.parentNode.insertBefore(band, why);
+    }
+
+    if (!document.getElementById('tbt-wa-strip')) {
+      var footer = document.querySelector('footer');
+      var strip = document.createElement('section');
+      strip.id = 'tbt-wa-strip';
+      strip.innerHTML =
+        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Message Budi directly with your dates, pickup point and what you would like to do.</p></div><a data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a></div>';
+      if (footer && footer.parentNode) footer.parentNode.insertBefore(strip, footer);
+      else document.body.appendChild(strip);
+    }
+  }
+
   function enhanceWhatsAppBookingForm() {
     var form = document.getElementById('waForm');
     if (!form || document.getElementById('waForm-send-note')) return;
@@ -243,6 +310,7 @@
     addQuickChoices();
     prioritiseHomepageSections();
     insertNuanuTourCard();
+    addHomepageWarmth();
     enhanceWhatsAppBookingForm();
   }
 
