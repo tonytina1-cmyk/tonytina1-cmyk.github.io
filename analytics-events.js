@@ -233,9 +233,11 @@
         'body.tbt-home-warm #tours{background:#fffdf9!important;}' +
         'body.tbt-home-warm #why{background:#f5efe5!important;}' +
         'body.tbt-home-warm #reviews{background:#fffaf2!important;}' +
-        'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(7,27,45,.08);border-color:#e7e0d4;}' +
-        '#tbt-trust-row{max-width:1080px;margin:8px auto 42px;padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}' +
-        '#tbt-trust-row .tbt-trust-card{background:#fff7ec;border:1px solid #eadfce;border-radius:18px;padding:20px;text-align:center;}' +
+        'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(7,27,45,.08);border-color:#e7e0d4;min-height:0!important;height:auto!important;}' +
+        'body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;align-self:start!important;}' +
+        '#tbt-quick-choices{grid-column:1/-1!important;width:100%!important;}' +
+        '#tbt-trust-row{grid-column:1/-1!important;width:min(1080px,calc(100% - 40px))!important;max-width:1080px;margin:8px auto 42px!important;padding:0!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;}' +
+        '#tbt-trust-row .tbt-trust-card{background:#fff7ec;border:1px solid #eadfce;border-radius:18px;padding:22px 20px;text-align:center;min-height:0!important;}' +
         '#tbt-trust-row strong{display:block;color:#071b2d;font-size:17px;margin-bottom:5px;}' +
         '#tbt-trust-row span{color:#65717c;font-size:14px;line-height:1.45;}' +
         '#tbt-bali-band{position:relative;overflow:hidden;min-height:300px;margin:0;background:#071b2d;background-size:cover;background-position:center;display:flex;align-items:center;}' +
@@ -248,7 +250,7 @@
         '#tbt-wa-strip h3{font-family:Playfair Display,serif;font-size:clamp(28px,4vw,40px);margin:0 0 6px;}' +
         '#tbt-wa-strip p{margin:0;color:#c6d4df;}' +
         '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;background:#1faa59;color:#fff;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
-        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr;margin-bottom:30px}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip a{width:100%}}';
+        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr!important;margin:12px auto 30px!important;width:min(100% - 32px,1080px)!important}#tbt-trust-row .tbt-trust-card{padding:18px!important}body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;padding:22px!important}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip a{width:100%}}';
       document.head.appendChild(style);
     }
 
