@@ -302,20 +302,29 @@
   function addHeaderBookingButton() {
     if (!isHomepage()) return;
     var header = document.querySelector('header');
-    if (!header) return;
-    var existingCta = header.querySelector('.nav-cta') ||
+    if (!header || document.getElementById('tbt-header-booking-app')) return;
+    var whatsappCta = header.querySelector('.nav-cta') ||
       header.querySelector('a[href*="wa.me/"]') ||
       header.querySelector('a[href*="api.whatsapp.com/send"]');
-    if (!existingCta) return;
-    existingCta.id = 'tbt-header-booking-app';
-    existingCta.href = 'https://tbt-bali-tours.floot.app/';
-    existingCta.target = '_blank';
-    existingCta.rel = 'noopener';
-    existingCta.dataset.bookingApp = 'true';
-    existingCta.dataset.leadSource = 'header_booking_app';
-    existingCta.textContent = 'Book Online';
-    existingCta.style.setProperty('background', '#c8942f', 'important');
-    existingCta.style.setProperty('color', '#071b2d', 'important');
+    if (!whatsappCta || !whatsappCta.parentNode) return;
+
+    var button = document.createElement('a');
+    button.id = 'tbt-header-booking-app';
+    button.href = 'https://tbt-bali-tours.floot.app/';
+    button.target = '_blank';
+    button.rel = 'noopener';
+    button.dataset.bookingApp = 'true';
+    button.dataset.leadSource = 'header_booking_app';
+    button.textContent = 'Book Online';
+    button.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 16px;background:#c8942f;color:#071b2d;text-decoration:none;font-weight:800;font-size:14px;white-space:nowrap;margin-left:10px;box-shadow:0 6px 16px rgba(0,0,0,.12);';
+    whatsappCta.insertAdjacentElement('afterend', button);
+
+    if (!document.getElementById('tbt-header-booking-style')) {
+      var style = document.createElement('style');
+      style.id = 'tbt-header-booking-style';
+      style.textContent = '@media(max-width:960px){#tbt-header-booking-app{display:none!important}}';
+      document.head.appendChild(style);
+    }
   }
 
   function enhanceWhatsAppBookingForm() {
