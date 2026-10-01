@@ -254,8 +254,11 @@
         '#tbt-wa-strip .tbt-wa-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;}' +
         '#tbt-wa-strip h3{font-family:Playfair Display,serif;font-size:clamp(28px,4vw,40px);margin:0 0 6px;}' +
         '#tbt-wa-strip p{margin:0;color:#c6d4df;}' +
-        '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;background:#1faa59;color:#fff;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
-        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr!important;margin:12px auto 30px!important;width:min(100% - 32px,1080px)!important}#tbt-trust-row .tbt-trust-card{padding:18px!important}body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;padding:22px!important}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip a{width:100%}}';
+        '#tbt-wa-strip .tbt-wa-actions{display:flex;gap:10px;flex-wrap:wrap;}' +
+        '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;color:#fff;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
+        '#tbt-wa-strip .tbt-wa-primary{background:#1faa59;}' +
+        '#tbt-wa-strip .tbt-booking-app{background:#c8942f;color:#071b2d;}' +
+        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr!important;margin:12px auto 30px!important;width:min(100% - 32px,1080px)!important}#tbt-trust-row .tbt-trust-card{padding:18px!important}body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;padding:22px!important}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip .tbt-wa-actions{width:100%;flex-direction:column}#tbt-wa-strip a{width:100%}}';
       document.head.appendChild(style);
     }
 
@@ -289,7 +292,7 @@
       var strip = document.createElement('section');
       strip.id = 'tbt-wa-strip';
       strip.innerHTML =
-        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Message Budi directly with your dates, pickup point and what you would like to do.</p></div><a data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a></div>';
+        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Choose WhatsApp for a quick chat with Budi, or open the booking app to browse and request a booking.</p></div><div class="tbt-wa-actions"><a class="tbt-wa-primary" data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a><a class="tbt-booking-app" data-booking-app="true" data-lead-source="home_booking_app" href="https://tbt-bali-tours.floot.app/" target="_blank" rel="noopener">Book Online</a></div></div>';
       if (footer && footer.parentNode) footer.parentNode.insertBefore(strip, footer);
       else document.body.appendChild(strip);
     }
