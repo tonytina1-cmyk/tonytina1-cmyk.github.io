@@ -303,19 +303,19 @@
     if (!isHomepage()) return;
     var header = document.querySelector('header');
     if (!header) return;
-    var existingCta = header.querySelector('.nav-cta');
-    if (existingCta) {
-      existingCta.id = 'tbt-header-booking-app';
-      existingCta.href = 'https://tbt-bali-tours.floot.app/';
-      existingCta.target = '_blank';
-      existingCta.rel = 'noopener';
-      existingCta.dataset.bookingApp = 'true';
-      existingCta.dataset.leadSource = 'header_booking_app';
-      existingCta.textContent = 'Book Online';
-      existingCta.style.background = '#c8942f';
-      existingCta.style.color = '#071b2d';
-      return;
-    }
+    var existingCta = header.querySelector('.nav-cta') ||
+      header.querySelector('a[href*="wa.me/"]') ||
+      header.querySelector('a[href*="api.whatsapp.com/send"]');
+    if (!existingCta) return;
+    existingCta.id = 'tbt-header-booking-app';
+    existingCta.href = 'https://tbt-bali-tours.floot.app/';
+    existingCta.target = '_blank';
+    existingCta.rel = 'noopener';
+    existingCta.dataset.bookingApp = 'true';
+    existingCta.dataset.leadSource = 'header_booking_app';
+    existingCta.textContent = 'Book Online';
+    existingCta.style.setProperty('background', '#c8942f', 'important');
+    existingCta.style.setProperty('color', '#071b2d', 'important');
   }
 
   function enhanceWhatsAppBookingForm() {
