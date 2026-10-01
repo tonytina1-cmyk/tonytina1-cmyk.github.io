@@ -300,31 +300,21 @@
 
 
   function addHeaderBookingButton() {
-    if (!isHomepage() || document.getElementById('tbt-header-booking-app')) return;
+    if (!isHomepage()) return;
     var header = document.querySelector('header');
     if (!header) return;
-    var navWrap = header.querySelector('.nav-wrap') || header.firstElementChild || header;
-    var button = document.createElement('a');
-    button.id = 'tbt-header-booking-app';
-    button.href = 'https://tbt-bali-tours.floot.app/';
-    button.target = '_blank';
-    button.rel = 'noopener';
-    button.dataset.bookingApp = 'true';
-    button.dataset.leadSource = 'header_booking_app';
-    button.textContent = 'Book Online';
-    button.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 16px;background:#c8942f;color:#071b2d;text-decoration:none;font-weight:800;font-size:14px;white-space:nowrap;margin-left:10px;box-shadow:0 6px 16px rgba(0,0,0,.12);';
-    var existingCta = navWrap.querySelector('.nav-cta');
-    if (existingCta && existingCta.parentNode === navWrap) {
-      existingCta.insertAdjacentElement('afterend', button);
-    } else {
-      navWrap.appendChild(button);
-    }
-    if (!document.getElementById('tbt-header-booking-style')) {
-      var style = document.createElement('style');
-      style.id = 'tbt-header-booking-style';
-      style.textContent =
-        '@media(max-width:960px){#tbt-header-booking-app{display:none!important}}';
-      document.head.appendChild(style);
+    var existingCta = header.querySelector('.nav-cta');
+    if (existingCta) {
+      existingCta.id = 'tbt-header-booking-app';
+      existingCta.href = 'https://tbt-bali-tours.floot.app/';
+      existingCta.target = '_blank';
+      existingCta.rel = 'noopener';
+      existingCta.dataset.bookingApp = 'true';
+      existingCta.dataset.leadSource = 'header_booking_app';
+      existingCta.textContent = 'Book Online';
+      existingCta.style.background = '#c8942f';
+      existingCta.style.color = '#071b2d';
+      return;
     }
   }
 
