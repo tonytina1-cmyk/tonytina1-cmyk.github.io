@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.tbtbalitours.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.tbtbalitours.com/</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.tbtbalitours.com/bali-private-driver/</loc><lastmod>2026-09-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.tbtbalitours.com/ubud-day-tour/</loc><lastmod>2026-09-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.tbtbalitours.com/bali-airport-transfers/</loc><lastmod>2026-09-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -14,7 +14,7 @@
   <url><loc>https://www.tbtbalitours.com/north-bali-bedugul-tour/</loc><lastmod>2026-09-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.tbtbalitours.com/nuanu-creative-city-tanah-lot-tour/</loc><lastmod>2026-09-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.tbtbalitours.com/tours.html</loc></url>
-  <url><loc>https://www.tbtbalitours.com/plan-trip.html</loc></url>
+  <url><loc>https://www.tbtbalitours.com/plan-trip.html</loc><lastmod>2026-10-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.tbtbalitours.com/bali-tattoo-experience/</loc></url>
   <url><loc>https://www.tbtbalitours.com/nusa-lembongan-tour/</loc></url>
 </urlset>
