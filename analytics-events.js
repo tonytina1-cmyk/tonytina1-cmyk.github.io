@@ -355,6 +355,19 @@
     }
   }
 
+  function fixEmailLinks() {
+    var email = 'tbt.tours.travel@gmail.com';
+    var links = document.querySelectorAll('a');
+    for (var i = 0; i < links.length; i += 1) {
+      var text = (links[i].textContent || '').trim().toLowerCase();
+      var href = links[i].getAttribute('href') || '';
+      if (text === 'email tbt' || text === email || href.indexOf('/cdn-cgi/l/email-protection') !== -1) {
+        links[i].setAttribute('href', 'mailto:' + email);
+        links[i].removeAttribute('data-cfemail');
+      }
+    }
+  }
+
   function initialisePageEnhancements() {
     if (isHomepage()) addHomepageStyles();
     createMeetBudiSection();
@@ -363,6 +376,7 @@
     addHeaderBookingButton();
     enhanceWhatsAppBookingForm();
     removeStrayLiteralNewline();
+    fixEmailLinks();
   }
 
   if (document.readyState === 'loading') {
