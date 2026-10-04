@@ -292,7 +292,7 @@
       var strip = document.createElement('section');
       strip.id = 'tbt-wa-strip';
       strip.innerHTML =
-        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Choose WhatsApp for a quick chat with Budi, or open the booking app to browse and request a booking.</p></div><div class="tbt-wa-actions"><a class="tbt-wa-primary" data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a><a class="tbt-booking-app" data-booking-app="true" data-lead-source="home_booking_app" href="https://tbt-bali-tours.floot.app/" target="_blank" rel="noopener">Book Online</a></div></div>';
+        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Choose WhatsApp for a quick chat with Budi, or open the booking app to browse and request a booking.</p></div><div class="tbt-wa-actions"><a class="tbt-wa-primary" data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a><a class="tbt-booking-app" data-booking-app="true" data-lead-source="home_booking_app" href="https://tbt-bali-tours.floot.app/book" target="_blank" rel="noopener">Book Online</a></div></div>';
       if (footer && footer.parentNode) footer.parentNode.insertBefore(strip, footer);
       else document.body.appendChild(strip);
     }
@@ -310,7 +310,7 @@
 
     var button = document.createElement('a');
     button.id = 'tbt-header-booking-app';
-    button.href = 'https://tbt-bali-tours.floot.app/';
+    button.href = 'https://tbt-bali-tours.floot.app/book';
     button.target = '_blank';
     button.rel = 'noopener';
     button.dataset.bookingApp = 'true';
