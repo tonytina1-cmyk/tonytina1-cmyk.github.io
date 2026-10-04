@@ -343,6 +343,18 @@
     else form.appendChild(note);
   }
 
+  function removeStrayLiteralNewline() {
+    if (!isHomepage()) return;
+    var root = document.querySelector('main') || document.body;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      if ((node.nodeValue || '').trim() === '\\n') {
+        node.nodeValue = '';
+      }
+    }
+  }
+
   function initialisePageEnhancements() {
     if (isHomepage()) addHomepageStyles();
     createMeetBudiSection();
@@ -350,6 +362,7 @@
     addHomepageWarmth();
     addHeaderBookingButton();
     enhanceWhatsAppBookingForm();
+    removeStrayLiteralNewline();
   }
 
   if (document.readyState === 'loading') {
