@@ -251,6 +251,21 @@ if (waForm) waForm.addEventListener('submit', (e) => {
   const pickup = document.getElementById('pickup').value || 'Not sure yet';
   const notes = document.getElementById('notes').value || 'No extra notes';
   const msg = `Hi Budi, I'd like to enquire about a ${service}.\n\nDate: ${date}\nGuests: ${guests}\nPickup: ${pickup}\nPlaces / notes: ${notes}\n\nPlease let me know availability and price. Thank you.`;
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'whatsapp_click', {
+      click_source: 'booking_form',
+      link_text: 'Continue to WhatsApp',
+      service: service,
+      transport_type: 'beacon'
+    });
+    window.gtag('event', 'generate_lead', {
+      click_source: 'booking_form',
+      lead_source: 'quick_whatsapp_booking_form',
+      contact_method: 'whatsapp',
+      service: service,
+      transport_type: 'beacon'
+    });
+  }
   window.open('https://wa.me/6285738148276?text=' + encodeURIComponent(msg), '_blank', 'noopener');
 });
 
