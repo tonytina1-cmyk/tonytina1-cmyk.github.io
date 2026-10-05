@@ -165,7 +165,25 @@ button,input,select,textarea{font:inherit}
 .home-choices .service-photo{width:calc(100% + 52px);height:190px;object-fit:cover;margin:0 -26px 22px;display:block}
 .home-choices .tour-icon{display:none!important}
 @media(max-width:640px){.home-choices .service-photo{width:calc(100% + 44px);height:165px;margin:0 -22px 18px}}
-</style></head>
+</style>
+<style id="tbt-uluwatu-banner">
+.hero{background:#132f37 url('/assets/uluwatu-poster.jpg') center/cover no-repeat;min-height:540px}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity .8s ease}
+.hero-video.is-playing{opacity:1}
+.hero-shade{background:linear-gradient(90deg,rgba(4,18,31,.85),rgba(4,18,31,.48) 60%,rgba(4,18,31,.2))}
+.hero .hero-grid{padding-top:64px;padding-bottom:72px}
+.hero-app{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.hero-app .app-open,.hero-app .store-pending{display:inline-flex;flex-direction:column;justify-content:center;min-height:52px;padding:9px 16px;border-radius:12px;line-height:1.25;font-size:14px;text-decoration:none}
+.hero-app .app-open{background:#fff;color:#102838;font-weight:800}
+.hero-app .app-open:hover{background:#f6cb68}
+.hero-app .store-pending{border:1px solid rgba(255,255,255,.35);background:rgba(4,18,31,.45);color:#fff}
+.hero-app small{font-size:11px;color:#d9e4ed;margin-bottom:3px}
+.hero-video-toggle{position:absolute;bottom:16px;right:20px;z-index:2;border:1px solid rgba(255,255,255,.5);border-radius:20px;background:rgba(4,18,31,.6);color:white;font:inherit;font-size:12px;padding:7px 13px;cursor:pointer}
+.hero-video-toggle[hidden]{display:none}
+@media(max-width:640px){.hero{min-height:0;background-position:58% center}.hero-video{object-position:58% center}.hero .hero-grid{padding:38px 0 58px}.hero-app{gap:8px;margin-top:20px}.hero-app .app-open{width:100%;align-items:center}.hero-app .store-pending{flex:1;align-items:center;padding:8px 12px}.hero-shade{background:linear-gradient(180deg,rgba(4,18,31,.72),rgba(4,18,31,.48))}}
+@media(prefers-reduced-motion:reduce){.hero-video{display:none;transition:none}}
+</style>
+</head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
       <a class="brand" href="/" aria-label="TBT Tours & Travel home">
@@ -182,7 +200,9 @@ button,input,select,textarea{font:inherit}
       </nav>
       <a class="btn btn-wa nav-cta" data-lead-source="header" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20book%20a%20Bali%20tour%20or%20transfer." target="_blank" rel="noopener">WhatsApp Budi</a>\n      <a id="tbt-header-booking-app" class="btn btn-book nav-cta" data-booking-app="true" data-lead-source="header_booking_app" href="https://tbt-bali-tours.floot.app/" target="_blank" rel="noopener">Book Online</a>
     </div>
-  <!-- header-buttons-cache-bust-2026-10-01 -->\n  </header><main id="main"><section class="hero">
+  <!-- header-buttons-cache-bust-2026-10-01 -->\n  </header><main id="main"><section class="hero" aria-label="Explore Bali with Budi at Uluwatu Temple">
+      <video class="hero-video" muted loop playsinline preload="none" poster="/assets/uluwatu-poster.jpg" aria-hidden="true" tabindex="-1" data-src="/assets/uluwatu-hero.mp4"></video>
+      <button class="hero-video-toggle" type="button" hidden aria-label="Pause background video">Pause video</button>
       <div class="hero-shade"></div>
       <div class="shell hero-grid">
         <div class="hero-copy">
@@ -190,8 +210,13 @@ button,input,select,textarea{font:inherit}
           <h1>Explore Bali with Budi.</h1>
           <p class="lead">Private tours, airport transfers and a day planned around you. Book directly with your friendly local driver.</p>
           <div class="hero-actions">
-            
-            
+            <a class="btn btn-book" href="/tours.html">Explore Tours</a>
+            <a class="btn btn-ghost" href="/plan-trip.html">Book with Budi</a>
+          </div>
+          <div class="hero-app" aria-label="TBT app">
+            <a class="app-open" href="https://tbt-bali-tours.floot.app/" target="_blank" rel="noopener" data-lead-source="homepage_app">Open TBT App ↗</a>
+            <span class="store-pending" aria-disabled="true"><small>Coming soon</small><strong>App Store</strong></span>
+            <span class="store-pending" aria-disabled="true"><small>Coming soon</small><strong>Google Play</strong></span>
           </div>
           
         </div>
@@ -249,4 +274,24 @@ if (waForm) waForm.addEventListener('submit', (e) => {
 });
 
 </script>
-<script src="/analytics-events.js"></script></body></html>
+<script src="/analytics-events.js"></script>
+<script id="tbt-hero-video-control">
+(function(){
+  const video=document.querySelector('.hero-video');
+  const toggle=document.querySelector('.hero-video-toggle');
+  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const connection=navigator.connection;
+  if(!video||!toggle)return;
+  let pausedByUser=false;
+  function showState(){toggle.textContent=video.paused?'Play video':'Pause video';toggle.setAttribute('aria-label',video.paused?'Play background video':'Pause background video');}
+  function start(){if(motion.matches||(connection&&connection.saveData))return; if(!video.src)video.src=video.dataset.src;video.muted=true;video.play().catch(function(){video.classList.remove('is-playing');toggle.hidden=false;showState();});}
+  video.addEventListener('playing',function(){video.classList.add('is-playing');toggle.hidden=false;showState();});
+  video.addEventListener('pause',showState);
+  video.addEventListener('error',function(){video.classList.remove('is-playing');toggle.hidden=true;});
+  toggle.addEventListener('click',function(){if(video.paused){pausedByUser=false;start();}else{pausedByUser=true;video.pause();}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)video.pause();else if(!pausedByUser)start();});
+  motion.addEventListener('change',function(){if(motion.matches){video.pause();toggle.hidden=true;}else start();});
+  start();
+})();
+</script>
+</body></html>
