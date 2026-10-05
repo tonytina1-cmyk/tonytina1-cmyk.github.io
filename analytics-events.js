@@ -292,7 +292,7 @@
       var strip = document.createElement('section');
       strip.id = 'tbt-wa-strip';
       strip.innerHTML =
-        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Choose WhatsApp for a quick chat with Budi, or use the enquiry form to share your trip details.</p></div><div class="tbt-wa-actions"><a class="tbt-wa-primary" data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a><a class="tbt-booking-app" data-enquiry-form="true" data-lead-source="home_enquiry_form" href="/plan-trip.html#waForm">Book Online</a></div></div>';
+        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Choose WhatsApp for a quick chat with Budi, or use the enquiry form to email your trip details.</p></div><div class="tbt-wa-actions"><a class="tbt-wa-primary" data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a><a class="tbt-booking-app" data-enquiry-form="true" data-lead-source="home_enquiry_form" href="/plan-trip.html#waForm">Book Online</a></div></div>';
       if (footer && footer.parentNode) footer.parentNode.insertBefore(strip, footer);
       else document.body.appendChild(strip);
     }
@@ -327,7 +327,7 @@
 
   function enhanceWhatsAppBookingForm() {
     var form = document.getElementById('waForm');
-    if (!form || document.getElementById('waForm-send-note')) return;
+    if (!form || form.dataset.contactMethod === 'email' || document.getElementById('waForm-send-note')) return;
     var submit = form.querySelector('button[type="submit"], input[type="submit"]');
     if (submit) {
       if (submit.tagName === 'INPUT') submit.value = 'Continue to WhatsApp';
@@ -420,7 +420,7 @@
   }, true);
 
   document.addEventListener('submit', function (event) {
-    if (!event.target.matches('#waForm')) return;
+    if (!event.target.matches('#waForm') || event.target.dataset.contactMethod === 'email') return;
     var service = document.getElementById('service');
     var serviceValue = service ? service.value : 'unknown';
 
