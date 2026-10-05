@@ -178,7 +178,7 @@ button,input,select,textarea{font:inherit}
 .hero-app .app-open:hover{background:#f6cb68}
 .hero-app .store-pending{border:1px solid rgba(255,255,255,.35);background:rgba(4,18,31,.45);color:#fff}
 .hero-app small{font-size:11px;color:#d9e4ed;margin-bottom:3px}
-.hero-video-toggle{position:absolute;bottom:16px;right:20px;z-index:2;border:1px solid rgba(255,255,255,.5);border-radius:20px;background:rgba(4,18,31,.6);color:white;font:inherit;font-size:12px;padding:7px 13px;cursor:pointer}
+.hero-video-toggle{position:absolute;bottom:16px;right:20px;z-index:2;border:1px solid rgba(255,255,255,.5);border-radius:20px;background:rgba(4,18,31,.6);color:white;font:inherit;font-size:11px;padding:0;width:28px;height:28px;display:grid;place-items:center;cursor:pointer;opacity:.65}
 .hero-video-toggle[hidden]{display:none}
 @media(max-width:640px){.hero{min-height:0;background-position:58% center}.hero-video{object-position:58% center}.hero .hero-grid{padding:38px 0 58px}.hero-app{gap:8px;margin-top:20px}.hero-app .app-open{width:100%;align-items:center}.hero-app .store-pending{flex:1;align-items:center;padding:8px 12px}.hero-shade{background:linear-gradient(180deg,rgba(4,18,31,.72),rgba(4,18,31,.48))}}
 @media(prefers-reduced-motion:reduce){.hero-video{display:none;transition:none}}
@@ -190,6 +190,7 @@ button,input,select,textarea{font:inherit}
 .meet-budi-copy h2{margin-bottom:18px}.meet-budi-copy p:not(.eyebrow){max-width:560px;margin-bottom:22px;line-height:1.7}
 @media(max-width:640px){.meet-budi{grid-template-columns:1fr;gap:24px;text-align:center}.meet-budi-photo{width:180px;margin:0 auto}.meet-budi-copy p{margin-left:auto;margin-right:auto}.hero .hero-grid{grid-template-columns:1fr}}
 </style>
+<style>.hero-video-toggle:hover,.hero-video-toggle:focus-visible{opacity:1}.hero-video-toggle:focus-visible{outline:2px solid #fff;outline-offset:3px}</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -209,7 +210,7 @@ button,input,select,textarea{font:inherit}
     </div>
   <!-- header-buttons-cache-bust-2026-10-01 -->\n  </header><main id="main"><section class="hero" aria-label="Explore Bali with Budi at Uluwatu Temple">
       <video class="hero-video" muted loop playsinline preload="none" poster="/assets/uluwatu-poster.jpg" aria-hidden="true" tabindex="-1" data-src="/assets/uluwatu-hero.mp4"></video>
-      <button class="hero-video-toggle" type="button" hidden aria-label="Pause background video">Pause video</button>
+      <button class="hero-video-toggle" type="button" hidden aria-label="Pause background video">Ⅱ</button>
       <div class="hero-shade"></div>
       <div class="shell hero-grid">
         <div class="hero-copy">
@@ -283,7 +284,7 @@ if (waForm) waForm.addEventListener('submit', (e) => {
   const connection=navigator.connection;
   if(!video||!toggle)return;
   let pausedByUser=false;
-  function showState(){toggle.textContent=video.paused?'Play video':'Pause video';toggle.setAttribute('aria-label',video.paused?'Play background video':'Pause background video');}
+  function showState(){toggle.textContent=video.paused?'▶':'Ⅱ';toggle.setAttribute('aria-label',video.paused?'Play background video':'Pause background video');}
   function start(){if(motion.matches||(connection&&connection.saveData))return; if(!video.src)video.src=video.dataset.src;video.muted=true;video.play().catch(function(){video.classList.remove('is-playing');toggle.hidden=false;showState();});}
   video.addEventListener('playing',function(){video.classList.add('is-playing');toggle.hidden=false;showState();});
   video.addEventListener('pause',showState);
