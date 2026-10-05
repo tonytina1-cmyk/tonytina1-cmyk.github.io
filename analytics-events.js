@@ -55,12 +55,12 @@
     var style = document.createElement('style');
     style.id = 'tbt-home-layout-style';
     style.textContent =
-      '#tbt-hero-image{width:100%;height:clamp(280px,42vw,560px);background-position:center center;background-size:cover;background-repeat:no-repeat;background-color:#071b2d;}' +
-      '.tbt-compact-hero{min-height:auto!important;padding-top:54px!important;padding-bottom:44px!important;background-image:none!important;background:#071b2d!important;}' +
+      '#tbt-hero-image{width:100%;height:clamp(280px,42vw,560px);background-position:center center;background-size:cover;background-repeat:no-repeat;background-color:#18352c;}' +
+      '.tbt-compact-hero{min-height:auto!important;padding-top:54px!important;padding-bottom:44px!important;background-image:none!important;background:#18352c!important;}' +
       '.tbt-compact-hero h1{margin-bottom:16px!important;}' +
-      '#meet-budi{background:#fff!important;color:#071b2d!important;padding:38px 20px 28px!important;position:relative;z-index:2;}' +
+      '#meet-budi{background:#fffaf0!important;color:#18352c!important;padding:38px 20px 28px!important;position:relative;z-index:2;}' +
       '#meet-budi .tbt-budi-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.1fr);gap:32px;align-items:center;}' +
-      '#meet-budi .tbt-budi-photo{border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(7,27,45,.13);background:#f3f3f3;}' +
+      '#meet-budi .tbt-budi-photo{border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(24,53,44,.13);background:#f3f3f3;}' +
       '#meet-budi .tbt-budi-photo img{display:block!important;width:100%!important;height:auto!important;max-height:450px!important;object-fit:cover!important;object-position:center center!important;margin:0!important;border-radius:0!important;}' +
       '@media(max-width:760px){#tbt-hero-image{height:58vw;min-height:235px;max-height:360px;background-size:cover;background-position:center center}.tbt-compact-hero{padding-top:36px!important;padding-bottom:32px!important}.tbt-compact-hero h1{font-size:clamp(42px,12vw,64px)!important;line-height:1.02!important}#meet-budi{padding:28px 18px 24px!important}#meet-budi .tbt-budi-inner{grid-template-columns:1fr!important;gap:20px!important}#meet-budi .tbt-budi-photo img{max-height:390px!important;object-fit:cover!important}}';
     document.head.appendChild(style);
@@ -170,10 +170,10 @@
 
     var copy = document.createElement('div');
     copy.innerHTML =
-      '<div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#1d6f4a;margin-bottom:8px;">YOUR LOCAL BALI DRIVER</div>' +
-      '<h2 style="font-family:Playfair Display,serif;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 14px;color:#071b2d;">Meet Budi</h2>' +
-      '<p style="font-size:18px;line-height:1.58;color:#4f5d68;margin:0 0 13px;">Explore Bali with Budi, a friendly local private driver offering personal service, flexible itineraries and local knowledge. From airport pickups to full-day adventures, your trip can be shaped around what you want to see and do.</p>' +
-      '<p style="font-size:16px;line-height:1.55;color:#4f5d68;margin:0;">Chat directly with Budi about your dates, pickup point and plans — no payment is needed just to enquire.</p>';
+      '<div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#176b4d;margin-bottom:8px;">YOUR LOCAL BALI DRIVER</div>' +
+      '<h2 style="font-family:Playfair Display,serif;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 14px;color:#18352c;">Meet Budi</h2>' +
+      '<p style="font-size:18px;line-height:1.58;color:#52675d;margin:0 0 13px;">Explore Bali with Budi, a friendly local private driver offering personal service, flexible itineraries and local knowledge. From airport pickups to full-day adventures, your trip can be shaped around what you want to see and do.</p>' +
+      '<p style="font-size:16px;line-height:1.55;color:#52675d;margin:0;">Chat directly with Budi about your dates, pickup point and plans — no payment is needed just to enquire.</p>';
     inner.appendChild(copy);
     section.appendChild(inner);
     hero.parentNode.insertBefore(section, hero.nextSibling);
@@ -198,11 +198,11 @@
     quick.setAttribute('aria-label', 'Choose your Bali service');
     quick.style.cssText = 'max-width:1080px;margin:24px auto 34px;padding:0 20px;';
     quick.innerHTML =
-      '<div style="text-align:center;margin-bottom:16px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#1d6f4a;">HOW CAN BUDI HELP?</div><h2 style="margin:7px 0 0;font-family:Playfair Display,serif;font-size:clamp(25px,4vw,34px);line-height:1.15;color:#071b2d;">Choose what you need</h2></div>' +
+      '<div style="text-align:center;margin-bottom:16px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#176b4d;">HOW CAN BUDI HELP?</div><h2 style="margin:7px 0 0;font-family:Playfair Display,serif;font-size:clamp(25px,4vw,34px);line-height:1.15;color:#18352c;">Choose what you need</h2></div>' +
       '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">' +
-      '<a data-lead-source="quick_private_driver" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20in%20Bali." target="_blank" rel="noopener" style="display:block;padding:18px;border-radius:18px;background:#071b2d;color:#fff;text-decoration:none;text-align:center;font-weight:800;box-shadow:0 10px 28px rgba(7,27,45,.12);">Private Driver<br><span style="font-size:13px;font-weight:500;opacity:.82;">Message Budi</span></a>' +
-      '<a href="#transfers" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Airport Transfers<br><span style="font-size:13px;font-weight:500;color:#66717f;">Pickup &amp; drop-off</span></a>' +
-      '<a href="#tours" style="display:block;padding:18px;border-radius:18px;background:#f8f4ec;color:#071b2d;text-decoration:none;text-align:center;font-weight:800;border:1px solid #e7e5df;">Bali Tours<br><span style="font-size:13px;font-weight:500;color:#66717f;">Explore with Budi</span></a></div>';
+      '<a data-lead-source="quick_private_driver" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20a%20private%20driver%20in%20Bali." target="_blank" rel="noopener" style="display:block;padding:18px;border-radius:18px;background:#18352c;color:#fffaf0;text-decoration:none;text-align:center;font-weight:800;box-shadow:0 10px 28px rgba(24,53,44,.12);">Private Driver<br><span style="font-size:13px;font-weight:500;opacity:.82;">Message Budi</span></a>' +
+      '<a href="#transfers" style="display:block;padding:18px;border-radius:18px;background:#f8f3e9;color:#18352c;text-decoration:none;text-align:center;font-weight:800;border:1px solid #dfd3bf;">Airport Transfers<br><span style="font-size:13px;font-weight:500;color:#687a71;">Pickup &amp; drop-off</span></a>' +
+      '<a href="#tours" style="display:block;padding:18px;border-radius:18px;background:#f8f3e9;color:#18352c;text-decoration:none;text-align:center;font-weight:800;border:1px solid #dfd3bf;">Bali Tours<br><span style="font-size:13px;font-weight:500;color:#687a71;">Explore with Budi</span></a></div>';
     if (meet && meet.parentNode === tours.parentNode) {
       tours.parentNode.insertBefore(quick, meet.nextSibling);
     } else {
@@ -217,7 +217,7 @@
     var card = document.createElement('div');
     card.id = 'nuanu-tour-home-card';
     card.style.cssText = 'max-width:1080px;margin:34px auto 8px;padding:0 20px;';
-    card.innerHTML = '<div style="background:#f8f4ec;border:1px solid #e7e5df;border-radius:24px;padding:28px;box-shadow:0 14px 38px rgba(7,27,45,.09);display:grid;gap:14px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#1d6f4a;">NEW TBT TOUR</div><h3 style="margin:0;font-family:Playfair Display,serif;font-size:clamp(26px,4vw,38px);line-height:1.1;color:#071b2d;">Nuanu Creative City &amp; Tanah Lot</h3><p style="margin:0;color:#4f5d68;max-width:760px;">Discover Bali\'s iconic Tanah Lot coastline, then experience the art, architecture, nature and creative spaces of Nuanu Creative City on a flexible private day with Budi.</p><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;"><a href="/nuanu-creative-city-tanah-lot-tour/" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 20px;font-weight:700;background:#071b2d;color:#fff;text-decoration:none;">View Nuanu Tour</a><a data-lead-source="nuanu_home_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20a%20price%20for%20the%20Nuanu%20Creative%20City%20and%20Tanah%20Lot%20tour." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 20px;font-weight:700;background:#1faa59;color:#fff;text-decoration:none;">WhatsApp Budi for price</a></div><small style="color:#66717f;">Private transport • Flexible itinerary • Price on request</small></div>';
+    card.innerHTML = '<div style="background:#f8f3e9;border:1px solid #dfd3bf;border-radius:24px;padding:28px;box-shadow:0 14px 38px rgba(24,53,44,.09);display:grid;gap:14px;"><div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#176b4d;">NEW TBT TOUR</div><h3 style="margin:0;font-family:Playfair Display,serif;font-size:clamp(26px,4vw,38px);line-height:1.1;color:#18352c;">Nuanu Creative City &amp; Tanah Lot</h3><p style="margin:0;color:#52675d;max-width:760px;">Discover Bali\'s iconic Tanah Lot coastline, then experience the art, architecture, nature and creative spaces of Nuanu Creative City on a flexible private day with Budi.</p><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;"><a href="/nuanu-creative-city-tanah-lot-tour/" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 20px;font-weight:700;background:#18352c;color:#fffaf0;text-decoration:none;">View Nuanu Tour</a><a data-lead-source="nuanu_home_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20a%20price%20for%20the%20Nuanu%20Creative%20City%20and%20Tanah%20Lot%20tour." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 20px;font-weight:700;background:#176b4d;color:#fffaf0;text-decoration:none;">WhatsApp Budi for price</a></div><small style="color:#687a71;">Private transport • Flexible itinerary • Price on request</small></div>';
     tours.appendChild(card);
   }
 
@@ -233,31 +233,31 @@
       var style = document.createElement('style');
       style.id = 'tbt-home-warm-style';
       style.textContent =
-        'body.tbt-home-warm main{background:#fffdf9;}' +
-        'body.tbt-home-warm #tours{background:#fffdf9!important;}' +
-        'body.tbt-home-warm #why{background:#f5efe5!important;}' +
-        'body.tbt-home-warm #reviews{background:#fffaf2!important;}' +
-        'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(7,27,45,.08);border-color:#e7e0d4;min-height:0!important;height:auto!important;}' +
+        'body.tbt-home-warm main{background:#f8f3e9;}' +
+        'body.tbt-home-warm #tours{background:#f8f3e9!important;}' +
+        'body.tbt-home-warm #why{background:#efe4d3!important;}' +
+        'body.tbt-home-warm #reviews{background:#fffaf0!important;}' +
+        'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(24,53,44,.08);border-color:#dfd3bf;min-height:0!important;height:auto!important;}' +
         'body.tbt-home-warm #tours,body.tbt-home-warm #transfers{align-self:start!important;height:auto!important;min-height:0!important;}' +
         'body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;align-self:start!important;}' +
         '#tbt-quick-choices{grid-column:1/-1!important;width:100%!important;}' +
         '#tbt-trust-row{grid-column:1/-1!important;width:min(1080px,calc(100% - 40px))!important;max-width:1080px;margin:8px auto 42px!important;padding:0!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;}' +
-        '#tbt-trust-row .tbt-trust-card{background:#fff7ec;border:1px solid #eadfce;border-radius:18px;padding:22px 20px;text-align:center;min-height:0!important;}' +
-        '#tbt-trust-row strong{display:block;color:#071b2d;font-size:17px;margin-bottom:5px;}' +
-        '#tbt-trust-row span{color:#65717c;font-size:14px;line-height:1.45;}' +
-        '#tbt-bali-band{position:relative;overflow:hidden;min-height:300px;margin:0;background:#071b2d;background-size:cover;background-position:center;display:flex;align-items:center;}' +
-        '#tbt-bali-band:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,27,45,.88),rgba(7,27,45,.42));}' +
-        '#tbt-bali-band .tbt-bali-band-inner{position:relative;z-index:1;width:min(1080px,calc(100% - 40px));margin:0 auto;color:#fff;padding:48px 0;}' +
+        '#tbt-trust-row .tbt-trust-card{background:#fffaf0;border:1px solid #dfd3bf;border-radius:18px;padding:22px 20px;text-align:center;min-height:0!important;}' +
+        '#tbt-trust-row strong{display:block;color:#18352c;font-size:17px;margin-bottom:5px;}' +
+        '#tbt-trust-row span{color:#687a71;font-size:14px;line-height:1.45;}' +
+        '#tbt-bali-band{position:relative;overflow:hidden;min-height:300px;margin:0;background:#18352c;background-size:cover;background-position:center;display:flex;align-items:center;}' +
+        '#tbt-bali-band:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,53,44,.88),rgba(24,53,44,.42));}' +
+        '#tbt-bali-band .tbt-bali-band-inner{position:relative;z-index:1;width:min(1080px,calc(100% - 40px));margin:0 auto;color:#fffaf0;padding:48px 0;}' +
         '#tbt-bali-band h2{font-family:Playfair Display,serif;font-size:clamp(36px,5vw,58px);line-height:1.05;margin:0 0 12px;max-width:660px;}' +
-        '#tbt-bali-band p{max-width:620px;color:#d8e1e8;font-size:18px;line-height:1.55;margin:0;}' +
-        '#tbt-wa-strip{background:#0b2a41;color:#fff;padding:30px 20px;}' +
+        '#tbt-bali-band p{max-width:620px;color:#e4e9df;font-size:18px;line-height:1.55;margin:0;}' +
+        '#tbt-wa-strip{background:#0f2a23;color:#fffaf0;padding:30px 20px;}' +
         '#tbt-wa-strip .tbt-wa-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;}' +
         '#tbt-wa-strip h3{font-family:Playfair Display,serif;font-size:clamp(28px,4vw,40px);margin:0 0 6px;}' +
-        '#tbt-wa-strip p{margin:0;color:#c6d4df;}' +
+        '#tbt-wa-strip p{margin:0;color:#e4e9df;}' +
         '#tbt-wa-strip .tbt-wa-actions{display:flex;gap:10px;flex-wrap:wrap;}' +
-        '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;color:#fff;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
-        '#tbt-wa-strip .tbt-wa-primary{background:#1faa59;}' +
-        '#tbt-wa-strip .tbt-booking-app{background:#c8942f;color:#071b2d;}' +
+        '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;color:#fffaf0;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
+        '#tbt-wa-strip .tbt-wa-primary{background:#176b4d;}' +
+        '#tbt-wa-strip .tbt-booking-app{background:#dcc89d;color:#18352c;}' +
         '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr!important;margin:12px auto 30px!important;width:min(100% - 32px,1080px)!important}#tbt-trust-row .tbt-trust-card{padding:18px!important}body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;padding:22px!important}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip .tbt-wa-actions{width:100%;flex-direction:column}#tbt-wa-strip a{width:100%}}';
       document.head.appendChild(style);
     }
@@ -283,7 +283,7 @@
       var heroImage = document.getElementById('tbt-hero-image');
       if (heroImage && heroImage.style.backgroundImage) band.style.backgroundImage = heroImage.style.backgroundImage;
       band.innerHTML =
-        '<div class="tbt-bali-band-inner"><div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#f0c66a;margin-bottom:10px;">SEE BALI YOUR WAY</div><h2>More than a ride — your local Bali experience.</h2><p>From airport pickup to full-day exploring, Budi keeps the day personal, flexible and easy.</p></div>';
+        '<div class="tbt-bali-band-inner"><div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#dcc89d;margin-bottom:10px;">SEE BALI YOUR WAY</div><h2>More than a ride — your local Bali experience.</h2><p>From airport pickup to full-day exploring, Budi keeps the day personal, flexible and easy.</p></div>';
       if (why && why.parentNode) why.parentNode.insertBefore(band, why);
     }
 
@@ -316,7 +316,7 @@
     button.dataset.bookingApp = 'true';
     button.dataset.leadSource = 'header_booking_app';
     button.textContent = 'Book Online';
-    button.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 16px;background:#c8942f;color:#071b2d;text-decoration:none;font-weight:800;font-size:14px;white-space:nowrap;margin-left:10px;box-shadow:0 6px 16px rgba(0,0,0,.12);';
+    button.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 16px;background:#dcc89d;color:#18352c;text-decoration:none;font-weight:800;font-size:14px;white-space:nowrap;margin-left:10px;box-shadow:0 6px 16px rgba(0,0,0,.12);';
     whatsappCta.insertAdjacentElement('afterend', button);
 
     if (!document.getElementById('tbt-header-booking-style')) {
@@ -337,7 +337,7 @@
     }
     var note = document.createElement('p');
     note.id = 'waForm-send-note';
-    note.style.cssText = 'margin:10px 0 0;font-size:13px;line-height:1.45;color:#66717f;text-align:center;';
+    note.style.cssText = 'margin:10px 0 0;font-size:13px;line-height:1.45;color:#687a71;text-align:center;';
     note.textContent = 'WhatsApp will open with your trip details ready. Please press Send in WhatsApp to complete your enquiry with Budi.';
     if (submit && submit.parentNode) submit.parentNode.insertBefore(note, submit.nextSibling);
     else form.appendChild(note);
