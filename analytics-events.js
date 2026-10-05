@@ -401,6 +401,20 @@
   }, true);
 
   document.addEventListener('click', function (event) {
+    var link = event.target.closest('a[href^="mailto:"]');
+    if (!link) return;
+    var source = getClickLocation(link);
+    var label = (link.textContent || '').trim().slice(0, 100);
+    sendAnalyticsEvent('email_click', { click_source: source, link_text: label });
+    sendAnalyticsEvent('generate_lead', {
+      click_source: source,
+      lead_source: 'email_' + source,
+      contact_method: 'email',
+      link_text: label
+    });
+  }, true);
+
+  document.addEventListener('click', function (event) {
     var link = event.target.closest('a[data-booking-app]');
     if (!link) return;
     sendAnalyticsEvent('booking_app_click', {
