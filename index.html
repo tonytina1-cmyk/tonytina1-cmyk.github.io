@@ -256,6 +256,15 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 @media(max-width:640px){.tbt-faq{padding:24px 0 30px}.tbt-faq-panel{padding:24px 20px}.tbt-faq-list summary{font-size:15px}}
 </style>
 <style id="tbt-members-style">#tbt-members{padding:30px 0 0;scroll-margin-top:100px}.tbt-members-panel{display:flex;gap:24px;align-items:center;justify-content:space-between;background:#efe4d3;border:1px solid #dfd3bf;border-radius:24px;padding:28px 30px;color:#18352c}.tbt-members-panel h2{font-family:"Playfair Display",serif;font-size:clamp(26px,4vw,36px);margin:0 0 12px;line-height:1.15}.tbt-members-panel p:last-child{margin:0;color:#52675d;max-width:650px}.tbt-members-panel .btn{flex-shrink:0;min-height:44px}@media(max-width:700px){.tbt-members-panel{flex-direction:column;align-items:flex-start;padding:24px 20px}.tbt-members-panel .btn{width:100%}}</style>
+<style id="tbt-header-members-style">
+.site-header .nav-wrap{gap:16px}
+.site-header .main-nav{gap:16px}
+#tbt-header-members{background:#fffaf0;color:#176b4d;border:1px solid #176b4d;min-height:44px;padding:10px 14px;white-space:nowrap}
+#tbt-header-members:hover{background:#176b4d;color:#fffaf0}
+#tbt-header-members:focus-visible{outline:2px solid #176b4d;outline-offset:3px}
+@media(max-width:960px){.site-header .nav-wrap{gap:10px}.site-header .brand{margin-right:auto}#tbt-header-members{display:inline-flex!important;font-size:12px!important;padding:9px 12px!important}}
+@media(max-width:640px){.site-header .nav-wrap{gap:7px!important}#tbt-header-members{font-size:11px!important;padding:8px 10px!important}}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -270,9 +279,9 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
         <a href="/#why">Why TBT</a>
         <a href="/plan-trip.html">Enquire with Budi</a>
         <a href="/#contact">Contact</a>
-        <a href="/members.html">Members</a>
       </nav>
       <a class="btn btn-wa nav-cta" data-lead-source="header" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20book%20a%20Bali%20tour%20or%20transfer." target="_blank" rel="noopener">WhatsApp Budi</a>
+      <a id="tbt-header-members" class="btn nav-cta" href="/members.html">Members</a>
       <a id="tbt-header-booking-app" class="btn btn-book nav-cta" data-enquiry-form="true" data-lead-source="header_enquiry_form" href="/plan-trip.html#waForm">Book Online</a>
     </div>
   <!-- header-buttons-cache-bust-2026-10-01 -->
