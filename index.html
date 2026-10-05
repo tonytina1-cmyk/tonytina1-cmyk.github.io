@@ -171,7 +171,7 @@ button,input,select,textarea{font:inherit}
 .hero{background:#18352c url('/assets/uluwatu-poster.jpg') center/cover no-repeat;min-height:540px}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity .8s ease}
 .hero-video.is-playing{opacity:1}
-.hero-shade{background:linear-gradient(90deg,rgba(15,42,35,.85),rgba(15,42,35,.48) 60%,rgba(15,42,35,.2))}
+.hero-shade{background:linear-gradient(90deg,rgba(15,42,35,.60),rgba(15,42,35,.22) 60%,rgba(15,42,35,.08))}
 .hero .hero-grid{padding-top:64px;padding-bottom:72px}
 .hero-app{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .hero-app .app-open,.hero-app .store-pending{display:inline-flex;flex-direction:column;justify-content:center;min-height:52px;padding:9px 16px;border-radius:12px;line-height:1.25;font-size:14px;text-decoration:none}
@@ -181,7 +181,7 @@ button,input,select,textarea{font:inherit}
 .hero-app small{font-size:11px;color:#d9e4ed;margin-bottom:3px}
 .hero-video-toggle{position:absolute;bottom:16px;right:20px;z-index:2;border:1px solid rgba(255,255,255,.5);border-radius:20px;background:rgba(15,42,35,.6);color:white;font:inherit;font-size:11px;padding:0;width:28px;height:28px;display:grid;place-items:center;cursor:pointer;opacity:.65}
 .hero-video-toggle[hidden]{display:none}
-@media(max-width:640px){.hero{min-height:0;background-position:58% center}.hero-video{object-position:58% center}.hero .hero-grid{padding:38px 0 58px}.hero-app{gap:8px;margin-top:20px}.hero-app .app-open{width:100%;align-items:center}.hero-app .store-pending{flex:1;align-items:center;padding:8px 12px}.hero-shade{background:linear-gradient(180deg,rgba(15,42,35,.72),rgba(15,42,35,.48))}}
+@media(max-width:640px){.hero{min-height:0;background-position:58% center}.hero-video{object-position:58% center}.hero .hero-grid{padding:38px 0 58px}.hero-app{gap:8px;margin-top:20px}.hero-app .app-open{width:100%;align-items:center}.hero-app .store-pending{flex:1;align-items:center;padding:8px 12px}.hero-shade{background:linear-gradient(180deg,rgba(15,42,35,.52),rgba(15,42,35,.32))}}
 @media(prefers-reduced-motion:reduce){.hero-video{display:none;transition:none}}
 </style>
 <style id="tbt-meet-budi-layout">
@@ -243,6 +243,7 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 .booking-guide-steps p{font-size:14px;line-height:1.6;color:#52675d;margin:0}
 @media(max-width:640px){.booking-guide{padding-bottom:24px}.booking-guide-panel{padding:24px 20px}.booking-guide-steps{grid-template-columns:1fr;gap:20px}}
 </style>
+<style id="tbt-hero-text-contrast">.hero h1,.hero .lead,.hero .eyebrow{text-shadow:0 2px 8px rgba(15,42,35,.65)}</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
