@@ -292,7 +292,7 @@
       var strip = document.createElement('section');
       strip.id = 'tbt-wa-strip';
       strip.innerHTML =
-        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Choose WhatsApp for a quick chat with Budi, or open the booking app to browse and request a booking.</p></div><div class="tbt-wa-actions"><a class="tbt-wa-primary" data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a><a class="tbt-booking-app" data-booking-app="true" data-lead-source="home_booking_app" href="https://tbt-bali-tours.floot.app/book" target="_blank" rel="noopener">Book Online</a></div></div>';
+        '<div class="tbt-wa-inner"><div><h3>Ready to plan your Bali day?</h3><p>Choose WhatsApp for a quick chat with Budi, or use the enquiry form to share your trip details.</p></div><div class="tbt-wa-actions"><a class="tbt-wa-primary" data-lead-source="home_bottom_strip" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20plan%20my%20Bali%20trip." target="_blank" rel="noopener">WhatsApp Budi</a><a class="tbt-booking-app" data-enquiry-form="true" data-lead-source="home_enquiry_form" href="/plan-trip.html#waForm">Book Online</a></div></div>';
       if (footer && footer.parentNode) footer.parentNode.insertBefore(strip, footer);
       else document.body.appendChild(strip);
     }
@@ -310,11 +310,9 @@
 
     var button = document.createElement('a');
     button.id = 'tbt-header-booking-app';
-    button.href = 'https://tbt-bali-tours.floot.app/book';
-    button.target = '_blank';
-    button.rel = 'noopener';
-    button.dataset.bookingApp = 'true';
-    button.dataset.leadSource = 'header_booking_app';
+    button.href = '/plan-trip.html#waForm';
+    button.dataset.enquiryForm = 'true';
+    button.dataset.leadSource = 'header_enquiry_form';
     button.textContent = 'Book Online';
     button.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 16px;background:#dcc89d;color:#18352c;text-decoration:none;font-weight:800;font-size:14px;white-space:nowrap;margin-left:10px;box-shadow:0 6px 16px rgba(0,0,0,.12);';
     whatsappCta.insertAdjacentElement('afterend', button);
@@ -407,6 +405,15 @@
     var link = event.target.closest('a[data-booking-app]');
     if (!link) return;
     sendAnalyticsEvent('booking_app_click', {
+      click_source: getClickLocation(link),
+      link_text: (link.textContent || '').trim().slice(0, 100)
+    });
+  }, true);
+
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest('a[data-enquiry-form]');
+    if (!link) return;
+    sendAnalyticsEvent('enquiry_form_click', {
       click_source: getClickLocation(link),
       link_text: (link.textContent || '').trim().slice(0, 100)
     });
