@@ -385,18 +385,13 @@
     initialisePageEnhancements();
   }
 
+  // Contact clicks indicate intent only; receipt of an enquiry is not observable here.
   document.addEventListener('click', function (event) {
     var link = event.target.closest('a[href*="api.whatsapp.com/send"], a[href*="wa.me/"]');
     if (!link) return;
     var source = getClickLocation(link);
     var label = (link.textContent || '').trim().slice(0, 100);
     sendAnalyticsEvent('whatsapp_click', { click_source: source, link_text: label });
-    sendAnalyticsEvent('generate_lead', {
-      click_source: source,
-      lead_source: 'whatsapp_' + source,
-      contact_method: 'whatsapp',
-      link_text: label
-    });
     if (link.href.indexOf('wa.me/') !== -1) link.href = getSafeWhatsAppUrl(link.href);
   }, true);
 
@@ -406,12 +401,6 @@
     var source = getClickLocation(link);
     var label = (link.textContent || '').trim().slice(0, 100);
     sendAnalyticsEvent('email_click', { click_source: source, link_text: label });
-    sendAnalyticsEvent('generate_lead', {
-      click_source: source,
-      lead_source: 'email_' + source,
-      contact_method: 'email',
-      link_text: label
-    });
   }, true);
 
   document.addEventListener('click', function (event) {
@@ -438,13 +427,6 @@
     sendAnalyticsEvent('whatsapp_click', {
       click_source: 'booking_form',
       link_text: 'Continue to WhatsApp'
-    });
-    sendAnalyticsEvent('generate_lead', {
-      click_source: 'booking_form',
-      lead_source: 'quick_whatsapp_booking_form',
-      contact_method: 'whatsapp',
-      link_text: 'Continue to WhatsApp',
-      service: serviceValue
     });
 
     event.preventDefault();
