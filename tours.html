@@ -165,7 +165,13 @@ button,input,select,textarea{font:inherit}
 .tour-card .tour-card-photo{width:calc(100% + 60px);height:185px;object-fit:cover;margin:0 -30px 18px;display:block}
 .tour-card .tour-icon{display:none!important}
 @media(max-width:640px){.tour-card .tour-card-photo{width:calc(100% + 44px);height:165px;margin:0 -22px 16px}}
-</style></head>
+</style><style>
+.tour-card .card-actions{gap:10px}
+.tour-card .card-actions>.card-link{margin-bottom:4px}
+.tour-card .tour-quote-contact{width:100%;min-height:44px;padding:11px 14px;font-size:14px;line-height:1.4;text-align:center}
+.tour-card .card-actions a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+</style>
+</head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
       <a class="brand" href="/" aria-label="TBT Tours & Travel home">
@@ -199,7 +205,7 @@ button,input,select,textarea{font:inherit}
             <h3>Ubud & Central Bali</h3>
             <p>Rice terraces, temples, waterfalls, art villages, markets and the cultural heart of Bali.</p>
             <ul><li>Tegallalang rice terraces</li><li>Temple or waterfall stops</li><li>Flexible Ubud itinerary</li></ul>
-            <div class="card-actions"><a class="card-link" href="/ubud-day-tour/">View Ubud Tour →</a><a class="card-link" data-lead-source="home_ubud_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27m%20interested%20in%20an%20Ubud%20tour." target="_blank" rel="noopener">Ask about Ubud →</a></div>
+            <div class="card-actions"><a class="card-link" href="/ubud-day-tour/">View Ubud Tour →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="home_ubud_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Ubud%20%26%20Central%20Bali%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Ubud%20%26%20Central%20Bali&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Ubud%20%26%20Central%20Bali%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
           <article class="tour-card">
             <img class="tour-card-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/2c91d186-eb4b-4075-bffd-2b5b378088ab.png" alt="Nusa Penida coastal scenery" loading="lazy">
@@ -207,7 +213,7 @@ button,input,select,textarea{font:inherit}
             <h3>Nusa Penida</h3>
             <p>Experience dramatic cliffs, clear beaches and iconic island viewpoints on a full-day adventure.</p>
             <ul><li>Kelingking Beach</li><li>Broken Beach & Angel’s Billabong</li><li>Crystal Bay options</li></ul>
-            <div class="card-actions"><a class="card-link" href="/nusa-penida-tour/">View Nusa Penida Tour →</a><a class="card-link" data-lead-source="home_nusa_penida_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27m%20interested%20in%20a%20Nusa%20Penida%20trip." target="_blank" rel="noopener">Ask about Nusa Penida →</a></div>
+            <div class="card-actions"><a class="card-link" href="/nusa-penida-tour/">View Nusa Penida Tour →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="home_nusa_penida_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Nusa%20Penida%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Nusa%20Penida&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Nusa%20Penida%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
           <article class="tour-card">
             <img class="tour-card-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/d53fc6ab-1b3c-4e68-b878-7dc9b44ee707.png" alt="Balinese temple and cultural scenery" loading="lazy">
@@ -215,7 +221,7 @@ button,input,select,textarea{font:inherit}
             <h3>Uluwatu & South Bali</h3>
             <p>Coastal scenery, beaches and one of Bali’s most famous cliff-top temple areas.</p>
             <ul><li>Beach stops</li><li>Uluwatu Temple</li><li>Kecak sunset option</li></ul>
-            <div class="card-actions"><a class="card-link" href="/uluwatu-tour/">View Uluwatu Tour →</a><a class="card-link" data-lead-source="home_uluwatu_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27m%20interested%20in%20an%20Uluwatu%20tour." target="_blank" rel="noopener">Ask Budi on WhatsApp →</a></div>
+            <div class="card-actions"><a class="card-link" href="/uluwatu-tour/">View Uluwatu Tour →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="home_uluwatu_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Uluwatu%20%26%20South%20Bali%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Uluwatu%20%26%20South%20Bali&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Uluwatu%20%26%20South%20Bali%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
           <article class="tour-card">
             <img class="tour-card-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/4376b006-ba27-456b-81a1-8961316473c9.png" alt="Scenic Bali day tour" loading="lazy">
@@ -223,7 +229,7 @@ button,input,select,textarea{font:inherit}
             <h3>Kintamani & Mount Batur</h3>
             <p>Head into Bali’s highlands for volcano views, cooler air and scenic stops along the way.</p>
             <ul><li>Mount Batur viewpoints</li><li>Lake scenery</li><li>Coffee & village stops</li></ul>
-            <div class="card-actions"><a class="card-link" href="/kintamani-mount-batur-tour/">View Mount Batur Tour →</a><a class="card-link" data-lead-source="home_mount_batur_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27m%20interested%20in%20a%20Kintamani%20tour." target="_blank" rel="noopener">Ask about Kintamani →</a></div>
+            <div class="card-actions"><a class="card-link" href="/kintamani-mount-batur-tour/">View Mount Batur Tour →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="home_mount_batur_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Kintamani%20%26%20Mount%20Batur%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Kintamani%20%26%20Mount%20Batur&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Kintamani%20%26%20Mount%20Batur%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
           <article class="tour-card">
             <img class="tour-card-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/3937d5b8-0051-4182-afc9-f553e7fcf8ca.png" alt="North Bali waterfall and jungle scenery" loading="lazy">
@@ -231,7 +237,7 @@ button,input,select,textarea{font:inherit}
             <h3>Bedugul & North Bali</h3>
             <p>Discover lakes, mountain roads, waterfalls, temples and the greener side of the island.</p>
             <ul><li>Lake & temple scenery</li><li>Waterfall options</li><li>North Bali route planning</li></ul>
-            <div class="card-actions"><a class="card-link" href="/north-bali-bedugul-tour/">View North Bali Tour →</a><a class="card-link" data-lead-source="home_north_bali_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27m%20interested%20in%20Bedugul%20or%20North%20Bali." target="_blank" rel="noopener">Ask Budi on WhatsApp →</a></div>
+            <div class="card-actions"><a class="card-link" href="/north-bali-bedugul-tour/">View North Bali Tour →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="home_north_bali_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Bedugul%20%26%20North%20Bali%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Bedugul%20%26%20North%20Bali&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Bedugul%20%26%20North%20Bali%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
           <article class="tour-card">
             <img class="tour-card-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/d53fc6ab-1b3c-4e68-b878-7dc9b44ee707.png" alt="Bali art, temple and cultural scenery" loading="lazy">
@@ -239,14 +245,14 @@ button,input,select,textarea{font:inherit}
             <h3>Nuanu Creative City & Tanah Lot</h3>
             <p>Combine one of Bali’s iconic coastal temples with a modern creative destination of art, nature, architecture and immersive experiences.</p>
             <ul><li>Tanah Lot Temple</li><li>Nuanu Creative City</li><li>Flexible private itinerary</li></ul>
-            <a class="card-link" href="/nuanu-creative-city-tanah-lot-tour/">Explore Nuanu tour →</a>
+            <div class="card-actions"><a class="card-link" href="/nuanu-creative-city-tanah-lot-tour/">Explore Nuanu tour →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="tours_nuanu_creative_city_tanah_lot_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Nuanu%20Creative%20City%20%26%20Tanah%20Lot%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Nuanu%20Creative%20City%20%26%20Tanah%20Lot&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Nuanu%20Creative%20City%20%26%20Tanah%20Lot%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
           <article class="tour-card">
             <img class="tour-card-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/d20e4d71-9913-485e-aace-aa95808e94b0-tbt-tattoo-card.jpg" alt="Tattoo artist creating a tattoo" loading="lazy">
             <div class="tag">Special Experience</div>
             <h3>Bali Tattoo Experience</h3>
             <p>Private transport and help arranging a trusted tattoo studio visit in Bali.</p>
-            <div class="card-actions"><a class="card-link" href="/bali-tattoo-experience/">View tattoo experience →</a></div>
+            <div class="card-actions"><a class="card-link" href="/bali-tattoo-experience/">View tattoo experience →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="tours_bali_tattoo_experience_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Bali%20Tattoo%20Experience%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Bali%20Tattoo%20Experience&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Bali%20Tattoo%20Experience%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
           <article class="tour-card custom-card">
             <img class="tour-card-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/4376b006-ba27-456b-81a1-8961316473c9.png" alt="Custom Bali day tour scenery" loading="lazy">
@@ -254,7 +260,7 @@ button,input,select,textarea{font:inherit}
             <h3>Custom Bali Tour</h3>
             <p>Already know where you want to go? Send Budi your list and we’ll help turn it into a practical day route.</p>
             <ul><li>Shopping & markets</li><li>Cultural experiences</li><li>Activities & hidden gems</li></ul>
-            <div class="card-actions"><a class="card-link" href="/custom-bali-tours/">View Custom Tour Options →</a><a class="card-link" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20customise%20a%20Bali%20tour." target="_blank" rel="noopener">Build my tour →</a></div>
+            <div class="card-actions"><a class="card-link" href="/custom-bali-tours/">View Custom Tour Options →</a><a class="btn btn-wa tour-quote-contact" data-lead-source="tours_custom_bali_tour_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Custom%20Bali%20Tour%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="btn btn-book tour-quote-contact" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Custom%20Bali%20Tour&amp;body=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Custom%20Bali%20Tour%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20">Email Budi for a quote</a></div>
           </article>
         </div>
       </div>
