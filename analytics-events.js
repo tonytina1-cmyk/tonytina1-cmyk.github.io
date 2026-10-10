@@ -327,7 +327,7 @@
 
   function enhanceWhatsAppBookingForm() {
     var form = document.getElementById('waForm');
-    if (!form || form.dataset.contactMethod === 'email' || document.getElementById('waForm-send-note')) return;
+    if (!form || form.dataset.contactMethod !== 'whatsapp' || document.getElementById('waForm-send-note')) return;
     var submit = form.querySelector('button[type="submit"], input[type="submit"]');
     if (submit) {
       if (submit.tagName === 'INPUT') submit.value = 'Continue to WhatsApp';
@@ -420,7 +420,7 @@
   }, true);
 
   document.addEventListener('submit', function (event) {
-    if (!event.target.matches('#waForm') || event.target.dataset.contactMethod === 'email') return;
+    if (!event.target.matches('#waForm') || event.target.dataset.contactMethod !== 'whatsapp') return;
     var service = document.getElementById('service');
     var serviceValue = service ? service.value : 'unknown';
 
