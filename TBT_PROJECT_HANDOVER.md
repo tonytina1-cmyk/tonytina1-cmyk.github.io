@@ -52,3 +52,8 @@ A connected customer app and separate internal admin workflow have been worked o
 ## 14 October 2026 — quick driver assignment
 - Owner Admin now shows 'Assign a driver' shortcuts for confirmed unassigned jobs. Clicking opens the existing booking edit form directly on the driver tab. Existing conflict and time-off checks apply when saved; no automatic messages are triggered by shortcut.
 - Typecheck clean; published to https://tbt-bali-tours.floot.app. The section hides if no confirmed unassigned jobs.
+
+## 14 October 2026 — reduce Admin clutter and alert on collapsed tools
+- Owner Admin's Private Test Mode, quick assignment shortcuts and Driver Check are now grouped under a collapsed 'Extra Admin tools' section. Budi's Admin remains unchanged.
+- The closed heading dynamically shows 'Needs attention' when there are confirmed unassigned bookings, pending driver replies, or driver schedule warnings. Expand to see issue counts. When clear it says 'No driver alerts'. No automated WhatsApp, email or push messages added.
+- Floot web deployment succeeded at https://tbt-bali-tours.floot.app; TypeScript typecheck clean. Changes are web-only; no native mobile build triggered.
