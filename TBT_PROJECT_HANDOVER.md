@@ -73,3 +73,7 @@ A connected customer app and separate internal admin workflow have been worked o
 ## 14 October 2026 — Booking Overview pop-up
 - The large inline Booking Overview & extra tools summary (Awaiting review, TBT fees due, Drivers assigned) is replaced with a fifth compact top quick-tools button 'Booking Overview'. The button shows warning/count for new requests requiring review. Clicking opens a popup containing the same three metrics and drill-down details, with Close control. Budi view unchanged.
 - Floot web deployment succeeded; typecheck clean; no native builds or live bookings altered.
+
+## 14 October 2026 — remove duplicated controls
+- Audited owner Admin and removed the legacy nested 'Advanced booking controls' dashboard section that repeated booking counts, quick links, and booking alerts from newer top pop-ups. Preserved owner Add Booking and View All Bookings, 5 top pop-ups, daily jobs, booking calendar, and advanced system settings. Kept Paste WhatsApp booking and per-device notification toggle accessible under Accounts, drivers & system settings > Account setup & advanced tools. Budi's simplified view unchanged.
+- Floot web publish successful. TypeScript checks clean. No booking data modified and no native app build triggered.
