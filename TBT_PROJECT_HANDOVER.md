@@ -48,3 +48,7 @@ A connected customer app and separate internal admin workflow have been worked o
 ## 14 October 2026 — driver admin simplification
 - Floot owner Admin now has compact Driver check summary near the top, showing Booked, Unavailable, Check or Unconfirmed for six drivers based on confirmed bookings, driver responses and recorded time off. No bookings are NOT treated as confirmed availability. A button opens existing daily/weekly Driver Schedule; no daily login or messaging requirement was added.
 - Typecheck clean; web app deployed to https://tbt-bali-tours.floot.app (no native build requested). Budi view was left unchanged.
+
+## 14 October 2026 — quick driver assignment
+- Owner Admin now shows 'Assign a driver' shortcuts for confirmed unassigned jobs. Clicking opens the existing booking edit form directly on the driver tab. Existing conflict and time-off checks apply when saved; no automatic messages are triggered by shortcut.
+- Typecheck clean; published to https://tbt-bali-tours.floot.app. The section hides if no confirmed unassigned jobs.
