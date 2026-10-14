@@ -461,11 +461,13 @@
   function connectTransferButtons() {
     var sections = document.querySelectorAll('section.hero, section.cta');
     sections.forEach(function (section) {
-      var current = Array.from(section.querySelectorAll('a[href*="wa.me/6285738148276"]'))[0];
+      var current = Array.from(section.querySelectorAll('a[href*="wa.me/6285738148276"], a[href*="api.whatsapp.com/send"]')).find(function (link) {
+        return !link.dataset.tbtTransferLinked && !link.classList.contains('tbt-direct-whatsapp') && (link.textContent || '').toLowerCase().indexOf('whatsapp') >= 0;
+      });
       if (!current || current.dataset.tbtTransferLinked) return;
       var direct = current.cloneNode(true);
       direct.textContent = 'WhatsApp Budi directly';
-      direct.classList.add('outline');
+      direct.classList.add('outline', 'tbt-direct-whatsapp');
       direct.style.marginLeft = '8px';
       current.parentNode.insertBefore(direct, current.nextSibling);
       current.href = 'https://tbt-bali-tours.floot.app/airport-transfer-request';
