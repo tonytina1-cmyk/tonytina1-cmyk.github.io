@@ -61,3 +61,7 @@ A connected customer app and separate internal admin workflow have been worked o
 ## 14 October 2026 — 3 pop-up Admin tools
 - Replaced collapsed Extra Admin tools section with three compact owner-only pop-up buttons: Test Mode, Assign Driver, Driver Check. Assign Driver button shows count of confirmed unassigned jobs; Driver Check badge counts pending driver replies and schedule warnings. Each pop-up has Close; assign opens existing edit driver tab; Driver Check can open full driver schedule. Budi Admin unchanged.
 - Typecheck clean, published to https://tbt-bali-tours.floot.app web only.
+
+## 14 October 2026 — Business Snapshot pop-up
+- Owner Admin Business Snapshot now appears as a single compact button. It opens a dismissible pop-up preserving all existing confirmed-job, Budi vs outsourced, booking value, and referral fee metrics. The button warns when referral fees are owing; otherwise shows Up to date. Budi Admin untouched.
+- Typecheck clean; web deployment succeeded at https://tbt-bali-tours.floot.app.
