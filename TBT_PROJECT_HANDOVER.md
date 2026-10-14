@@ -57,3 +57,7 @@ A connected customer app and separate internal admin workflow have been worked o
 - Owner Admin's Private Test Mode, quick assignment shortcuts and Driver Check are now grouped under a collapsed 'Extra Admin tools' section. Budi's Admin remains unchanged.
 - The closed heading dynamically shows 'Needs attention' when there are confirmed unassigned bookings, pending driver replies, or driver schedule warnings. Expand to see issue counts. When clear it says 'No driver alerts'. No automated WhatsApp, email or push messages added.
 - Floot web deployment succeeded at https://tbt-bali-tours.floot.app; TypeScript typecheck clean. Changes are web-only; no native mobile build triggered.
+
+## 14 October 2026 — 3 pop-up Admin tools
+- Replaced collapsed Extra Admin tools section with three compact owner-only pop-up buttons: Test Mode, Assign Driver, Driver Check. Assign Driver button shows count of confirmed unassigned jobs; Driver Check badge counts pending driver replies and schedule warnings. Each pop-up has Close; assign opens existing edit driver tab; Driver Check can open full driver schedule. Budi Admin unchanged.
+- Typecheck clean, published to https://tbt-bali-tours.floot.app web only.
