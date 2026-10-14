@@ -39,3 +39,8 @@ A connected customer app and separate internal admin workflow have been worked o
 1. Ask ChatGPT: "Open TBT_PROJECT_HANDOVER.md from our GitHub website repo and continue from it."
 2. Check the latest code/deployment and any new user observations; do not assume this file is newer than the actual repo.
 3. Update this file after meaningful milestones, without exposing customer private information, credentials, API keys or unpublished personal driver contact details.
+
+## Update — 14 October 2026, private booking flow review
+- Inspected Floot /airport-transfer-request and /_api/bookings. Customer requests are stored first in bookingRequests; server then attempts emails to TBT Gmail and Australian collaborator's Hotmail and push messages to registered devices. Customer WhatsApp message requires manual Send. Email/push delivery is NOT yet independently verified; errors can be logged while the customer still receives success.
+- Enhanced Admin-only Private Test Mode with a safe Preview customer enquiry & alerts walkthrough. No API calls, stored test bookings or messages; current deployment confirmed published at https://tbt-bali-tours.floot.app.
+- Do not submit a real test booking without planning notifications to Budi, who may receive email or push. Next step is a controlled real-delivery check when appropriate and recording notification delivery status reliably.
