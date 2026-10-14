@@ -44,3 +44,7 @@ A connected customer app and separate internal admin workflow have been worked o
 - Inspected Floot /airport-transfer-request and /_api/bookings. Customer requests are stored first in bookingRequests; server then attempts emails to TBT Gmail and Australian collaborator's Hotmail and push messages to registered devices. Customer WhatsApp message requires manual Send. Email/push delivery is NOT yet independently verified; errors can be logged while the customer still receives success.
 - Enhanced Admin-only Private Test Mode with a safe Preview customer enquiry & alerts walkthrough. No API calls, stored test bookings or messages; current deployment confirmed published at https://tbt-bali-tours.floot.app.
 - Do not submit a real test booking without planning notifications to Budi, who may receive email or push. Next step is a controlled real-delivery check when appropriate and recording notification delivery status reliably.
+
+## 14 October 2026 — driver admin simplification
+- Floot owner Admin now has compact Driver check summary near the top, showing Booked, Unavailable, Check or Unconfirmed for six drivers based on confirmed bookings, driver responses and recorded time off. No bookings are NOT treated as confirmed availability. A button opens existing daily/weekly Driver Schedule; no daily login or messaging requirement was added.
+- Typecheck clean; web app deployed to https://tbt-bali-tours.floot.app (no native build requested). Budi view was left unchanged.
