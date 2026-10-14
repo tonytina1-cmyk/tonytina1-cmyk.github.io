@@ -69,3 +69,7 @@ A connected customer app and separate internal admin workflow have been worked o
 ## 14 October 2026 — Business Snapshot top button
 - Owner Admin now has FOUR compact buttons in the top quick tools row: Test Mode, Assign Driver, Driver Check and Business Snapshot. The latter opens the existing snapshot pop-up, warns if referral fees are owing, and no longer has a large button farther down the page. Budi Admin untouched.
 - Typecheck clean and Floot web deployment succeeded.
+
+## 14 October 2026 — Booking Overview pop-up
+- The large inline Booking Overview & extra tools summary (Awaiting review, TBT fees due, Drivers assigned) is replaced with a fifth compact top quick-tools button 'Booking Overview'. The button shows warning/count for new requests requiring review. Clicking opens a popup containing the same three metrics and drill-down details, with Close control. Budi view unchanged.
+- Floot web deployment succeeded; typecheck clean; no native builds or live bookings altered.
