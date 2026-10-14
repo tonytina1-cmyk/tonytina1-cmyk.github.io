@@ -65,3 +65,7 @@ A connected customer app and separate internal admin workflow have been worked o
 ## 14 October 2026 — Business Snapshot pop-up
 - Owner Admin Business Snapshot now appears as a single compact button. It opens a dismissible pop-up preserving all existing confirmed-job, Budi vs outsourced, booking value, and referral fee metrics. The button warns when referral fees are owing; otherwise shows Up to date. Budi Admin untouched.
 - Typecheck clean; web deployment succeeded at https://tbt-bali-tours.floot.app.
+
+## 14 October 2026 — Business Snapshot top button
+- Owner Admin now has FOUR compact buttons in the top quick tools row: Test Mode, Assign Driver, Driver Check and Business Snapshot. The latter opens the existing snapshot pop-up, warns if referral fees are owing, and no longer has a large button farther down the page. Budi Admin untouched.
+- Typecheck clean and Floot web deployment succeeded.
