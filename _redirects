@@ -1,0 +1,14 @@
+# Permanent redirects from legacy standalone pages to their canonical tour pages.
+# Keep canonical destination URLs (trailing-slash directories) out of source rules.
+/bali-airport-transfer /bali-airport-transfers/ 301
+/bali-airport-transfer.html /bali-airport-transfers/ 301
+/mount-batur-tour /kintamani-mount-batur-tour/ 301
+/mount-batur-tour.html /kintamani-mount-batur-tour/ 301
+/ubud-private-tour /ubud-day-tour/ 301
+/ubud-private-tour.html /ubud-day-tour/ 301
+/nusa-penida-tour.html /nusa-penida-tour/ 301
+/custom-bali-tours.html /custom-bali-tours/ 301
+/bali-private-driver.html /bali-private-driver/ 301
+/kuta-private-driver.html /kuta-private-driver/ 301
+/seminyak-private-driver.html /seminyak-private-driver/ 301
+/bali-airport-transfer-ubud.html /bali-airport-transfer-ubud/ 301
