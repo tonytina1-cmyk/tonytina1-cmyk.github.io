@@ -241,11 +241,7 @@
         '' +
         '' +
         '#tbt-quick-choices{grid-column:1/-1!important;width:100%!important;}' +
-        '#tbt-trust-row{grid-column:1/-1!important;width:min(1080px,calc(100% - 40px))!important;max-width:1080px;margin:8px auto 42px!important;padding:0!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;}' +
-        '#tbt-trust-row .tbt-trust-card{background:#fffaf0;border:1px solid #dfd3bf;border-radius:18px;padding:22px 20px;text-align:center;min-height:0!important;}' +
-        '#tbt-trust-row strong{display:block;color:#18352c;font-size:17px;margin-bottom:5px;}' +
-        '#tbt-trust-row span{color:#687a71;font-size:14px;line-height:1.45;}' +
-        '#tbt-bali-band{position:relative;overflow:hidden;min-height:300px;margin:0;background:#18352c;background-size:cover;background-position:center;display:flex;align-items:center;}' +
+                                        '#tbt-bali-band{position:relative;overflow:hidden;min-height:300px;margin:0;background:#18352c;background-size:cover;background-position:center;display:flex;align-items:center;}' +
         '#tbt-bali-band:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,53,44,.88),rgba(24,53,44,.42));}' +
         '#tbt-bali-band .tbt-bali-band-inner{position:relative;z-index:1;width:min(1080px,calc(100% - 40px));margin:0 auto;color:#fffaf0;padding:48px 0;}' +
         '#tbt-bali-band h2{font-family:Playfair Display,serif;font-size:clamp(36px,5vw,58px);line-height:1.05;margin:0 0 12px;max-width:660px;}' +
@@ -258,23 +254,10 @@
         '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;color:#fffaf0;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
         '#tbt-wa-strip .tbt-wa-primary{background:#176b4d;}' +
         '#tbt-wa-strip .tbt-booking-app{background:#dcc89d;color:#18352c;}' +
-        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr!important;margin:12px auto 30px!important;width:min(100% - 32px,1080px)!important}#tbt-trust-row .tbt-trust-card{padding:18px!important}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip .tbt-wa-actions{width:100%;flex-direction:column}#tbt-wa-strip a{width:100%}}';
+        '@media(max-width:760px){#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip .tbt-wa-actions{width:100%;flex-direction:column}#tbt-wa-strip a{width:100%}}';
       document.head.appendChild(style);
     }
 
-    if (!document.getElementById('tbt-trust-row')) {
-      var tours = document.getElementById('tours');
-      var trust = document.createElement('section');
-      trust.id = 'tbt-trust-row';
-      trust.setAttribute('aria-label', 'Why travel with Budi');
-      trust.innerHTML =
-        '<div class="tbt-trust-card"><strong>Personal Service</strong><span>Friendly, direct help from Budi from enquiry to your day in Bali.</span></div>' +
-        '<div class="tbt-trust-card"><strong>Flexible Day</strong><span>Adjust the timing and stops to suit your holiday.</span></div>' +
-        '<div class="tbt-trust-card"><strong>Local Knowledge</strong><span>Friendly Bali advice from Budi along the way.</span></div>';
-      var whySection = document.getElementById('why');
-      if (whySection && whySection.parentNode) whySection.parentNode.insertBefore(trust, whySection);
-      else if (tours && tours.parentNode) tours.parentNode.insertBefore(trust, tours);
-    }
 
 
     if (!document.getElementById('tbt-wa-strip')) {
