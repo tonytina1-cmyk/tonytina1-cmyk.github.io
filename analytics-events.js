@@ -276,16 +276,6 @@
       else if (tours && tours.parentNode) tours.parentNode.insertBefore(trust, tours);
     }
 
-    if (!document.getElementById('tbt-bali-band')) {
-      var why = document.getElementById('why');
-      var band = document.createElement('section');
-      band.id = 'tbt-bali-band';
-      var heroImage = document.getElementById('tbt-hero-image');
-      if (heroImage && heroImage.style.backgroundImage) band.style.backgroundImage = heroImage.style.backgroundImage;
-      band.innerHTML =
-        '<div class="tbt-bali-band-inner"><div style="font-size:12px;font-weight:800;letter-spacing:.13em;color:#dcc89d;margin-bottom:10px;">SEE BALI YOUR WAY</div><h2>More than a ride — your local Bali experience.</h2><p>From airport pickup to full-day exploring, Budi keeps the day personal, flexible and easy.</p></div>';
-      if (why && why.parentNode) why.parentNode.insertBefore(band, why);
-    }
 
     if (!document.getElementById('tbt-wa-strip')) {
       var footer = document.querySelector('footer');
