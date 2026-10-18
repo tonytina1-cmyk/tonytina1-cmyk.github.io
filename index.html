@@ -420,64 +420,36 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
   .home-choices .card-link{margin-top:auto!important}
 }
 </style>
-<style id="tbt-benefit-card-polish-v3">
+<style id="tbt-benefit-card-polish-v4">
 #why .benefit-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;
+  gap:16px;
   margin-top:24px;
 }
-#why .benefit-card{
-  position:relative;
-  overflow:hidden;
+#why .benefit-grid article{
   background:#fffaf0;
   border:1px solid #d8cbb6;
-  border-radius:20px;
-  box-shadow:0 8px 20px rgba(24,53,44,.05);
-  padding:20px 22px 22px;
-  min-height:168px;
+  border-radius:18px;
+  box-shadow:0 6px 16px rgba(24,53,44,.045);
+  padding:22px 24px;
+  min-height:170px;
 }
-#why .benefit-card:before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:4px;
-  background:#dcc89d;
-}
-#why .benefit-card:nth-child(even){background:#f4efe4}
-#why .benefit-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:10px;
-}
-#why .benefit-icon{
-  display:grid;
-  place-items:center;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  background:#176b4d;
-  color:#fffaf0;
-  font-size:16px;
-  line-height:1;
-  box-shadow:0 6px 14px rgba(23,107,77,.18);
-}
-#why .benefit-number{
+#why .benefit-grid span{
+  display:block;
   font-size:10px;
   letter-spacing:.12em;
   font-weight:800;
   color:#9b7a45;
-  opacity:.65;
+  margin-bottom:10px;
 }
-#why .benefit-card h3{
+#why .benefit-grid h3{
   font-family:"Playfair Display",serif;
-  font-size:clamp(21px,2vw,26px);
-  line-height:1.1;
+  font-size:clamp(22px,2vw,27px);
+  line-height:1.12;
   margin:0 0 10px;
 }
-#why .benefit-card p{
+#why .benefit-grid p{
   margin:0;
   font-size:14px;
   line-height:1.5;
@@ -485,11 +457,11 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 }
 @media (min-width:641px) and (max-width:1250px){
   #why .benefit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-  #why .benefit-card{min-height:160px;padding:20px 22px}
+  #why .benefit-grid article{min-height:165px}
 }
 @media(max-width:640px){
   #why .benefit-grid{grid-template-columns:1fr;gap:12px}
-  #why .benefit-card{min-height:0;padding:18px 20px 20px}
+  #why .benefit-grid article{min-height:0;padding:20px}
 }
 </style>
 <!-- benefit-layout-version:20261018-v2 -->
