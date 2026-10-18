@@ -20,6 +20,7 @@ button:hover{background:#105239}.note{font-size:13px;margin:0}.back{display:inli
 <input type="hidden" name="_cc" value="tony.tbt.tours@gmail.com">
 <input type="hidden" name="_next" value="https://www.tbtbalitours.com/enquiry-thanks.html">
 <input type="hidden" name="_template" value="table">
+<input type="hidden" name="Enquiry reference" id="enquiry-reference">
 <input type="hidden" name="_captcha" value="true">
 <input type="hidden" name="_url" value="https://www.tbtbalitours.com/enquiry.html">
 <input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off">
@@ -36,6 +37,7 @@ button:hover{background:#105239}.note{font-size:13px;margin:0}.back{display:inli
 <label>Hotel / pickup area<input type="text" name="Hotel or pickup area" maxlength="160" placeholder="e.g. Seminyak or Ubud"></label>
 <label>Your message<textarea name="Message" rows="5" maxlength="3000" placeholder="Any stops, questions or special requests?"></textarea></label>
 <button type="submit">Send enquiry to Budi →</button>
+<p class="note" id="reference-note" aria-live="polite">Your enquiry reference will appear here.</p>
 <p class="note">By submitting, your details will be processed by FormSubmit and emailed to TBT for a reply. Please don’t include payment or passport details. Spam protection may ask you to complete a quick check. <a href="/privacy.html">Privacy</a>.</p>
 </form><a class="back" href="/tours.html">← Back to tours</a></main>
 <script>
@@ -43,4 +45,16 @@ const params=new URLSearchParams(location.search);const tour=params.get('tour');
 if(tour){let option=[...select.options].find(o=>o.text.trim().toLowerCase()===tour.trim().toLowerCase());if(!option){option=new Option(tour,tour);select.add(option);}select.value=option.value;}
 document.getElementById('mail-subject').value='TBT Bali enquiry: '+select.value;
 select.addEventListener('change',()=>document.getElementById('mail-subject').value='TBT Bali enquiry: '+select.value);
+
+const form=document.querySelector('form');
+const code=Array.from(crypto.getRandomValues(new Uint8Array(4)),b=>b.toString(16).padStart(2,'0')).join('').slice(0,8).toUpperCase();
+const now=new Date();
+const dateKey=String(now.getFullYear())+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+const ref='TBT-'+dateKey+'-'+code;
+document.getElementById('enquiry-reference').value=ref;
+document.getElementById('reference-note').textContent='Enquiry reference: '+ref+' (not yet a confirmed booking)';
+form.querySelector('[name="_next"]').value='https://www.tbtbalitours.com/enquiry-thanks.html?ref='+encodeURIComponent(ref);
+const subject=()=>document.getElementById('mail-subject').value='TBT enquiry '+ref+': '+select.value;
+subject();
+select.addEventListener('change',subject);
 </script></body></html>
