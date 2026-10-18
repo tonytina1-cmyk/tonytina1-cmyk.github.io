@@ -339,6 +339,21 @@
     }
   }
 
+
+  function removeLegacyTattooEnquiryLabel() {
+    var nodes = document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span,div');
+    for (var i = 0; i < nodes.length; i += 1) {
+      var text = (nodes[i].textContent || '').replace(/\s+/g, ' ').trim();
+      if (
+        text === 'Tattoos / Bali Tattoo Experience' ||
+        text === '🖋️ Tattoos / Bali Tattoo Experience' ||
+        text === '✒️ Tattoos / Bali Tattoo Experience'
+      ) {
+        nodes[i].style.display = 'none';
+      }
+    }
+  }
+
   function initialisePageEnhancements() {
     if (isHomepage()) addHomepageStyles();
     createMeetBudiSection();
@@ -348,7 +363,11 @@
     enhanceWhatsAppBookingForm();
     removeStrayLiteralNewline();
     fixEmailLinks();
+    removeLegacyTattooEnquiryLabel();
   }
+
+  var tbtTattooLabelObserver = new MutationObserver(function(){ removeLegacyTattooEnquiryLabel(); });
+  tbtTattooLabelObserver.observe(document.documentElement, { childList: true, subtree: true });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initialisePageEnhancements);
