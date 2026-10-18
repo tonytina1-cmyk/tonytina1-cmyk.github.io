@@ -87,6 +87,14 @@ button,input,select,textarea{font:inherit}
 .home-all-link{text-align:center;margin-top:28px}
 .team-direct-cta{margin-top:18px}
 @media(max-width:800px){.airport-quick-inner{grid-template-columns:1fr}.airport-quick .btn{width:100%}}
+
+/* Make tour details the clear first action; prevent accidental WhatsApp opens on mobile. */
+.home-choices .tour-card .card-link{display:flex;align-items:center;justify-content:center;min-height:54px;width:100%;margin-top:auto;padding:13px 16px;border-radius:14px;background:#176b4d;color:#fffaf0;text-align:center;font-weight:800;font-size:16px;line-height:1.25;box-shadow:0 6px 16px rgba(23,107,77,.17)}
+.home-choices .tour-card .card-link:hover,.home-choices .tour-card .card-link:focus-visible{background:#105239;outline-offset:3px}
+.home-choices .tour-card .tour-whatsapp-quote{display:flex;align-items:center;justify-content:center;align-self:center;width:calc(100% - 30px);min-height:44px;margin-top:16px;padding:9px 12px;background:transparent;color:#176b4d;border:1px solid #91b5a5;box-shadow:none;font-size:13px;font-weight:600;text-align:center}
+.home-choices .tour-card .tour-whatsapp-quote:hover,.home-choices .tour-card .tour-whatsapp-quote:focus-visible{background:#e9f2eb;color:#105239}
+.home-choices .tour-card .tour-email-quote{align-self:center;margin-top:10px;font-size:12px;text-align:center;color:#52675d;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:650px){.home-choices .tour-card .card-link{min-height:56px}.home-choices .tour-card .tour-whatsapp-quote{margin-top:18px;width:calc(100% - 36px)}}
 </style>
   
   <meta property="og:site_name" content="TBT Tours & Travel by Budi Bali Driver">
