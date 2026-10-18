@@ -753,4 +753,23 @@ if (waForm) waForm.addEventListener('submit', (e) => {
   }
 })();
 </script>
+<script id="tbt-remove-tattoo-title-strip">
+(function(){
+  function removeTattooStrip(){
+    document.querySelectorAll('h1,h2,h3,h4,p,div,span').forEach(function(el){
+      var txt=(el.textContent||'').replace(/\s+/g,' ').trim();
+      if(txt==='Tattoos / Bali Tattoo Experience'){
+        var parent=el.parentElement;
+        if(parent && (parent.textContent||'').replace(/\s+/g,' ').trim()===txt){
+          parent.style.display='none';
+        }else{
+          el.style.display='none';
+        }
+      }
+    });
+  }
+  removeTattooStrip();
+  new MutationObserver(removeTattooStrip).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
 </body></html>
