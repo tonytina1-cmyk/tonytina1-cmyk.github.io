@@ -231,7 +231,38 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
             <label>Date<input id="date" type="date"></label>
             <label>Guests<input id="guests" type="number" min="1" max="20" placeholder="2"></label>
           </div>
-          <label>Pickup area or hotel<input id="pickup" type="text" placeholder="e.g. Seminyak"></label>
+          <label>Pickup area
+  <select id="pickup">
+    <option value="">Choose pickup area</option>
+    <option value="Bali Airport (DPS)">Bali Airport (DPS)</option>
+    <option value="Kuta">Kuta</option>
+    <option value="Legian">Legian</option>
+    <option value="Seminyak">Seminyak</option>
+    <option value="Canggu">Canggu</option>
+    <option value="Jimbaran">Jimbaran</option>
+    <option value="Nusa Dua">Nusa Dua</option>
+    <option value="Sanur">Sanur</option>
+    <option value="Uluwatu">Uluwatu</option>
+    <option value="Ubud">Ubud</option>
+    <option value="Tanah Lot">Tanah Lot</option>
+    <option value="Padang Bai">Padang Bai</option>
+    <option value="Candi Dasa">Candi Dasa</option>
+    <option value="Amed">Amed</option>
+    <option value="Tulamben">Tulamben</option>
+    <option value="Kintamani">Kintamani</option>
+    <option value="Bedugul">Bedugul</option>
+    <option value="Lovina">Lovina</option>
+    <option value="Pemuteran">Pemuteran</option>
+    <option value="Medewi">Medewi</option>
+    <option value="Gilimanuk">Gilimanuk</option>
+    <option value="Nusa Penida">Nusa Penida</option>
+    <option value="Nusa Lembongan">Nusa Lembongan</option>
+    <option value="Other / Not sure yet">Other / Not sure yet</option>
+  </select>
+</label>
+<label>Hotel / villa name or pickup details
+  <input id="pickupDetails" type="text" placeholder="Optional — e.g. hotel or villa name">
+</label>
           <label>Places or notes<textarea id="notes" rows="4" placeholder="Tell Budi where you'd like to go..."></textarea></label>
           <button class="btn btn-wa btn-block" type="submit">Continue to Secure Booking</button>
           <p class="form-note">Next, enter your name and contact details to send your request directly to the TBT booking team. No payment is required.</p>
@@ -241,7 +272,7 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
     <div class="shell footer-grid">
       <div><strong>TBT Tours & Travel</strong><span>by Budi Bali Driver</span><span><a href="mailto:tbt.tours.travel@gmail.com" style="color:#c8d3dc">tbt.tours.travel@gmail.com</a></span></div>
       <p>Private Bali tours • Airport transfers • Custom trips</p>
-      <p>© <span id="year"></span> TBT Tours & Travel. All rights reserved.</p>
+      <p>© <span id="year"></span> TBT Tours & Travel. <a href="/privacy.html" style="color:#c8d3dc">Privacy</a> · <a href="/booking-terms.html" style="color:#c8d3dc">Booking Terms</a></p>
     </div>
   </footer><script>
 const menuBtn = document.querySelector('.menu-btn');
@@ -267,11 +298,12 @@ if (waForm) waForm.addEventListener('submit', (e) => {
   const service = document.getElementById('service').value;
   const date = document.getElementById('date').value;
   const guests = document.getElementById('guests').value || '2';
-  const pickup = document.getElementById('pickup').value.trim();
+  const pickup = document.getElementById('pickup').value;
+  const pickupDetails = document.getElementById('pickupDetails').value.trim();
   const notes = document.getElementById('notes').value.trim();
   const params = new URLSearchParams({ tour: service, guests, source: 'tbt-website' });
   if (date) params.set('date', date);
-  if (pickup) params.set('pickup', pickup);
+  if (pickup || pickupDetails) params.set('pickup', [pickup, pickupDetails].filter(Boolean).join(' — '));
   if (notes) params.set('message', notes);
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'booking_form_continue', { click_source: 'website_plan_trip', service, transport_type: 'beacon' });
