@@ -237,7 +237,7 @@
         'body.tbt-home-warm #tours{background:#f8f3e9!important;}' +
         'body.tbt-home-warm #why{background:#efe4d3!important;}' +
         'body.tbt-home-warm #reviews{background:#fffaf0!important;}' +
-        'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(24,53,44,.08);border-color:#dfd3bf;min-height:0!important;height:auto!important;}' +
+        'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(24,53,44,.08);border-color:#dfd3bf;}' +
         '' +
         '' +
         '#tbt-quick-choices{grid-column:1/-1!important;width:100%!important;}' +
