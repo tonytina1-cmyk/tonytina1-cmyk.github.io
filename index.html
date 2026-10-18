@@ -451,17 +451,5 @@ if (waForm) waForm.addEventListener('submit', (e) => {
   start();
 })();
 </script>
-<script id="tbt-home-popular-order">
-(function(){
-  const grid=document.querySelector('.home-choices');
-  if(!grid)return;
-  ['transfers','tours','ubud','uluwatu','mount-batur','nusa-penida'].forEach(function(id){
-    const el=document.getElementById(id); if(el) grid.appendChild(el);
-  });
-  const cards=Array.from(grid.querySelectorAll('.tour-card'));
-  const preferred=['transfers','tours','ubud','uluwatu','mount-batur','nusa-penida'];
-  preferred.slice().reverse().forEach(function(id){const el=document.getElementById(id);if(el)grid.insertBefore(el,grid.firstChild);});
-  cards.forEach(function(card){card.style.display=preferred.includes(card.id)?'':'none';});
-})();
-</script>
+
 </body></html>
