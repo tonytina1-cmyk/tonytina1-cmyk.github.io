@@ -189,6 +189,11 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 .eyebrow.dark{color:#946622}
 @media(max-width:960px){.site-header .main-nav.open{background:#f8f3e9}}
 </style>
+<style id="tbt-tour-cta-cleanup">
+.tour-card .card-actions a[href^="mailto:"]{display:none!important}
+.tour-card .card-actions{gap:10px}
+.tour-card .card-link{display:inline-flex;align-items:center;min-height:44px}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -286,7 +291,7 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
     <div class="shell footer-grid">
       <div><strong>TBT Tours & Travel</strong><span>by Budi Bali Driver</span><span><a href="mailto:tbt.tours.travel@gmail.com" style="color:#c8d3dc">tbt.tours.travel@gmail.com</a></span></div>
       <p>Private Bali tours • Airport transfers • Custom trips</p>
-      <p>© <span id="year"></span> TBT Tours & Travel. All rights reserved.</p>
+      <p>© <span id="year"></span> TBT Tours & Travel. <a href="/privacy.html" style="color:#c8d3dc">Privacy</a> · <a href="/booking-terms.html" style="color:#c8d3dc">Booking Terms</a></p>
     </div>
   </footer><script>
 const menuBtn = document.querySelector('.menu-btn');
