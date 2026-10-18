@@ -322,6 +322,54 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 }
 </style>
 
+
+<style id="tbt-professional-pass-20261018">
+/* Cleaner homepage experience cards */
+.home-choices .tour-preview-details,
+.home-choices .tour-whatsapp-quote,
+.home-choices .tour-email-quote{display:none!important}
+.home-choices .tour-card{min-height:0!important}
+.home-choices .tour-card>p{margin-bottom:8px}
+.home-choices .card-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  margin-top:auto!important;
+  padding:10px 14px;
+  border:1px solid var(--green);
+  border-radius:12px;
+  background:#fffaf0;
+}
+.home-choices .card-link:hover{background:var(--green);color:#fffaf0}
+
+/* Switch to the compact menu earlier on iPad/tablet widths */
+@media(max-width:1120px){
+  .site-header .main-nav{display:none!important}
+  .site-header .menu-btn{display:block!important;margin-left:auto!important}
+  .site-header .nav-wrap{gap:10px}
+  .site-header .nav-cta{display:inline-flex!important;padding:9px 12px!important;font-size:12px!important;margin-left:0!important}
+  .site-header .main-nav.open{
+    display:flex!important;
+    position:absolute;
+    left:0;
+    right:0;
+    top:78px;
+    background:#f8f3e9;
+    padding:18px 20px 24px;
+    flex-direction:column;
+    align-items:flex-start;
+    border-bottom:1px solid #dfd3bf;
+  }
+}
+@media(max-width:760px){
+  #tbt-header-members{display:none!important}
+}
+@media(max-width:640px){
+  .site-header .main-nav.open{top:70px}
+}
+</style>
+
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -368,7 +416,7 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
     <div class="airport-points"><span>Private vehicle</span><span>Airport pickup</span><span>Hotel drop-off</span><span>WhatsApp confirmation</span></div>
     <a class="btn btn-dark" data-lead-source="home_airport_quick" href="/bali-airport-transfers/">View airport prices from Rp 300,000</a>
   </div>
-</section><section class="section" id="services"><div class="shell"><div class="center-head"><p class="eyebrow dark">MOST POPULAR</p><h2>Start with TBT’s most-booked Bali experiences.</h2><p>Choose a favourite below, or browse every experience if you already know what you want.</p></div><div class="tour-grid home-choices">
+</section><section class="section" id="services"><div class="shell"><div class="center-head"><p class="eyebrow dark">POPULAR BALI EXPERIENCES</p><h2>Start with some of TBT’s favourite Bali experiences.</h2><p>Choose a favourite below, or browse every experience if you already know what you want.</p></div><div class="tour-grid home-choices">
 <article class="tour-card" id="tours"><img class="service-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/0abdd700-f985-4856-8075-c3374053a95f-tbt-private-tours-card.jpg" alt="Bali temple gate with mountain view" loading="lazy"><h3><a href="/tours.html">Private Tours</a></h3><p>Explore Ubud, island views, temples and more at your own pace.</p><div class="tour-preview-details"><span class="tour-preview-type">Private tours</span><span class="tour-preview-timing">Flexible route & timing</span><span class="tour-preview-price">Ask Budi for a quote</span></div><a class="card-link" href="/tours.html">Explore tours →</a><a class="btn btn-wa tour-whatsapp-quote" data-lead-source="home_private_tours_quote" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%0D%0A%0D%0ACould%20you%20please%20send%20me%20a%20quote%20for%20Private%20Tours%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20%0D%0A%0D%0AThank%20you%21" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="tour-email-quote" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Private%20Tours&amp;body=Hi%20Budi%2C%0D%0A%0D%0ACould%20you%20please%20send%20me%20a%20quote%20for%20Private%20Tours%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20%0D%0A%0D%0AThank%20you%21">Email Budi for a quote</a></article>
 <article class="tour-card" id="transfers"><img class="service-photo" src="https://tbt-bali-tours.floot.app/_cdn/static/a9ca759e-fe66-4300-8404-909fa8824f25-tbt-airport-card.jpg" alt="Bali airport pickup zone" loading="lazy"><h3><a href="/bali-airport-transfers/">Airport Transfers</a></h3><p>Arrange your airport pickup or drop-off. View the full destination price list.</p><div class="tour-preview-details"><span class="tour-preview-type">Pickup or drop-off</span><span class="tour-preview-timing">Price varies by destination</span><span class="tour-preview-price">From Rp 300,000</span></div><a class="card-link" href="/bali-airport-transfers/">View transfer prices →</a><a class="btn btn-wa tour-whatsapp-quote" data-lead-source="home_airport_transfers_quote" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%0D%0A%0D%0ACould%20you%20please%20send%20me%20a%20quote%20for%20Airport%20Transfers%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20%0D%0A%0D%0AThank%20you%21" target="_blank" rel="noopener">WhatsApp Budi for a quote</a><a class="tour-email-quote" href="mailto:tbt.tours.travel@gmail.com?subject=TBT%20quote%20request%3A%20Airport%20Transfers&amp;body=Hi%20Budi%2C%0D%0A%0D%0ACould%20you%20please%20send%20me%20a%20quote%20for%20Airport%20Transfers%3F%0D%0A%0D%0ATravel%20date%3A%20%0D%0ANumber%20of%20guests%3A%20%0D%0AHotel%20%2F%20pickup%20area%3A%20%0D%0APreferred%20stops%20or%20other%20details%3A%20%0D%0A%0D%0AThank%20you%21">Email Budi for a quote</a></article>
 
