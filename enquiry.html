@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Email Budi | TBT Bali Tours</title><meta name="description" content="Send a Bali tour enquiry directly to Budi and the TBT Tours & Travel team.">
+<style>
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#18352c;background:#f7f2e8}
+*{box-sizing:border-box}body{margin:0}header{background:#18352c;color:#fffaf0;padding:19px 6%}header a{color:inherit;text-decoration:none;font-weight:800;letter-spacing:.03em}
+main{max-width:760px;margin:36px auto;padding:0 18px 40px}h1{font-family:Georgia,serif;font-size:clamp(32px,5vw,46px);margin:4px 0 10px}p{line-height:1.6;color:#566d64}.eyebrow{color:#a17232;letter-spacing:.13em;text-transform:uppercase;font-size:12px;font-weight:800}
+form{background:#fffaf0;border:1px solid #e1d4bd;border-radius:23px;box-shadow:0 12px 30px #18352c0b;padding:clamp(22px,5vw,38px);display:grid;gap:18px}
+label{display:grid;gap:7px;font-size:14px;font-weight:700}input,select,textarea{width:100%;border:1px solid #bbcdc5;border-radius:10px;padding:13px 12px;font:inherit;font-size:16px;background:white;color:#18352c}input:focus,select:focus,textarea:focus{outline:2px solid #65a78b;outline-offset:1px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}@media(max-width:560px){.two{grid-template-columns:1fr}}
+button{border:0;background:#176b4d;color:white;border-radius:12px;padding:16px;font:inherit;font-weight:800;font-size:17px;cursor:pointer}
+button:hover{background:#105239}.note{font-size:13px;margin:0}.back{display:inline-block;margin-top:18px;color:#176b4d}
+.honey{position:absolute;left:-9999px}
+</style></head><body>
+<header><a href="/">TBT TOURS &amp; TRAVEL <span style="font-weight:400">· by Budi Bali Driver</span></a></header>
+<main><div class="eyebrow">Private Bali tours</div><h1>Email Budi about your trip</h1>
+<p>Send your details here. Your enquiry will be emailed to the TBT team; there is no need to open an email app. No payment required.</p>
+<form action="https://formsubmit.co/tbt.tours.travel@gmail.com" method="POST">
+<input type="hidden" name="_subject" id="mail-subject" value="New TBT Bali tour enquiry">
+<input type="hidden" name="_next" value="https://www.tbtbalitours.com/enquiry-thanks.html">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_captcha" value="true">
+<input type="hidden" name="_url" value="https://www.tbtbalitours.com/enquiry.html">
+<input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off">
+<label>Tour or experience<select name="Tour requested" id="tour" required>
+<option>Ubud</option><option>Uluwatu</option><option>Nusa Penida</option><option>Nusa Lembongan</option>
+<option>Amed Snorkelling &amp; Coastal Tour</option><option>Lovina Dolphin Sunrise Tour</option><option>Jimbaran Bay Seafood Dinner</option>
+<option>Sidemen &amp; East Bali</option><option>Bali Cooking Class &amp; Local Market</option><option>Kintamani &amp; Mount Batur</option>
+<option>Bedugul &amp; North Bali</option><option>Nuanu Creative City &amp; Tanah Lot</option><option>Bali Tattoo Experience</option>
+<option>Custom Bali Tour</option><option>Other / not sure yet</option></select></label>
+<div class="two"><label>Your name<input type="text" name="Name" autocomplete="name" maxlength="120" required></label>
+<label>Your email<input type="email" name="email" autocomplete="email" required></label></div>
+<div class="two"><label>Travel date (if known)<input type="date" name="Travel date"></label>
+<label>Number of guests<input type="number" name="Number of guests" min="1" max="40" placeholder="e.g. 2"></label></div>
+<label>Hotel / pickup area<input type="text" name="Hotel or pickup area" maxlength="160" placeholder="e.g. Seminyak or Ubud"></label>
+<label>Your message<textarea name="Message" rows="5" maxlength="3000" placeholder="Any stops, questions or special requests?"></textarea></label>
+<button type="submit">Send enquiry to Budi →</button>
+<p class="note">By submitting, your details will be processed by FormSubmit and emailed to TBT for a reply. Please don’t include payment or passport details. Spam protection may ask you to complete a quick check. <a href="/privacy.html">Privacy</a>.</p>
+</form><a class="back" href="/tours.html">← Back to tours</a></main>
+<script>
+const params=new URLSearchParams(location.search);const tour=params.get('tour');const select=document.getElementById('tour');
+if(tour){let option=[...select.options].find(o=>o.text.trim().toLowerCase()===tour.trim().toLowerCase());if(!option){option=new Option(tour,tour);select.add(option);}select.value=option.value;}
+document.getElementById('mail-subject').value='TBT Bali enquiry: '+select.value;
+select.addEventListener('change',()=>document.getElementById('mail-subject').value='TBT Bali enquiry: '+select.value);
+</script></body></html>
