@@ -181,11 +181,11 @@
 
   function prioritiseHomepageSections() {
     if (!isHomepage()) return;
-    var tours = document.getElementById('tours');
     var transfers = document.getElementById('transfers');
-    if (!tours || !transfers || tours.parentNode !== transfers.parentNode) return;
-    if (transfers.nextElementSibling === tours) return;
-    tours.parentNode.insertBefore(transfers, tours);
+    if (!transfers || !transfers.parentNode) return;
+    var grid = transfers.parentNode;
+    if (grid.firstElementChild === transfers) return;
+    grid.insertBefore(transfers, grid.firstElementChild);
   }
 
   function addQuickChoices() {
