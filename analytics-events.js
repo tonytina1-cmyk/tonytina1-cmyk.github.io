@@ -238,8 +238,8 @@
         'body.tbt-home-warm #why{background:#efe4d3!important;}' +
         'body.tbt-home-warm #reviews{background:#fffaf0!important;}' +
         'body.tbt-home-warm .home-choices .tour-card{box-shadow:0 12px 32px rgba(24,53,44,.08);border-color:#dfd3bf;min-height:0!important;height:auto!important;}' +
-        'body.tbt-home-warm #tours,body.tbt-home-warm #transfers{align-self:start!important;height:auto!important;min-height:0!important;}' +
-        'body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;align-self:start!important;}' +
+        '' +
+        '' +
         '#tbt-quick-choices{grid-column:1/-1!important;width:100%!important;}' +
         '#tbt-trust-row{grid-column:1/-1!important;width:min(1080px,calc(100% - 40px))!important;max-width:1080px;margin:8px auto 42px!important;padding:0!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch;}' +
         '#tbt-trust-row .tbt-trust-card{background:#fffaf0;border:1px solid #dfd3bf;border-radius:18px;padding:22px 20px;text-align:center;min-height:0!important;}' +
@@ -258,7 +258,7 @@
         '#tbt-wa-strip a{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;color:#fffaf0;text-decoration:none;font-weight:800;border-radius:999px;padding:14px 22px;}' +
         '#tbt-wa-strip .tbt-wa-primary{background:#176b4d;}' +
         '#tbt-wa-strip .tbt-booking-app{background:#dcc89d;color:#18352c;}' +
-        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr!important;margin:12px auto 30px!important;width:min(100% - 32px,1080px)!important}#tbt-trust-row .tbt-trust-card{padding:18px!important}body.tbt-home-warm #tours .tour-card,body.tbt-home-warm #transfers .tour-card{min-height:0!important;height:auto!important;padding:22px!important}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip .tbt-wa-actions{width:100%;flex-direction:column}#tbt-wa-strip a{width:100%}}';
+        '@media(max-width:760px){#tbt-trust-row{grid-template-columns:1fr!important;margin:12px auto 30px!important;width:min(100% - 32px,1080px)!important}#tbt-trust-row .tbt-trust-card{padding:18px!important}#tbt-bali-band{min-height:250px}#tbt-wa-strip .tbt-wa-inner{flex-direction:column;align-items:flex-start}#tbt-wa-strip .tbt-wa-actions{width:100%;flex-direction:column}#tbt-wa-strip a{width:100%}}';
       document.head.appendChild(style);
     }
 
