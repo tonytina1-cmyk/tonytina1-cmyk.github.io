@@ -404,6 +404,19 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
   }
 }
 </style>
+<style id="tbt-ipad-fixed-card-height">
+@media (min-width:641px) and (max-width:960px){
+  .home-choices{grid-auto-rows:1fr}
+  .home-choices .tour-card{
+    min-height:420px!important;
+    height:420px!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  .home-choices .service-photo{flex:0 0 160px}
+  .home-choices .card-link{margin-top:auto!important}
+}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
