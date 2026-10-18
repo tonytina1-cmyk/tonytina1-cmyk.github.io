@@ -576,6 +576,22 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
   .traditional-bali-cta{width:100%}
 }
 </style>
+<style id="tbt-traditional-bali-close-style">
+.traditional-bali-close-wrap{display:flex;justify-content:flex-end;margin:4px 0 14px}
+.traditional-bali-close{
+  border:1px solid #d8cbb6;
+  background:#fffaf0;
+  color:#18352c;
+  border-radius:999px;
+  padding:9px 16px;
+  font:inherit;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+}
+.traditional-bali-close:hover{background:#f3eadc}
+.traditional-bali-close:focus-visible{outline:2px solid #176b4d;outline-offset:3px}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -642,7 +658,7 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
       <div><strong>Balinese cooking</strong><span>Learn local dishes and ingredients in a hands-on class.</span></div>
       <div><strong>Silver making</strong><span>Create your own piece with a local silversmith.</span></div><div><strong>Batik workshop</strong><span>Learn traditional batik techniques and create your own design.</span></div>
     </div>
-    <a class="btn btn-wa traditional-bali-cta" data-lead-source="traditional_bali_options" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20traditional%20Bali%20experiences%20such%20as%20temples%2C%20melukat%2C%20cooking%2C%20silver%20making%20or%20batik." target="_blank" rel="noopener">Ask Budi about local experiences</a>
+    <div class="traditional-bali-close-wrap"><button class="traditional-bali-close" type="button">Close</button></div><a class="btn btn-wa traditional-bali-cta" data-lead-source="traditional_bali_options" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20traditional%20Bali%20experiences%20such%20as%20temples%2C%20melukat%2C%20cooking%2C%20silver%20making%20or%20batik." target="_blank" rel="noopener">Ask Budi about local experiences</a>
   </div>
 </div></section><section class="reviews-section" id="reviews"><div class="shell reviews-wrap"><div class="reviews-copy"><p class="eyebrow dark">GUEST EXPERIENCES</p><h2>See what travellers say about TBT.</h2><p>Read recent guest feedback or leave a review after your trip.</p></div><div class="review-card-stack"><div class="google-review-card"><div class="google-brand"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div><div class="review-stars">★★★★★</div><p>TBT BALI TOURS (By Budi Bali driver) is a verified Google Business Profile.</p><div class="review-actions"><a class="btn btn-dark" href="https://maps.google.com/maps?cid=6387751195367336511" target="_blank" rel="noopener">Read Google Reviews</a><a class="btn btn-book" href="https://search.google.com/local/writereview?placeid=ChIJ8dbhzcNwNo0RP2pyUd7ZpVg" target="_blank" rel="noopener">Leave a Review</a></div></div></div></div></section><section id="tbt-members" aria-labelledby="tbt-members-title"><div class="shell"><div class="tbt-members-panel"><div><p class="eyebrow dark">TBT MEMBERS · FREE TO JOIN</p><h2 id="tbt-members-title">Make Bali feel a little more yours.</h2><p>Save your trip details and keep your TBT travel tools together in one place.</p></div><a class="btn" href="/members.html">Open TBT Members</a></div></div></section>
 <section class="tbt-faq" id="booking-questions" aria-labelledby="tbt-faq-title">
@@ -726,6 +742,15 @@ if (waForm) waForm.addEventListener('submit', (e) => {
     panel.hidden=open;
     btn.textContent=open?'See local experiences ↓':'Hide local experiences ↑';
   });
+  const closeBtn=panel.querySelector('.traditional-bali-close');
+  if(closeBtn){
+    closeBtn.addEventListener('click',function(){
+      panel.hidden=true;
+      btn.setAttribute('aria-expanded','false');
+      btn.textContent='See local experiences ↓';
+      btn.focus();
+    });
+  }
 })();
 </script>
 </body></html>
