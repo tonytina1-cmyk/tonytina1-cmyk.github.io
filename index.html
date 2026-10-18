@@ -365,6 +365,31 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 @media(max-width:760px){.tbt-trust-strip-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;font-size:12px;padding:13px 0}}
 </style>
 <style id="tbt-remove-legacy-bali-band">#tbt-bali-band{display:none!important}</style>
+<style id="tbt-ipad-landscape-header">
+@media (min-width:961px) and (max-width:1250px){
+  .site-header .nav-wrap{gap:10px;height:78px}
+  .site-header .brand{order:1;margin-right:auto}
+  .site-header .main-nav{display:none!important}
+  .site-header .btn-wa.nav-cta{order:2;margin-left:0;padding:10px 16px}
+  .site-header #tbt-header-members{order:3;margin-left:0;padding:10px 16px}
+  .site-header #tbt-header-booking-app{order:4;margin-left:0;padding:10px 16px}
+  .site-header .menu-btn{display:block!important;order:5;margin-left:2px;color:#18352c}
+  .site-header .main-nav.open{
+    display:flex!important;
+    position:absolute;
+    left:0;
+    right:0;
+    top:78px;
+    z-index:70;
+    background:#f8f3e9;
+    border-bottom:1px solid #dfd3bf;
+    padding:18px 28px 22px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+  }
+}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
