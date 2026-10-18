@@ -343,31 +343,7 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 }
 .home-choices .card-link:hover{background:var(--green);color:#fffaf0}
 
-/* Switch to the compact menu earlier on iPad/tablet widths */
-@media(max-width:1120px){
-  .site-header .main-nav{display:none!important}
-  .site-header .menu-btn{display:block!important;margin-left:auto!important}
-  .site-header .nav-wrap{gap:10px}
-  .site-header .nav-cta{display:inline-flex!important;padding:9px 12px!important;font-size:12px!important;margin-left:0!important}
-  .site-header .main-nav.open{
-    display:flex!important;
-    position:absolute;
-    left:0;
-    right:0;
-    top:78px;
-    background:#f8f3e9;
-    padding:18px 20px 24px;
-    flex-direction:column;
-    align-items:flex-start;
-    border-bottom:1px solid #dfd3bf;
-  }
-}
-@media(max-width:760px){
-  #tbt-header-members{display:none!important}
-}
-@media(max-width:640px){
-  .site-header .main-nav.open{top:70px}
-}
+
 </style>
 
 <style id="tbt-trust-strip-style">
