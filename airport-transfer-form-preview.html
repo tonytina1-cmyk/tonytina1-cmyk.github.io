@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Airport Transfer Request Preview | TBT Bali Tours</title><meta name="robots" content="noindex,nofollow">
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#18352c;background:#f8f3e9}*{box-sizing:border-box}body{margin:0}main{max-width:760px;margin:auto;padding:24px 16px 60px}.top{font-size:14px;margin:10px 0 24px}.top a{color:#176b4d}h1{font-size:clamp(30px,5vw,44px);margin:0 0 10px}p{line-height:1.6}.sub{color:#536e61;margin-bottom:24px}.panel{background:#fffaf0;border:1px solid #dfd3bf;border-radius:20px;padding:clamp(18px,4vw,32px);box-shadow:0 4px 18px #18352c0a}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:block;font-weight:bold;margin-bottom:7px;font-size:14px}input,select,textarea{width:100%;border-radius:10px;border:1px solid #b8c8bd;padding:13px;font:inherit;background:white;color:#18352c}textarea{min-height:75px;resize:vertical}.field{margin:0 0 18px}button{border:0;border-radius:999px;padding:15px 25px;background:#176b4d;color:#fff;font:inherit;font-weight:bold;cursor:pointer;width:100%}.note{font-size:13px;color:#536e61}.preview{background:#eff5ed;border-radius:12px;padding:16px;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:18px;display:none}.preview.show{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions button{flex:1 1 200px}.secondary{background:#18352c}@media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style></head><body><main><p class="top"><a href="/bali-airport-transfers/">← Airport transfer prices</a> · TBT Tours & Travel by Budi Bali Driver</p><h1>Request your Bali airport transfer</h1><p class="sub">Tell Budi about your journey. He'll confirm availability and the final price before your booking is confirmed.</p>
+<div class="panel"><form id="transfer">
+<div class="field"><label for="direction">Transfer type</label><select id="direction"><option>Airport pickup</option><option>Airport drop-off</option><option>Return transfer (pickup and drop-off)</option></select></div>
+<div class="grid"><div class="field"><label for="name">Your name *</label><input id="name" autocomplete="name" required></div><div class="field"><label for="contact">Email or WhatsApp number *</label><input id="contact" required placeholder="Include country code for phone"></div></div>
+<div class="grid"><div class="field"><label for="date">Travel date *</label><input id="date" type="date" required></div><div class="field"><label for="time">Flight arrival / departure time</label><input id="time" type="time"></div></div>
+<div class="grid"><div class="field"><label for="flight">Flight number</label><input id="flight" placeholder="e.g. JQ35"></div><div class="field"><label for="guests">Passengers *</label><input id="guests" type="number" min="1" max="30" value="2" required></div></div>
+<div class="grid"><div class="field"><label for="bags">Large bags</label><input id="bags" type="number" min="0" max="50" value="2"></div><div class="field"><label for="destination">Hotel / villa and destination *</label><input id="destination" required placeholder="e.g. hotel name, Ubud"></div></div>
+<div class="field"><label for="notes">Extra details (optional)</label><textarea id="notes" placeholder="Child seats, return date, special requests"></textarea></div>
+<button type="submit">Prepare WhatsApp request</button><p class="note">Preview only: this form does not send a booking to Admin. The next step opens WhatsApp with your details. You must tap Send there. No payment is taken.</p></form>
+<div id="preview" class="preview" role="status" aria-live="polite"></div>
+<div id="actions" class="actions" hidden><button id="whatsapp" type="button">Open WhatsApp to send</button><button id="copy" class="secondary" type="button">Copy request</button></div></div>
+</main><script>
+const form=document.getElementById('transfer'),preview=document.getElementById('preview'),actions=document.getElementById('actions');let message='';
+document.getElementById('date').min=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+const val=id=>document.getElementById(id).value.trim();
+form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;
+message=['Hello Budi, I would like to request a TBT Bali airport transfer.','Transfer: '+val('direction'),'Name: '+val('name'),'Contact: '+val('contact'),'Date: '+val('date'),'Time (Bali): '+(val('time')||'To confirm'),'Flight: '+(val('flight')||'To confirm'),'Passengers: '+val('guests'),'Large bags: '+(val('bags')||'Not specified'),'Hotel/destination: '+val('destination'),'Extra details: '+(val('notes')||'None'),'Please confirm availability and final price.'].join('\n');
+preview.textContent=message;preview.classList.add('show');actions.hidden=false;preview.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+document.getElementById('whatsapp').addEventListener('click',()=>window.open('https://wa.me/6285738148276?text='+encodeURIComponent(message),'_blank','noopener'));
+document.getElementById('copy').addEventListener('click',()=>navigator.clipboard?.writeText(message).then(()=>{document.getElementById('copy').textContent='Copied!'}).catch(()=>{document.getElementById('copy').textContent='Select the request above to copy'}));
+</script></body></html>
