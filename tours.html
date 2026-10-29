@@ -250,6 +250,12 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 .tour-card .card-actions .tbt-tour-contact-row .btn-book:hover{background:#12548d!important}
 @media(max-width:640px){.tour-card .tour-card-photo{width:calc(100% + 44px)!important;height:175px!important;margin:0 -22px 12px!important}}
 </style>
+<style id="beach-club-photo-layout">
+/* The beach club image is a full-bleed cover, not a constrained inline image. */
+.tour-card.beach-club-tour-card{position:relative;overflow:hidden!important}
+.beach-club-tour-card .beach-club-photo{display:block;flex:none;position:relative;left:-30px;width:calc(100% + 60px);height:205px;margin:0 0 14px;background-image:url("https://commons.wikimedia.org/wiki/Special:Redirect/file/La%20Brisa%20beach%20club%20at%20Echo%20Beach%2C%20Canggu%2C%20Bali.jpg?width=960");background-size:cover;background-position:center center;background-repeat:no-repeat}
+@media(max-width:640px){.beach-club-tour-card .beach-club-photo{left:-22px;width:calc(100% + 44px);height:185px}}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -356,8 +362,8 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
             <p>Private transport and help arranging a trusted tattoo studio visit in Bali.</p>
             <div class="card-actions"><a class="card-link" href="/bali-tattoo-experience/">View Tour →</a><div class="tbt-tour-contact-row"><a class="btn btn-wa tour-quote-contact" data-lead-source="tours_bali_tattoo_experience_card" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20could%20you%20please%20send%20me%20a%20quote%20for%20Bali%20Tattoo%20Experience%3F%0A%0ATravel%20date%3A%20%0ANumber%20of%20guests%3A%20%0AHotel%20%2F%20pickup%20area%3A%20%0APreferred%20stops%20or%20other%20details%3A%20" target="_blank" rel="noopener"><svg class="tbt-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1a11 11 0 0 0-9.5 16.5L1 23l5.7-1.5A11 11 0 1 0 12 1Zm0 20a9 9 0 0 1-4.6-1.3l-.4-.2-3.3.9.9-3.2-.2-.4A9 9 0 1 1 12 21Zm5-6.6c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.2-.2.3-.7.8-.8 1-.2.2-.3.2-.6.1-.3-.2-1.1-.4-2.1-1.3-.8-.7-1.3-1.6-1.5-1.9-.1-.2 0-.4.1-.5l.4-.5.3-.4c.1-.2 0-.3 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.2s.9 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.7.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.1-1.3-.1-.1-.2-.2-.5-.3Z"/></svg><span>WhatsApp</span></a><a class="btn btn-book tour-quote-contact" href="mailto:booking.tbtbali@gmail.com?subject=Bali%20tour%20quote%3A%20Bali%20Tattoo%20Experience">Email Budi for a quote</a></div></div>
           </article>
-          <article class="tour-card">
-            <img class="tour-card-photo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/La%20Brisa%20beach%20club%20at%20Echo%20Beach%2C%20Canggu%2C%20Bali.jpg?width=960" alt="La Brisa beach club at Echo Beach in Canggu Bali" loading="lazy">
+          <article class="tour-card beach-club-tour-card">
+            <div class="beach-club-photo" role="img" aria-label="La Brisa beach club at Echo Beach in Canggu Bali"></div>
             <div class="tag">Private Transfers</div>
             <h3>Beach Club Transfers &amp; Hopping</h3>
             <small class="tour-photo-credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:La_Brisa_beach_club_at_Echo_Beach,_Canggu,_Bali.jpg" target="_blank" rel="noopener">Meetvas</a> · CC BY-SA 4.0</small>
