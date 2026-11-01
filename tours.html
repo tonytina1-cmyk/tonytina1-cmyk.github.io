@@ -256,6 +256,25 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 .beach-club-tour-card .beach-club-photo{display:block;flex:none;position:relative;left:-30px;width:calc(100% + 60px);height:205px;margin:0 0 14px;background-image:url("https://images.unsplash.com/photo-1546484458-6904289cd4f0?auto=format&fit=crop&w=1200&q=85");background-size:cover;background-position:center center;background-repeat:no-repeat}
 @media(max-width:640px){.beach-club-tour-card .beach-club-photo{left:-22px;width:calc(100% + 44px);height:185px}}
 </style>
+<style id="tbt-compact-mobile-tour-grid">
+/* Mobile tour catalogue: two scannable tiles per row, with full details on each tour page. */
+@media (max-width:640px){
+  #tours .tour-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;align-items:stretch}
+  #tours .tour-grid>.tour-card{min-width:0;min-height:0;padding:12px 10px 13px;border-radius:15px;overflow:hidden;box-shadow:0 5px 16px rgba(24,53,44,.07)}
+  #tours .tour-grid>.tour-card .tour-card-photo{width:calc(100% + 20px)!important;height:115px!important;min-height:0!important;margin:-12px -10px 8px!important;border-radius:0!important;object-fit:cover}
+  #tours .tour-grid>.tour-card .beach-club-photo{left:-10px!important;width:calc(100% + 20px)!important;height:115px!important;margin:-12px 0 8px!important}
+  #tours .tour-grid>.tour-card .tag{font-size:9px;line-height:1.2;letter-spacing:0;margin:2px 0 6px;padding:4px 7px;max-width:100%;white-space:normal}
+  #tours .tour-grid>.tour-card h3{font-size:clamp(16px,4.2vw,19px);line-height:1.2;margin:2px 0 10px;overflow-wrap:anywhere}
+  #tours .tour-grid>.tour-card>p,#tours .tour-grid>.tour-card>ul,#tours .tour-grid>.tour-card .tour-photo-credit{display:none}
+  #tours .tour-grid>.tour-card .card-actions{margin-top:auto;padding-top:4px;gap:0}
+  #tours .tour-grid>.tour-card .card-actions>.card-link{min-height:42px;padding:9px 5px;font-size:13px;border-radius:9px}
+  #tours .tour-grid>.tour-card .card-actions>.tbt-tour-contact-row,
+  #tours .tour-grid>.tour-card .card-actions>.btn-wa,
+  #tours .tour-grid>.tour-card .card-actions>.btn-book,
+  #tours .tour-grid>.tour-card .card-actions>.tour-email-quote{display:none!important}
+}
+@media(max-width:350px){#tours .tour-grid{gap:8px}#tours .tour-grid>.tour-card{padding-left:8px;padding-right:8px}#tours .tour-grid>.tour-card h3{font-size:15px}}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
