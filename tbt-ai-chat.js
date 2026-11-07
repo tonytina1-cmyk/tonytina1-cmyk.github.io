@@ -16,7 +16,7 @@
  dialog{padding:0;border:1px solid #dfd3bf;border-radius:20px;width:min(510px,calc(100vw - 18px));max-width:none;max-height:calc(100dvh - 18px);background:#fffaf0;color:#18352c;box-shadow:0 22px 65px #0004;overflow:hidden}dialog::backdrop{background:#10241d77}
  header{display:flex;align-items:center;gap:10px;background:#18352c;color:white;padding:10px 12px}.logo{display:grid;place-items:center;background:#e8dcb5;color:#18352c;border-radius:50%;width:42px;height:42px;font-weight:800;flex-shrink:0}.heading{flex:1}h2{font-size:17px;line-height:1.2;margin:0}header small{display:block;color:#dce6de;margin-top:3px;font-size:11px}.close{min-width:44px;min-height:44px;background:transparent;border:1px solid #80998c;border-radius:10px;color:white;font-size:23px}
  .chat{display:flex;flex-direction:column;max-height:calc(100dvh - 90px)}.history{overflow:auto;overscroll-behavior:contain;min-height:180px;max-height:calc(100dvh - 285px);padding:12px}.bubble{margin:0 25px 12px 0;padding:12px 14px;border-radius:16px 16px 16px 3px;border:1px solid #e4dcc9;background:#fff;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.45}.bubble.user{margin:0 0 12px 25px;background:#e6efe7;border-color:#c7d7c9;border-radius:16px 16px 3px 16px}.suggestions{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 12px}.suggestions button{border:1px solid #91a99a;border-radius:20px;padding:8px 11px;min-height:40px;background:white;color:#18352c;font-size:13px}
- form{display:flex;align-items:flex-end;gap:8px;padding:8px 12px;border-top:1px solid #dfd3bf}textarea{resize:vertical;min-height:45px;max-height:116px;border:1px solid #afbeb5;background:white;color:#18352c;border-radius:12px;padding:11px;min-width:0;flex:1;font-size:16px}.send{border:0;background:#176b4d;color:white;border-radius:12px;padding:10px 16px;min-height:45px;font-weight:700}.send:disabled{opacity:.55;cursor:default}.links{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 7px}.links a,.links button{flex:1;text-decoration:none;text-align:center;border:1px solid #176b4d;border-radius:11px;padding:8px 6px;font-size:12px;line-height:1.25;font-weight:700;color:#176b4d;background:#fff;min-height:44px}.links button{flex:0 0 auto;white-space:nowrap}.links a.wa{flex:1.25}.links a.email{flex:1}.note{font-size:11px;color:#52675d;padding:0 12px 9px;margin:0}.status{font-size:12px;color:#52675d;margin:0;padding:0 14px 8px;min-height:18px}
+ form{display:flex;align-items:flex-end;gap:8px;padding:8px 12px;border-top:1px solid #dfd3bf}textarea{resize:vertical;min-height:45px;max-height:116px;border:1px solid #afbeb5;background:white;color:#18352c;border-radius:12px;padding:11px;min-width:0;flex:1;font-size:16px}.send{border:0;background:#176b4d;color:white;border-radius:12px;padding:10px 16px;min-height:45px;font-weight:700}.send:disabled{opacity:.55;cursor:default}.links{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 7px}.links a,.links button{flex:1;text-decoration:none;text-align:center;border:1px solid #176b4d;border-radius:11px;padding:8px 6px;font-size:12px;line-height:1.25;font-weight:700;color:#176b4d;background:#fff;min-height:44px}.links button{flex:0 0 auto;white-space:nowrap}.links a.wa{flex:1.25}.links a.email{flex:1}.review{margin:0 12px 12px;padding:12px;border:1px solid #c9b77d;border-radius:12px;background:#fff}.review h3{font-size:16px;margin:0 0 6px}.review p{font-size:12px;margin:0 0 9px;color:#52675d}.review textarea{width:100%;min-height:150px;max-height:230px;font-size:14px}.review-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.review-actions a,.review-actions button{flex:1;min-height:44px;padding:10px;text-align:center;border-radius:10px;border:1px solid #176b4d;background:#fff;color:#176b4d;text-decoration:none;font:700 13px system-ui;cursor:pointer}.review-actions a{background:#176b4d;color:white}.note{font-size:11px;color:#52675d;padding:0 12px 9px;margin:0}.status{font-size:12px;color:#52675d;margin:0;padding:0 14px 8px;min-height:18px}
  @media(max-height:570px){.history{max-height:32dvh;min-height:95px}}@media(max-width:420px){.logo{width:34px;height:34px;font-size:12px}.heading h2{font-size:16px}.links{gap:5px}.links a,.links button{font-size:11px;padding:8px 5px}.note{font-size:10px}header small{font-size:10px}}
  </style>
  <button type="button" class="launch" aria-haspopup="dialog">💬 Chat with our Bali AI guide</button>
@@ -24,7 +24,7 @@
  <div class="chat"><div class="history" role="log" aria-live="polite" aria-label="Chat conversation"></div><div class="suggestions"></div>
  <form><textarea aria-label="Your message" maxlength="1200" rows="2" placeholder="Tell me about your Bali plans…"></textarea><button class="send" type="submit">Send</button></form>
  <p class="status" role="status"></p><div class="links"><a class="wa" target="_blank" rel="noopener" href="#">WhatsApp Budi</a><a class="email" href="#">Email Budi</a><button type="button" class="restart">Start over</button></div>
- <p class="note">I’m TBT’s AI assistant, not Budi. Budi personally confirms prices and bookings; this chat doesn’t make reservations.</p></div></dialog>`;
+ <section class="review" hidden><h3>Review your enquiry for Budi</h3><p>Check or edit the details before opening WhatsApp or email. Nothing is sent automatically.</p><textarea aria-label="Review and edit booking enquiry" rows="8"></textarea><div class="review-actions"><a class="open-draft" href="#">Open draft</a><button type="button" class="cancel-review">Back to chat</button></div></section><p class="note">I’m TBT’s AI assistant, not Budi. Budi personally confirms prices and bookings; this chat doesn’t make reservations.</p></div></dialog>`;
  const $=s=>root.querySelector(s),dialog=$('dialog'),history=$('.history'),suggestions=$('.suggestions'),textarea=$('textarea');
  let messages=[],busy=false,returnFocus=null,requestId=0;
  function soundsConfirmed(reply){return /\b(?:we(?:'|’)ve (?:got you covered|booked|confirmed)|(?:your|the) (?:booking|reservation|transfer|pickup|driver) (?:is|has been) (?:booked|confirmed|arranged|scheduled)|(?:budi|your driver) (?:will be|is) waiting|(?:you(?:'|’)re|you are) (?:all set|booked|confirmed)|confirmed for \d)/i.test(reply);}
@@ -36,12 +36,46 @@
  function looksLikeFakeResearch(reply){return /\b(?:i(?:'|’)ll|let me|would you like me to|i can)\s+(?:look up|search|check online|research)\b/i.test(reply)||/semegenungan|tirta\s+empul\s+waterfall/i.test(reply);}
 
  function bubble(message,user=false){const div=document.createElement('div');div.className='bubble'+(user?' user':'');div.textContent=message;history.append(div);history.scrollTop=history.scrollHeight;}
- function controls(){const summary=messages.filter(m=>m.role==='user').map(m=>m.content).join('\n').slice(0,3200);
- const draft='Hi Budi, I have been chatting with the TBT Bali AI trip helper. Here is what I would like to discuss:\n\n'+(summary||'I would love your help planning a Bali trip.')+'\n\nPlease confirm dates, availability, price and inclusions. Thank you!';
- $('.wa').href='https://wa.me/6285738148276?text='+encodeURIComponent(draft);
- $('.email').href='mailto:booking.tbtbali@gmail.com?subject='+encodeURIComponent('TBT Bali trip enquiry')+'&body='+encodeURIComponent(draft);
+
+ function structuredDraft(){
+  const entries=messages.filter(m=>m.role==='user').map(m=>m.content.trim()).filter(Boolean);
+  const all=entries.join('\n'),fields=[],put=(label,value)=>{if(value)fields.push(label+': '+value);};
+  const capture=(pattern)=>{const m=all.match(pattern);return m?m[1].trim().replace(/[.,!?;]+$/,'').slice(0,90):'';};
+  put('Customer name',capture(/\b(?:my name is|name is|name:)\s+([a-z][a-z '-]{1,45})(?=[.,!?]|\n|$)/i));
+  put('Travel date',capture(/\b(?:on|for|from|between)\s+(\d{1,2}(?:st|nd|rd|th)?\s+(?:january|february|march|april|may|june|july|august|september|october|november|december)(?:\s+\d{4})?|\d{4}-\d{2}-\d{2})\b/i));
+  put('Hotel / pickup area',capture(/\b(?:staying in|staying at|based in|pickup from|pick up from)\s+([a-z][a-z0-9 '&-]{2,50}?)(?=\s+(?:for|with|but|and|on)\b|[.,!?]|\n|$)/i));
+  put('Adults',capture(/\b(\d{1,2}\s+adults?)\b/i));
+  put('Children',capture(/\b((?:\d{1,2}|one|two|three|four|five|six)\s+(?:children|kids|child))\b/i));
+  put('Travellers',capture(/\b(\d{1,2}\s+(?:travellers|travelers|guests|people|passengers))\b/i));
+  put('Flight',capture(/\bflight(?:\s+number)?\s*(?:is|:)?\s*([A-Z]{2,3}\s?\d{2,5})\b/i));
+  const services=[];
+  if(/\bairport|flight\b/i.test(all))services.push('Airport transfer');
+  if(/\bprivate driver|private car|day tour\b/i.test(all))services.push('Private driver / tour');
+  if(/\bnusa penida|nusa lembongan\b/i.test(all))services.push('Island trip');
+  if(/\bhotel transfer|port transfer\b/i.test(all))services.push('Hotel / port transfer');
+  if(/\bmulti.day|itinerary\b/i.test(all))services.push('Multi-day trip');
+  put('Requested service',services.join(', '));
+  const interests=[];
+  for(const [pattern,label] of [[/\bwaterfalls?\b/i,'Waterfalls'],[/\btemples?\b/i,'Temples'],[/\bbeach(?:es)?|sunset\b/i,'Beaches / sunset'],[/\brafting|atv|jeep\b/i,'Adventure'],[/\bsnorkel/i,'Snorkelling']])if(pattern.test(all))interests.push(label);
+  put('Interests',interests.join(', '));
+  const relevant=entries.filter(v=>!/^(hi|hello|hey|thanks|thank you|ok|okay)[!. ]*$/i.test(v));
+  const lines=['Hi Budi, I would like a quote for my Bali trip.',...fields];
+  if(relevant.length){lines.push('','My requests / additional details:');for(const entry of relevant.slice(-4))lines.push('- '+entry.replace(/\s+/g,' ').slice(0,300));}
+  lines.push('','Please confirm availability, price and inclusions. Thank you!');
+  return lines.join('\n').slice(0,3200);
  }
- function reset(){requestId++;busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';messages=[];history.replaceChildren();bubble('Hey! 👋 Planning a Bali holiday, looking for a driver, or just exploring ideas? I’m happy to help.');suggestions.replaceChildren();
+ function handoverUrl(channel,draft){return channel==='wa'?'https://wa.me/6285738148276?text='+encodeURIComponent(draft):'mailto:booking.tbtbali@gmail.com?subject='+encodeURIComponent('TBT Bali trip enquiry')+'&body='+encodeURIComponent(draft);}
+ function controls(){const draft=structuredDraft();$('.wa').href=handoverUrl('wa',draft);$('.email').href=handoverUrl('email',draft);}
+ function review(channel){
+   const box=$('.review'),field=box.querySelector('textarea'),link=$('.open-draft');
+   field.value=structuredDraft();box.hidden=false;
+   function refresh(){link.href=handoverUrl(channel,field.value);link.textContent=channel==='wa'?'Open WhatsApp draft':'Open email draft';link.target=channel==='wa'?'_blank':'_self';}
+   field.oninput=refresh;refresh();box.scrollIntoView({block:'nearest'});field.focus();
+ }
+ $('.wa').addEventListener('click',e=>{e.preventDefault();review('wa');});
+ $('.email').addEventListener('click',e=>{e.preventDefault();review('email');});
+ $('.cancel-review').addEventListener('click',()=>{$('.review').hidden=true;textarea.focus();});
+ function reset(){$('.review').hidden=true;requestId++;busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';messages=[];history.replaceChildren();bubble('Hey! 👋 Planning a Bali holiday, looking for a driver, or just exploring ideas? I’m happy to help.');suggestions.replaceChildren();
  ['🌴 Help me plan a day','✈️ I need an airport pickup','🏝️ Which island should I visit?','👨‍👩‍👧‍👦 Things to do with kids'].forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=()=>send(t.replace(/^[^\w]+/u,''));suggestions.append(b);});controls();}
  async function send(text){if(busy||!text.trim())return;const currentRequest=++requestId;busy=true;$('.send').disabled=true;textarea.disabled=true;$('.status').textContent='Your Bali buddy is thinking…';suggestions.replaceChildren();bubble(text,true);messages.push({role:'user',content:text});controls();
  if(wantsBudiQuote(text)){const reply=budiQuoteAnswer();bubble(reply);messages.push({role:'assistant',content:reply});busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';controls();textarea.focus();return;}
