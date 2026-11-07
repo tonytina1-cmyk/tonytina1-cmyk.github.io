@@ -23,11 +23,17 @@
  dialog{position:fixed;top:var(--tbt-vtop,8px);left:8px;right:auto;bottom:auto;margin:0;width:calc(100vw - 16px);height:var(--tbt-vheight,calc(100dvh - 16px));max-height:var(--tbt-vheight,calc(100dvh - 16px));display:flex;flex-direction:column}
  dialog:not([open]){display:none}
  dialog>header{flex:0 0 auto}
- .chat{flex:1;min-height:0;max-height:none;overflow-y:auto}
- .history{min-height:52px;max-height:none;flex:1;overflow-y:auto}
- .suggestions{flex:0 0 auto}
- form{flex:0 0 auto}
+ .chat{flex:1;min-height:0;max-height:none;overflow:hidden}
+ .history{min-height:0;max-height:none;flex:1 1 auto;overflow-y:auto}
+ .suggestions{flex:0 0 auto;overflow-y:auto;max-height:30dvh}
+ form{flex:0 0 auto;margin-top:auto}
  .links,.note,.status{flex-shrink:0}
+ dialog.keyboard-open .suggestions,dialog.keyboard-open .links,dialog.keyboard-open .note,dialog.keyboard-open .status{display:none!important}
+ dialog.keyboard-open .history{min-height:0;flex:1 1 auto}
+ dialog.keyboard-open form{margin-top:auto;padding:6px 8px}
+ dialog.keyboard-open form textarea{min-height:44px;max-height:72px}
+ dialog.keyboard-open .review{max-height:38%;overflow-y:auto}
+ dialog.keyboard-open .review textarea{min-height:54px;max-height:80px}
  .review{flex-shrink:0}
  .review textarea{max-height:110px;min-height:75px}
  }
@@ -117,16 +123,21 @@
  $('form').addEventListener('submit',e=>{e.preventDefault();const value=textarea.value.trim();if(!value)return;textarea.value='';send(value);});
  textarea.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('form').requestSubmit();}});
  function sizeMobileDialog(){
-  if(!window.matchMedia('(max-width:600px)').matches)return;
+  if(!window.matchMedia('(max-width:600px)').matches){dialog.classList.remove('keyboard-open');return;}
   const vv=window.visualViewport;
   const available=vv?vv.height:window.innerHeight;
   const top=(vv?vv.offsetTop:0)+8;
+  const focused=root.activeElement;
+  const isTyping=focused===textarea||focused===$('.review textarea');
+  dialog.classList.toggle('keyboard-open',isTyping);
   dialog.style.setProperty('--tbt-vtop',top+'px');
-  dialog.style.setProperty('--tbt-vheight',Math.max(220,available-16)+'px');
+  dialog.style.setProperty('--tbt-vheight',Math.max(200,available-16)+'px');
  }
  if(window.visualViewport){window.visualViewport.addEventListener('resize',sizeMobileDialog);window.visualViewport.addEventListener('scroll',sizeMobileDialog);}
  window.addEventListener('resize',sizeMobileDialog);
-  $('.launch').addEventListener('click',()=>{returnFocus=document.activeElement;sizeMobileDialog();dialog.showModal();textarea.focus();});
+ root.addEventListener('focusin',()=>{sizeMobileDialog();});
+ root.addEventListener('focusout',()=>{requestAnimationFrame(sizeMobileDialog);});
+ $('.launch').addEventListener('click',()=>{returnFocus=document.activeElement;dialog.showModal();sizeMobileDialog();if(!window.matchMedia('(max-width:600px)').matches)textarea.focus();});
  $('.close').addEventListener('click',()=>dialog.close());
  dialog.addEventListener('close',()=>{if(returnFocus?.isConnected)returnFocus.focus();});
  $('.restart').addEventListener('click',reset);
