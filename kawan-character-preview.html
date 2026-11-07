@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Kawan 3D Character Preview · TBT</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,sans-serif;background:#f8f3e9;color:#18352c}
+*{box-sizing:border-box}body{margin:0}.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 50px}
+header{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+header a{color:#176b4d;font-weight:700}.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+h1{font-size:clamp(28px,4vw,40px);margin:8px 0 12px}.pill{font-size:12px;font-weight:800;letter-spacing:.1em;color:#946622}
+.viewer{position:relative;min-height:500px;background:radial-gradient(circle at 50% 35%,#e9d9b7,#bcd7c6);border-radius:24px;overflow:hidden;box-shadow:0 14px 42px #18352c1b}
+model-viewer{height:500px;width:100%;display:block}
+.help{position:absolute;bottom:12px;left:12px;right:12px;background:#fffaf0e8;border-radius:12px;padding:10px;font-size:13px;text-align:center}
+.panel{background:#fffaf0;border:1px solid #dfd3bf;border-radius:24px;padding:24px;align-self:start}
+.panel p{line-height:1.55;color:#52675d}.button{display:inline-flex;justify-content:center;align-items:center;cursor:pointer;padding:12px 17px;min-height:46px;border:1px solid #176b4d;border-radius:12px;background:#176b4d;color:#fff;text-decoration:none;font-weight:750}.button.secondary{background:#fff;color:#176b4d}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.actions button:disabled{opacity:.4;cursor:not-allowed}
+input[type=file]{display:block;max-width:100%;margin-top:8px}.status{border-left:3px solid #d4a848;padding:10px 12px;background:#f5eee0;font-size:14px}.note{font-size:13px;color:#65786d}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.viewer,model-viewer{min-height:360px;height:360px}.panel{padding:20px}}
+</style>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head><body><div class="wrap">
+<header><strong>TBT Tours &amp; Travel · Character Workshop</strong><a href="/">← Back to website</a></header>
+<div class="layout"><div><span class="pill">NOT ON THE LIVE HOMEPAGE</span><h1>Kawan's real 3D model</h1>
+<div class="viewer"><model-viewer id="viewer" alt="Preview of the Kawan 3D character once a model is chosen" camera-controls auto-rotate rotation-per-second="7deg" shadow-intensity=".8" exposure="1.1" interaction-prompt="auto" disable-zoom></model-viewer>
+<div class="help">Drag to rotate Kawan · Tap Wave to play the actual model animation</div></div></div>
+<div class="panel"><h2>Character approval</h2>
+<p>This test page needs a <strong>proper rigged GLB model</strong> — not a static picture or shapes. It won't replace the TBT homepage until the character looks right.</p>
+<label><strong>Choose a 3D model (.glb)</strong><input id="character" type="file" accept=".glb,model/gltf-binary"></label>
+<div class="actions"><button id="idle" class="button" type="button" disabled>Idle</button><button id="wave" class="button secondary" type="button" disabled>👋 Wave</button></div>
+<p id="status" class="status" role="status">No Kawan character selected yet.</p>
+<p class="note">A GLB must include a skinned 3D character; embedded idle and wave animation clips are recommended. You can inspect it here on iPhone, Mac or iPad. Files selected stay on your device. Voice is not enabled.</p>
+</div></div></div>
+<script>
+(()=>{
+const viewer=document.getElementById('viewer'),file=document.getElementById('character'),idle=document.getElementById('idle'),wave=document.getElementById('wave'),status=document.getElementById('status');
+let url=null;
+file.addEventListener('change',()=>{const f=file.files?.[0];if(!f)return;if(!/\.glb$/i.test(f.name)){status.textContent='Please choose a .glb character model.';return;}
+if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(f);viewer.src=url;status.textContent='Loading '+f.name+'…';idle.disabled=true;wave.disabled=true;});
+viewer.addEventListener('load',()=>{const clips=viewer.availableAnimations||[];status.textContent=clips.length?'Model loaded. Available animations: '+clips.join(', '):'Model loaded, but this file has no embedded animations. A rigged model with idle and wave clips is needed.';const idleClip=clips.find(c=>/idle|breath|stand/i.test(c))||clips[0];if(idleClip){viewer.animationName=idleClip;viewer.play();idle.disabled=false;}wave.disabled=!clips.some(c=>/wave|hello|greet/i.test(c));});
+viewer.addEventListener('error',()=>{status.textContent='Could not load the model. Export as binary glTF (.glb) with materials and animations embedded.';});
+idle.onclick=()=>{const a=viewer.availableAnimations||[];viewer.animationName=a.find(c=>/idle|breath|stand/i.test(c))||a[0];viewer.play();};
+wave.onclick=()=>{const a=viewer.availableAnimations||[];const c=a.find(c=>/wave|hello|greet/i.test(c));if(!c)return;viewer.animationName=c;viewer.play({repetitions:1});};
+viewer.addEventListener('finished',()=>{if(!idle.disabled)idle.click();});
+})();
+</script></body></html>
