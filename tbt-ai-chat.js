@@ -25,8 +25,10 @@
  dialog>header{flex:0 0 auto}
  .chat{flex:1;min-height:0;max-height:none;overflow:hidden}
  .history{min-height:0;max-height:none;flex:1 1 auto;overflow-y:auto}
- .suggestions{flex:0 0 auto;overflow-y:auto;max-height:30dvh}
- form{flex:0 0 auto;margin-top:auto}
+ .suggestions{display:none!important}
+ form{flex:0 0 auto;margin-top:auto;position:relative;z-index:2;background:#fffaf0}
+ form textarea{min-height:44px;max-height:80px}
+ .chat .note{display:none}
  .links,.note,.status{flex-shrink:0}
  dialog.keyboard-open .suggestions,dialog.keyboard-open .links,dialog.keyboard-open .note,dialog.keyboard-open .status{display:none!important}
  dialog.keyboard-open .history{min-height:0;flex:1 1 auto}
@@ -128,14 +130,14 @@
   const available=vv?vv.height:window.innerHeight;
   const top=(vv?vv.offsetTop:0)+8;
   const focused=root.activeElement;
-  const isTyping=focused===textarea||focused===$('.review textarea');
+  const isTyping=focused===textarea||focused===$('.review textarea')||document.activeElement===host;
   dialog.classList.toggle('keyboard-open',isTyping);
   dialog.style.setProperty('--tbt-vtop',top+'px');
   dialog.style.setProperty('--tbt-vheight',Math.max(200,available-16)+'px');
  }
  if(window.visualViewport){window.visualViewport.addEventListener('resize',sizeMobileDialog);window.visualViewport.addEventListener('scroll',sizeMobileDialog);}
  window.addEventListener('resize',sizeMobileDialog);
- root.addEventListener('focusin',()=>{sizeMobileDialog();});
+ root.addEventListener('focusin',e=>{if(window.matchMedia('(max-width:600px)').matches&&e.target.matches('textarea'))dialog.classList.add('keyboard-open');sizeMobileDialog();});
  root.addEventListener('focusout',()=>{requestAnimationFrame(sizeMobileDialog);});
  $('.launch').addEventListener('click',()=>{returnFocus=document.activeElement;dialog.showModal();sizeMobileDialog();if(!window.matchMedia('(max-width:600px)').matches)textarea.focus();});
  $('.close').addEventListener('click',()=>dialog.close());
