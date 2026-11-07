@@ -57,8 +57,8 @@
  }
  @media(max-height:570px){.history{max-height:32dvh;min-height:95px}}@media(max-width:420px){.logo{width:34px;height:34px;font-size:12px}.heading h2{font-size:16px}.links{gap:5px}.links a,.links button{font-size:11px;padding:8px 5px}.note{font-size:10px}header small{font-size:10px}}
  </style>
- <button type="button" class="launch" aria-haspopup="dialog"><img class="launch-face" src="/assets/kawan-avatar.svg" alt="" width="30" height="30">Chat with Kawan 🌴</button>
- <dialog aria-labelledby="tbt-ai-title"><header><button type="button" class="avatar" aria-label="Wave to Kawan" title="Wave to Kawan"><img src="/assets/kawan-avatar.svg" alt="Kawan the AI travel buddy" width="44" height="44"></button><div class="heading"><h2 id="tbt-ai-title">Kawan 🌴</h2><small>Your Bali travel buddy · TBT AI assistant</small></div><button class="close" type="button" aria-label="Close chat">×</button></header>
+ <button type="button" class="launch" aria-haspopup="dialog"><img class="launch-face" src="/assets/kawan-avatar.svg?v=20261107-2" alt="" width="30" height="30">Chat with Kawan 🌴</button>
+ <dialog aria-labelledby="tbt-ai-title"><header><button type="button" class="avatar" aria-label="Wave to Kawan" title="Wave to Kawan"><img src="/assets/kawan-avatar.svg?v=20261107-2" alt="Kawan the AI travel buddy" width="44" height="44"></button><div class="heading"><h2 id="tbt-ai-title">Kawan 🌴</h2><small>Your Bali travel buddy · TBT AI assistant</small></div><button class="close" type="button" aria-label="Close chat">×</button></header>
  <div class="chat"><div class="history" role="log" aria-live="polite" aria-label="Chat conversation"></div><div class="suggestions"></div>
  <form><textarea aria-label="Your message" maxlength="1200" rows="2" placeholder="Tell me about your Bali plans…"></textarea><button class="send" type="submit">Send</button></form>
  <p class="status" role="status"></p><div class="links"><a class="wa" target="_blank" rel="noopener" href="#">WhatsApp Budi</a><a class="email" href="#">Email Budi</a><button type="button" class="restart">Start over</button></div>
