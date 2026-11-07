@@ -41,26 +41,35 @@
   const entries=messages.filter(m=>m.role==='user').map(m=>m.content.trim()).filter(Boolean);
   const all=entries.join('\n'),fields=[],put=(label,value)=>{if(value)fields.push(label+': '+value);};
   const capture=(pattern)=>{const m=all.match(pattern);return m?m[1].trim().replace(/[.,!?;]+$/,'').slice(0,90):'';};
+  const quant='(?:\\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)';
   put('Customer name',capture(/\b(?:my name is|name is|name:)\s+([a-z][a-z '-]{1,45})(?=[.,!?]|\n|$)/i));
   put('Travel date',capture(/\b(?:on|for|from|between)\s+(\d{1,2}(?:st|nd|rd|th)?\s+(?:january|february|march|april|may|june|july|august|september|october|november|december)(?:\s+\d{4})?|\d{4}-\d{2}-\d{2})\b/i));
   put('Hotel / pickup area',capture(/\b(?:staying in|staying at|based in|pickup from|pick up from)\s+([a-z][a-z0-9 '&-]{2,50}?)(?=\s+(?:for|with|but|and|on)\b|[.,!?]|\n|$)/i));
-  put('Adults',capture(/\b(\d{1,2}\s+adults?)\b/i));
-  put('Children',capture(/\b((?:\d{1,2}|one|two|three|four|five|six)\s+(?:children|kids|child))\b/i));
-  put('Travellers',capture(/\b(\d{1,2}\s+(?:travellers|travelers|guests|people|passengers))\b/i));
+  put('Adults',capture(new RegExp('\\b('+quant+'\\s+adults?)\\b','i')));
+  put('Children',capture(new RegExp('\\b('+quant+'\\s+(?:children|kids|child))\\b','i')));
+  put('Travellers',capture(new RegExp('\\b('+quant+'\\s+(?:travellers|travelers|guests|people|passengers))\\b','i')));
   put('Flight',capture(/\bflight(?:\s+number)?\s*(?:is|:)?\s*([A-Z]{2,3}\s?\d{2,5})\b/i));
+  // Only extract explicitly mentioned destinations, not guesses based on nearby attractions.
+  const destination=capture(/\b(?:visit|explore|tour|going to|drop(?:\s|-)?off at)\s+(Ubud|Uluwatu|Sanur|Seminyak|Canggu|Kuta|Nusa Dua|Jimbaran|Kintamani|Sidemen|Nusa Penida|Nusa Lembongan|Amed|Lovina)\b/i);
+  put('Destination / area to visit',destination);
   const services=[];
-  if(/\bairport|flight\b/i.test(all))services.push('Airport transfer');
-  if(/\bprivate driver|private car|day tour\b/i.test(all))services.push('Private driver / tour');
-  if(/\bnusa penida|nusa lembongan\b/i.test(all))services.push('Island trip');
-  if(/\bhotel transfer|port transfer\b/i.test(all))services.push('Hotel / port transfer');
-  if(/\bmulti.day|itinerary\b/i.test(all))services.push('Multi-day trip');
+  if(/\b(?:airport|flight)\b/i.test(all))services.push('Airport transfer');
+  if(/\b(?:private driver|private car|day tour)\b/i.test(all))services.push('Private driver / tour');
+  if(/\b(?:nusa penida|nusa lembongan)\b/i.test(all))services.push('Island trip');
+  if(/\b(?:hotel transfer|port transfer)\b/i.test(all))services.push('Hotel / port transfer');
+  if(/\b(?:multi.day|itinerary)\b/i.test(all))services.push('Multi-day trip');
   put('Requested service',services.join(', '));
   const interests=[];
-  for(const [pattern,label] of [[/\bwaterfalls?\b/i,'Waterfalls'],[/\btemples?\b/i,'Temples'],[/\bbeach(?:es)?|sunset\b/i,'Beaches / sunset'],[/\brafting|atv|jeep\b/i,'Adventure'],[/\bsnorkel/i,'Snorkelling']])if(pattern.test(all))interests.push(label);
+  for(const [pattern,label] of [[/\bwaterfalls?\b/i,'Waterfalls'],[/\btemples?\b/i,'Temples'],[/\brice terraces?\b/i,'Rice terraces'],[/\b(?:beach|beaches|sunset)\b/i,'Beaches / sunset'],[/\b(?:rafting|atv|jeep)\b/i,'Adventure'],[/\bsnorkel/i,'Snorkelling']])if(pattern.test(all))interests.push(label);
   put('Interests',interests.join(', '));
-  const relevant=entries.filter(v=>!/^(hi|hello|hey|thanks|thank you|ok|okay)[!. ]*$/i.test(v));
+  // Keep other details in the customer's own words, but avoid repeating the complete itinerary.
+  const notes=entries.filter(v=>!/^(?:hi|hello|hey|thanks|thank you|ok|okay|help me plan a day)[!. ]*$/i.test(v))
+    .filter(v=>!/\b(?:staying in|staying at|based in)\b/i.test(v)||!/\b(?:adults?|children|kids)\b/i.test(v))
+    .filter(v=>!/\b(?:private driver|private car|day tour)\b/i.test(v)||!/\b(?:visit|explore)\b/i.test(v))
+    .slice(-3);
   const lines=['Hi Budi, I would like a quote for my Bali trip.',...fields];
-  if(relevant.length){lines.push('','My requests / additional details:');for(const entry of relevant.slice(-4))lines.push('- '+entry.replace(/\s+/g,' ').slice(0,300));}
+  if(notes.length){lines.push('','Additional details:');for(const entry of notes)lines.push('- '+entry.replace(/\s+/g,' ').slice(0,300));}
+  if(!fields.length&&!notes.length){const request=entries.filter(v=>!/^(?:hi|hello|hey|thanks|thank you)[!. ]*$/i.test(v)).slice(-1)[0];if(request)lines.push('Request: '+request.slice(0,280));}
   lines.push('','Please confirm availability, price and inclusions. Thank you!');
   return lines.join('\n').slice(0,3200);
  }
