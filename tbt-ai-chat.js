@@ -19,6 +19,18 @@
  header{display:flex;align-items:center;gap:10px;background:#18352c;color:white;padding:10px 12px}.logo{display:grid;place-items:center;background:#e8dcb5;color:#18352c;border-radius:50%;width:42px;height:42px;font-weight:800;flex-shrink:0}.heading{flex:1}h2{font-size:17px;line-height:1.2;margin:0}header small{display:block;color:#dce6de;margin-top:3px;font-size:11px}.close{min-width:44px;min-height:44px;background:transparent;border:1px solid #80998c;border-radius:10px;color:white;font-size:23px}
  .chat{display:flex;flex-direction:column;max-height:calc(100dvh - 90px)}.history{overflow:auto;overscroll-behavior:contain;min-height:180px;max-height:calc(100dvh - 285px);padding:12px}.bubble{margin:0 25px 12px 0;padding:12px 14px;border-radius:16px 16px 16px 3px;border:1px solid #e4dcc9;background:#fff;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.45}.bubble.user{margin:0 0 12px 25px;background:#e6efe7;border-color:#c7d7c9;border-radius:16px 16px 3px 16px}.suggestions{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 12px}.suggestions button{border:1px solid #91a99a;border-radius:20px;padding:8px 11px;min-height:40px;background:white;color:#18352c;font-size:13px}
  form{display:flex;align-items:flex-end;gap:8px;padding:8px 12px;border-top:1px solid #dfd3bf}textarea{resize:vertical;min-height:45px;max-height:116px;border:1px solid #afbeb5;background:white;color:#18352c;border-radius:12px;padding:11px;min-width:0;flex:1;font-size:16px}.send{border:0;background:#176b4d;color:white;border-radius:12px;padding:10px 16px;min-height:45px;font-weight:700}.send:disabled{opacity:.55;cursor:default}.links{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 7px}.links a,.links button{flex:1;text-decoration:none;text-align:center;border:1px solid #176b4d;border-radius:11px;padding:8px 6px;font-size:12px;line-height:1.25;font-weight:700;color:#176b4d;background:#fff;min-height:44px}.links button{flex:0 0 auto;white-space:nowrap}.links a.wa{flex:1.25}.links a.email{flex:1}.review{margin:0 12px 12px;padding:12px;border:1px solid #c9b77d;border-radius:12px;background:#fff}.review h3{font-size:16px;margin:0 0 6px}.review p{font-size:12px;margin:0 0 9px;color:#52675d}.review textarea{width:100%;min-height:150px;max-height:230px;font-size:14px}.review-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.review-actions a,.review-actions button{flex:1;min-height:44px;padding:10px;text-align:center;border-radius:10px;border:1px solid #176b4d;background:#fff;color:#176b4d;text-decoration:none;font:700 13px system-ui;cursor:pointer}.review-actions a{background:#176b4d;color:white}.note{font-size:11px;color:#52675d;padding:0 12px 9px;margin:0}.status{font-size:12px;color:#52675d;margin:0;padding:0 14px 8px;min-height:18px}
+ @media(max-width:600px){
+ dialog{position:fixed;top:var(--tbt-vtop,8px);left:8px;right:auto;bottom:auto;margin:0;width:calc(100vw - 16px);height:var(--tbt-vheight,calc(100dvh - 16px));max-height:var(--tbt-vheight,calc(100dvh - 16px));display:flex;flex-direction:column}
+ dialog:not([open]){display:none}
+ dialog>header{flex:0 0 auto}
+ .chat{flex:1;min-height:0;max-height:none;overflow-y:auto}
+ .history{min-height:52px;max-height:none;flex:1;overflow-y:auto}
+ .suggestions{flex:0 0 auto}
+ form{flex:0 0 auto}
+ .links,.note,.status{flex-shrink:0}
+ .review{flex-shrink:0}
+ .review textarea{max-height:110px;min-height:75px}
+ }
  @media(max-height:570px){.history{max-height:32dvh;min-height:95px}}@media(max-width:420px){.logo{width:34px;height:34px;font-size:12px}.heading h2{font-size:16px}.links{gap:5px}.links a,.links button{font-size:11px;padding:8px 5px}.note{font-size:10px}header small{font-size:10px}}
  </style>
  <button type="button" class="launch" aria-haspopup="dialog">💬 Chat with our Bali AI guide</button>
@@ -104,7 +116,17 @@
  }
  $('form').addEventListener('submit',e=>{e.preventDefault();const value=textarea.value.trim();if(!value)return;textarea.value='';send(value);});
  textarea.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('form').requestSubmit();}});
- $('.launch').addEventListener('click',()=>{returnFocus=document.activeElement;dialog.showModal();textarea.focus();});
+ function sizeMobileDialog(){
+  if(!window.matchMedia('(max-width:600px)').matches)return;
+  const vv=window.visualViewport;
+  const available=vv?vv.height:window.innerHeight;
+  const top=(vv?vv.offsetTop:0)+8;
+  dialog.style.setProperty('--tbt-vtop',top+'px');
+  dialog.style.setProperty('--tbt-vheight',Math.max(220,available-16)+'px');
+ }
+ if(window.visualViewport){window.visualViewport.addEventListener('resize',sizeMobileDialog);window.visualViewport.addEventListener('scroll',sizeMobileDialog);}
+ window.addEventListener('resize',sizeMobileDialog);
+  $('.launch').addEventListener('click',()=>{returnFocus=document.activeElement;sizeMobileDialog();dialog.showModal();textarea.focus();});
  $('.close').addEventListener('click',()=>dialog.close());
  dialog.addEventListener('close',()=>{if(returnFocus?.isConnected)returnFocus.focus();});
  $('.restart').addEventListener('click',reset);
