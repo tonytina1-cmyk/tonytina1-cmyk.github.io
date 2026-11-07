@@ -30,14 +30,18 @@
  form textarea{min-height:44px;max-height:80px}
  .chat .note{display:none}
  .links,.note,.status{flex-shrink:0}
- dialog.keyboard-open .suggestions,dialog.keyboard-open .links,dialog.keyboard-open .note,dialog.keyboard-open .status{display:none!important}
- dialog.keyboard-open .history{min-height:0;flex:1 1 auto}
- dialog.keyboard-open form{margin-top:auto;padding:6px 8px}
- dialog.keyboard-open form textarea{min-height:44px;max-height:72px}
- dialog.keyboard-open .review{max-height:38%;overflow-y:auto}
- dialog.keyboard-open .review textarea{min-height:54px;max-height:80px}
+ .links{margin-top:0;padding:5px 8px 8px;background:#fffaf0}
+ .links a,.links button{min-height:44px}
+ dialog.keyboard-open:not(.review-mode) .links,dialog.keyboard-open:not(.review-mode) .status{display:none!important}
+ dialog.keyboard-open:not(.review-mode) .history{min-height:0;flex:1 1 auto}
+ dialog.keyboard-open:not(.review-mode) form{margin-top:auto;padding:6px 8px}
+ dialog.keyboard-open:not(.review-mode) form textarea{min-height:44px;max-height:72px}
  .review{flex-shrink:0}
  .review textarea{max-height:110px;min-height:75px}
+ dialog.review-mode .history,dialog.review-mode .suggestions,dialog.review-mode form,dialog.review-mode .links,dialog.review-mode .status{display:none!important}
+ dialog.review-mode .review{display:flex;flex-direction:column;flex:1;min-height:0;margin:8px;padding:10px;overflow:hidden}
+ dialog.review-mode .review textarea{flex:1;min-height:0;max-height:none;width:100%;resize:none}
+ dialog.review-mode .review-actions{flex-shrink:0}
  }
  @media(max-height:570px){.history{max-height:32dvh;min-height:95px}}@media(max-width:420px){.logo{width:34px;height:34px;font-size:12px}.heading h2{font-size:16px}.links{gap:5px}.links a,.links button{font-size:11px;padding:8px 5px}.note{font-size:10px}header small{font-size:10px}}
  </style>
@@ -107,14 +111,15 @@
  function controls(){const draft=structuredDraft();$('.wa').href=handoverUrl('wa',draft);$('.email').href=handoverUrl('email',draft);}
  function review(channel){
    const box=$('.review'),field=box.querySelector('textarea'),link=$('.open-draft');
-   field.value=structuredDraft();box.hidden=false;
+   field.value=structuredDraft();box.hidden=false;dialog.classList.add('review-mode');dialog.classList.remove('keyboard-open');textarea.blur();sizeMobileDialog();
    function refresh(){link.href=handoverUrl(channel,field.value);link.textContent=channel==='wa'?'Open WhatsApp draft':'Open email draft';link.target=channel==='wa'?'_blank':'_self';}
-   field.oninput=refresh;refresh();box.scrollIntoView({block:'nearest'});field.focus();
+   field.oninput=refresh;refresh();
+   if(window.matchMedia('(max-width:600px)').matches){box.scrollTop=0;}else{box.scrollIntoView({block:'nearest'});field.focus();}
  }
  $('.wa').addEventListener('click',e=>{e.preventDefault();review('wa');});
  $('.email').addEventListener('click',e=>{e.preventDefault();review('email');});
- $('.cancel-review').addEventListener('click',()=>{$('.review').hidden=true;textarea.focus();});
- function reset(){$('.review').hidden=true;lastFailedText='';requestId++;busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';messages=[];history.replaceChildren();bubble(tourContext?'Hey! 👋 Looking at our '+tourContext+'? Ask me about the experience or how Budi can help.':'Hey! 👋 Planning a Bali holiday, looking for a driver, or just exploring ideas? I’m happy to help.');suggestions.replaceChildren();
+ $('.cancel-review').addEventListener('click',()=>{$('.review').hidden=true;dialog.classList.remove('review-mode');sizeMobileDialog();if(!window.matchMedia('(max-width:600px)').matches)textarea.focus();});
+ function reset(){dialog.classList.remove('review-mode');$('.review').hidden=true;lastFailedText='';requestId++;busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';messages=[];history.replaceChildren();bubble(tourContext?'Hey! 👋 Looking at our '+tourContext+'? Ask me about the experience or how Budi can help.':'Hey! 👋 Planning a Bali holiday, looking for a driver, or just exploring ideas? I’m happy to help.');suggestions.replaceChildren();
  ['🌴 Help me plan a day','✈️ I need an airport pickup','🏝️ Which island should I visit?','👨‍👩‍👧‍👦 Things to do with kids'].forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=()=>send(t.replace(/^[^\w]+/u,''));suggestions.append(b);});controls();}
  async function send(text){if(busy||!text.trim())return;if(lastFailedText===text){const last=history.lastElementChild,prior=last?.previousElementSibling;if(last?.classList.contains('bubble')&&prior?.classList.contains('user')){last.remove();prior.remove();}}lastFailedText='';const currentRequest=++requestId;busy=true;$('.send').disabled=true;textarea.disabled=true;$('.status').textContent='Your Bali buddy is thinking…';suggestions.replaceChildren();bubble(text,true);messages.push({role:'user',content:text});controls();
  if(wantsBudiQuote(text)){const reply=budiQuoteAnswer();bubble(reply);messages.push({role:'assistant',content:reply});busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';controls();textarea.focus();return;}
@@ -130,8 +135,9 @@
   const available=vv?vv.height:window.innerHeight;
   const top=(vv?vv.offsetTop:0)+8;
   const focused=root.activeElement;
-  const isTyping=focused===textarea||focused===$('.review textarea')||document.activeElement===host;
-  dialog.classList.toggle('keyboard-open',isTyping);
+  const keyboardVisible=Boolean(vv&&vv.height<window.innerHeight-140);
+  const isTyping=keyboardVisible&&(focused===textarea||focused===$('.review textarea'));
+  dialog.classList.toggle('keyboard-open',isTyping&&!dialog.classList.contains('review-mode'));
   dialog.style.setProperty('--tbt-vtop',top+'px');
   dialog.style.setProperty('--tbt-vheight',Math.max(200,available-16)+'px');
  }
