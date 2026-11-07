@@ -96,11 +96,9 @@
  waveButton?.addEventListener('click',wave);
  target.addEventListener('click',wave);
  chatButton?.addEventListener('click',()=>{
-  const launch=document.querySelector('#tbt-ai-chat .launch');
-  if(launch){const shadow=document.getElementById('tbt-ai-chat')?.shadowRoot;shadow?.querySelector('.launch')?.click();}
+  const launch=document.getElementById('tbt-ai-chat')?.shadowRoot?.querySelector('.launch');
+  if(launch)launch.click();
   else document.getElementById('tbt-ai-chat')?.scrollIntoView({behavior:'smooth',block:'center'});
  });
- // Note: the chat lives in a Shadow DOM, so resolve its launch button there.
- if(chatButton)chatButton.addEventListener('click',()=>document.getElementById('tbt-ai-chat')?.shadowRoot?.querySelector('.launch')?.click(),{once:false});
  wave();
 })();
