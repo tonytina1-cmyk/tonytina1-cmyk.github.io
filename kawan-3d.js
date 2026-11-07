@@ -85,7 +85,7 @@
   if(t>blinkAt){blinkEnd=t+.17;blinkAt=t+3.0+Math.random()*3.1;}
   for(const e of eyes)e.scale.y=t<blinkEnd?12:1;
   const waving=t<waveEnd;
-  wavingArm.rotation.z=waving?-.65+Math.sin(t*13)*.28:-.12+(active?Math.sin(t*1.2)*.06:0);
+  wavingArm.rotation.z=waving?2.25+Math.sin(t*13)*.20:-.12+(active?Math.sin(t*1.2)*.06:0);
   wavingArm.rotation.x=waving?-.3:0;
   renderer.render(scene,camera);
  }
