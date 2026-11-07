@@ -650,6 +650,21 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 .home-choices .tour-card .tbt-tour-contact-row .tour-whatsapp-quote:focus-visible,
 .home-choices .tour-card .tbt-tour-contact-row .tour-whatsapp-quote:active{background:#e6f6ec!important;color:#176b4d!important;border-color:#a4d6b6!important}
 </style>
+<style id="kawan-home-stage-css">
+.kawan-stage{padding:28px 0 34px;background:#fffaf0;color:#18352c}
+.kawan-stage-inner{display:grid;grid-template-columns:minmax(270px,.88fr) minmax(310px,1.12fr);align-items:center;gap:clamp(22px,5vw,78px)}
+.kawan-stage-art{position:relative;min-height:350px;max-height:490px;overflow:hidden;border-radius:30px;background:radial-gradient(circle at 62% 28%,#e8d5a8 0%,#d8e8d8 55%,#b7d3c2 100%);box-shadow:0 14px 35px #18352c18}
+#kawan-3d-canvas{height:clamp(350px,38vw,490px);width:100%;cursor:pointer;touch-action:pan-y}
+#kawan-3d-canvas canvas{display:block;width:100%;height:100%}
+.kawan-3d-fallback{display:grid;place-items:center;position:absolute;inset:0;font-size:100px}
+.kawan-stage-tag{position:absolute;bottom:16px;left:18px;right:18px;text-align:center;color:#18352c;background:#fffaf0d9;backdrop-filter:blur(6px);border-radius:18px;padding:9px 12px;font-size:12px;font-weight:800;letter-spacing:.07em}
+.kawan-stage-copy h2{font:700 clamp(34px,4vw,52px)/1.12 "Playfair Display",serif;margin:0 0 16px}
+.kawan-stage-copy p:not(.eyebrow){font-size:18px;line-height:1.65;max-width:530px;color:#52675d}
+.kawan-stage-actions{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 16px}
+.kawan-wave-btn{background:#e9ddba;color:#18352c;border-color:#d8c391}
+.kawan-stage-copy small{display:block;color:#687a71;max-width:490px;font-size:12px;line-height:1.5}
+@media(max-width:720px){.kawan-stage{padding:18px 0 26px}.kawan-stage-inner{grid-template-columns:1fr;gap:18px}.kawan-stage-art{min-height:310px}.kawan-stage-copy h2{font-size:34px}.kawan-stage-copy p:not(.eyebrow){font-size:16px}.kawan-stage-actions .btn{font-size:14px;padding:11px 14px}#kawan-3d-canvas{height:350px}}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -685,7 +700,28 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
           </div>
 </div>
       </div>
-    </section><section class="tbt-trust-strip" aria-label="Why travellers choose TBT"><div class="shell tbt-trust-strip-inner"><span>★ Traveller reviews</span><span>Private local drivers</span><span>Direct booking with Budi</span><span>Flexible Bali trips</span></div></section><section class="airport-quick" aria-labelledby="airport-quick-title">
+    </section>
+<section class="kawan-stage" aria-labelledby="kawan-stage-title">
+  <div class="shell kawan-stage-inner">
+    <div class="kawan-stage-art">
+      <div id="kawan-3d-canvas" role="img" aria-label="Interactive 3D cartoon Kawan, a friendly Balinese travel buddy who waves and smiles">
+        <div class="kawan-3d-fallback" hidden aria-hidden="true">👋🌴</div>
+      </div>
+      <span class="kawan-stage-tag">YOUR BALI TRAVEL BUDDY</span>
+    </div>
+    <div class="kawan-stage-copy">
+      <p class="eyebrow dark">MEET YOUR NEW BALI FRIEND</p>
+      <h2 id="kawan-stage-title">Say hello to Kawan! 🌴</h2>
+      <p>Kawan is TBT’s friendly AI travel buddy. Ask about Bali, plan a tour, or get your trip details ready for Budi. Give him a wave!</p>
+      <div class="kawan-stage-actions">
+        <button id="kawan-3d-wave" class="btn kawan-wave-btn" type="button">👋 Make Kawan wave</button>
+        <button id="kawan-3d-chat" class="btn btn-wa" type="button">💬 Chat with Kawan</button>
+      </div>
+      <small>Kawan is an AI assistant, not a human guide. Budi confirms all prices and bookings.</small>
+    </div>
+  </div>
+</section>
+<section class="tbt-trust-strip" aria-label="Why travellers choose TBT"><div class="shell tbt-trust-strip-inner"><span>★ Traveller reviews</span><span>Private local drivers</span><span>Direct booking with Budi</span><span>Flexible Bali trips</span></div></section><section class="airport-quick" aria-labelledby="airport-quick-title">
   <div class="shell airport-quick-inner">
     <div><p class="eyebrow dark">LANDING IN BALI?</p><h2 id="airport-quick-title">Private airport transfers.</h2><p>Pre-book pickup or drop-off with Budi or a trusted TBT driver, with destination prices confirmed before you travel. Need a transfer between hotels or Bali areas? <a href="/bali-point-to-point-transfers/" style="text-decoration:underline;font-weight:700">Request a point-to-point transfer</a>.</p></div>
     <a class="btn btn-dark" data-lead-source="home_airport_quick" href="/bali-airport-transfers/">View Airport Transfer Prices</a>
@@ -827,4 +863,5 @@ if (waForm) waForm.addEventListener('submit', (e) => {
 <script src="/trip-help.js?v=20261107-3" defer></script>
 <script>window.TBT_AI_ENDPOINT='https://flat-dawntbt-bali-ai-026d.tbt-tours-travel.workers.dev/chat';</script>
 <script src="/tbt-ai-chat.js?v=20261107-20" defer></script>
+<script type="module" src="/kawan-3d.js?v=20261107-1"></script>
 </body></html>
