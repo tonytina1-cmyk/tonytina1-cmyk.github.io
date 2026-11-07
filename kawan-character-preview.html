@@ -26,11 +26,20 @@ input[type=file]{display:block;max-width:100%;margin-top:8px}.status{border-left
 <p>This test page needs a <strong>proper rigged GLB model</strong> — not a static picture or shapes. It won't replace the TBT homepage until the character looks right.</p>
 <div class="status" style="border-color:#176b4d;margin-bottom:16px"><strong>Design brief — Kawan:</strong><br>
 Friendly, stylised 3D young Balinese man; warm tan skin, expressive brown eyes, naturally wavy dark hair, gentle smile, very light stubble, dark green and gold patterned Balinese udeng, white frangipani behind his ear, cream linen tropical-leaf shirt. Balanced appealing proportions like a polished animated film character, not a photorealistic deepfake or a blocky mannequin. Full body, A-pose for rigging, separate movable arms, legs and jaw, blinking eyelids and mouth shapes for future voice. Clean materials and embedded textures. Include idle and wave animation clips. Export as rigged GLB, ideally under 8 MB.</div>
-<div class="actions">
-<a class="button" href="https://three.ws/create" target="_blank" rel="noopener">Create a character in 3D</a>
-<a class="button secondary" href="https://ara3dgen.com/" target="_blank" rel="noopener">Free 3D character builder</a>
+<div class="status" style="margin-bottom:16px">
+<strong>The next step: create Kawan's real 3D character</strong>
+<ol style="padding-left:20px;margin:8px 0">
+<li>Open <strong>MetaPerson Creator</strong> and choose its stylised/cartoon character option. Try the approved Kawan portrait as a reference; if it cannot use an illustration, start with a preset.</li>
+<li>Match the warm smile, wavy dark hair, brown eyes, headband and cream tropical shirt. Review the model by rotating it before exporting.</li>
+<li>Export as <strong>GLB</strong> with the free standard settings (if offered). Keep the original file so we can add waving, facial motion and voice later.</li>
+<li>Choose the exported GLB below to preview it here. Do not place it on the customer homepage until the face, outfit and proportions are approved.</li>
+</ol>
 </div>
-<p class="note">These are external character editors. A model must be created and exported before Kawan can appear here. Check each service's licence before using its output commercially. The free open-source option is Ara 3D Gen.</p>
+<div class="actions">
+<a class="button" href="https://avatarsdk.com/3d-character-creator/" target="_blank" rel="noopener">Open 3D character creator</a>
+<a class="button secondary" href="https://ara3dgen.com/" target="_blank" rel="noopener">Alternative: free 3D editor</a>
+</div>
+<p class="note">MetaPerson currently advertises a free first standard rigged model export, but creating it needs an external account. Free exports may not include animation clips; we can add them later. Verify the provider's commercial usage licence before publishing. Ara 3D Gen is open source, but its realistic appearance may not match Kawan's cartoon reference.</p>
 <label><strong>Choose a 3D model (.glb)</strong><input id="character" type="file" accept=".glb,model/gltf-binary"></label>
 <div class="actions"><button id="idle" class="button" type="button" disabled>Idle</button><button id="wave" class="button secondary" type="button" disabled>👋 Wave</button></div>
 <p id="status" class="status" role="status">No Kawan character selected yet.</p>
