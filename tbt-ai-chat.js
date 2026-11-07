@@ -24,7 +24,7 @@
  <div class="chat"><div class="history" role="log" aria-live="polite" aria-label="Chat conversation"></div><div class="suggestions"></div>
  <form><textarea aria-label="Your message" maxlength="1200" rows="2" placeholder="Tell me about your Bali plans…"></textarea><button class="send" type="submit">Send</button></form>
  <p class="status" role="status"></p><div class="links"><a class="wa" target="_blank" rel="noopener" href="#">WhatsApp Budi</a><a class="email" href="#">Email Budi</a><button type="button" class="restart">Start over</button></div>
- <p class="note">I'm an AI guide, not Budi 😊 Budi confirms all prices, availability and bookings. Nothing is booked through this chat.</p></div></dialog>`;
+ <p class="note">I’m TBT’s AI assistant, not Budi. Budi personally confirms prices and bookings; this chat doesn’t make reservations.</p></div></dialog>`;
  const $=s=>root.querySelector(s),dialog=$('dialog'),history=$('.history'),suggestions=$('.suggestions'),textarea=$('textarea');
  let messages=[],busy=false,returnFocus=null,requestId=0;
  function soundsConfirmed(reply){return /\b(?:we(?:'|’)ve (?:got you covered|booked|confirmed)|(?:your|the) (?:booking|reservation|transfer|pickup|driver) (?:is|has been) (?:booked|confirmed|arranged|scheduled)|(?:budi|your driver) (?:will be|is) waiting|(?:you(?:'|’)re|you are) (?:all set|booked|confirmed)|confirmed for \d)/i.test(reply);}
@@ -35,9 +35,9 @@
  $('.wa').href='https://wa.me/6285738148276?text='+encodeURIComponent(draft);
  $('.email').href='mailto:booking.tbtbali@gmail.com?subject='+encodeURIComponent('TBT Bali trip enquiry')+'&body='+encodeURIComponent(draft);
  }
- function reset(){requestId++;busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';messages=[];history.replaceChildren();bubble('Hey! 👋 Welcome to Bali 🌴 I can help with places to visit, tours and transfers. What are you planning?');suggestions.replaceChildren();
- ['🌴 What should we see in Bali?','✈️ Airport pickup','🏝️ Nusa Penida or Lembongan?','👨‍👩‍👧‍👦 Bali with kids'].forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=()=>send(t.replace(/^[^\w]+/u,''));suggestions.append(b);});controls();}
- async function send(text){if(busy||!text.trim())return;const currentRequest=++requestId;busy=true;$('.send').disabled=true;textarea.disabled=true;$('.status').textContent='Thinking about your Bali plans…';suggestions.replaceChildren();bubble(text,true);messages.push({role:'user',content:text});controls();
+ function reset(){requestId++;busy=false;$('.send').disabled=false;textarea.disabled=false;$('.status').textContent='';messages=[];history.replaceChildren();bubble('Hey! 👋 Planning a Bali holiday, looking for a driver, or just exploring ideas? I’m happy to help.');suggestions.replaceChildren();
+ ['🌴 Help me plan a day','✈️ I need an airport pickup','🏝️ Which island should I visit?','👨‍👩‍👧‍👦 Things to do with kids'].forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=()=>send(t.replace(/^[^\w]+/u,''));suggestions.append(b);});controls();}
+ async function send(text){if(busy||!text.trim())return;const currentRequest=++requestId;busy=true;$('.send').disabled=true;textarea.disabled=true;$('.status').textContent='Your Bali buddy is thinking…';suggestions.replaceChildren();bubble(text,true);messages.push({role:'user',content:text});controls();
  try{const response=await fetch(endpoint,{method:'POST',mode:'cors',cache:'no-store',headers:{'content-type':'application/json'},body:JSON.stringify({messages:messages.slice(-12)})});const result=await response.json();if(!response.ok||!result.reply)throw Error(result.error||'Unavailable');if(currentRequest!==requestId)return;const reply=soundsConfirmed(result.reply)?safeReply():result.reply;bubble(reply);messages.push({role:'assistant',content:reply});$('.status').textContent='';}
  catch(err){if(currentRequest!==requestId)return;messages.pop();bubble('Sorry, I can’t reply right now. You can still send your plans to Budi using WhatsApp or email below.');$('.status').textContent='AI temporarily unavailable';}
  finally{if(currentRequest===requestId){busy=false;$('.send').disabled=false;textarea.disabled=false;textarea.focus();controls();}}
