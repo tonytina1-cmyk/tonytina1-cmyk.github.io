@@ -651,6 +651,18 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 .home-choices .tour-card .tbt-tour-contact-row .tour-whatsapp-quote:active{background:#e6f6ec!important;color:#176b4d!important;border-color:#a4d6b6!important}
 </style>
 
+<style id="kawan-site-intro-styles">
+.kawan-site-intro{background:#f8f3e9;padding:24px 0;border-bottom:1px solid #dfd3bf}
+.kawan-site-intro .inner{display:flex;align-items:center;justify-content:space-between;gap:22px;background:#fffaf0;border:1px solid #dcc89d;border-radius:20px;padding:22px 26px;box-shadow:0 9px 28px rgba(24,53,44,.06)}
+.kawan-site-intro .intro-copy{min-width:0;max-width:700px}
+.kawan-site-intro .eyebrow{display:block;color:#88672e;font-size:11px;letter-spacing:.12em;font-weight:800;margin-bottom:6px}
+.kawan-site-intro h2{font:700 clamp(23px,3vw,30px)/1.2 "Playfair Display",Georgia,serif;color:#18352c;margin:0 0 7px}
+.kawan-site-intro p{font-size:14px;line-height:1.5;color:#52675d;margin:0}
+.kawan-site-intro button{border:0;min-height:48px;padding:12px 22px;border-radius:25px;white-space:nowrap;background:#176b4d;color:#fff;font:700 14px system-ui,sans-serif;cursor:pointer}
+.kawan-site-intro button:hover{background:#12543e}
+.kawan-site-intro button:focus-visible{outline:3px solid #ad8a47;outline-offset:3px}
+@media(max-width:640px){.kawan-site-intro{padding:16px 0}.kawan-site-intro .inner{flex-direction:column;align-items:stretch;padding:20px}.kawan-site-intro button{width:100%}}
+</style>
 </head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
@@ -687,6 +699,28 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 </div>
       </div>
     </section>
+<section class="kawan-site-intro" id="kawan-site-intro" aria-labelledby="kawan-site-title">
+  <div class="shell inner">
+    <div class="intro-copy">
+      <span class="eyebrow">MEET YOUR BALI TRAVEL BUDDY</span>
+      <h2 id="kawan-site-title">Ask Kawan about Bali 🌴</h2>
+      <p>Planning a tour, airport transfer or special day out? Chat with Kawan, TBT's friendly Bali travel assistant, then arrange the details directly with Budi.</p>
+    </div>
+    <button type="button" id="kawan-site-chat-button">Ask Kawan a question</button>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ var button=document.getElementById('kawan-site-chat-button');
+ if(!button)return;
+ button.addEventListener('click',function(){
+  var chat=document.getElementById('tbt-ai-chat');
+  var launcher=chat && chat.shadowRoot && chat.shadowRoot.querySelector('.launch');
+  if(launcher){launcher.click();return;}
+  window.location.href='/plan-trip.html';
+ });
+});
+</script>
 <section class="tbt-trust-strip" aria-label="Why travellers choose TBT"><div class="shell tbt-trust-strip-inner"><span>★ Traveller reviews</span><span>Private local drivers</span><span>Direct booking with Budi</span><span>Flexible Bali trips</span></div></section><section class="airport-quick" aria-labelledby="airport-quick-title">
   <div class="shell airport-quick-inner">
     <div><p class="eyebrow dark">LANDING IN BALI?</p><h2 id="airport-quick-title">Private airport transfers.</h2><p>Pre-book pickup or drop-off with Budi or a trusted TBT driver, with destination prices confirmed before you travel. Need a transfer between hotels or Bali areas? <a href="/bali-point-to-point-transfers/" style="text-decoration:underline;font-weight:700">Request a point-to-point transfer</a>.</p></div>
