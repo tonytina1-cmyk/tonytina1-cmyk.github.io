@@ -51,4 +51,4 @@ const micBtn=document.getElementById('mic');
 if(!MicRecognition){micBtn.disabled=true;micBtn.title='Voice input is not supported in this browser';micBtn.textContent='🎤 Voice input unavailable'}
 else micBtn.onclick=()=>{try{if(recognition){recognition.stop();recognition=null;return}recognition=new MicRecognition();recognition.lang='en-AU';recognition.interimResults=false;recognition.maxAlternatives=1;micBtn.textContent='🎤 Listening…';recognition.onresult=e=>ask(e.results[0][0].transcript);recognition.onerror=()=>{status.textContent='Microphone unavailable. Type your question instead.'};recognition.onend=()=>{recognition=null;micBtn.textContent='🎤 Ask by voice'};recognition.start()}catch(e){micBtn.textContent='🎤 Ask by voice';status.textContent='Microphone unavailable. Type your question instead.'}};
 
-</script><script src="/kawan-test/interactive.js?v=1" defer></script></body></html>
+</script><script src="/kawan-test/interactive.js?v=2" defer></script></body></html>
