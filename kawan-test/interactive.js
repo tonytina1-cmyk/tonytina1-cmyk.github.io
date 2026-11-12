@@ -15,14 +15,36 @@ const characterImage=document.getElementById('kawan');
 const questionField=document.getElementById('question');
 const poseStyle=document.createElement('style');
 poseStyle.textContent=`
-/* Conversation poses use the already-approved Kawan artwork: no shaking or bouncing. */
-.character.conversation.speaking img.talk{
-  mask-image:radial-gradient(ellipse 7.5% 2.7% at 54.3% 37.5%,black 62%,transparent 100%);
-  -webkit-mask-image:radial-gradient(ellipse 7.5% 2.7% at 54.3% 37.5%,black 62%,transparent 100%);
-  transform:translate(-4.12%,.48%);
-}
+/* Keep Kawan's artwork steady in conversation; gestures must never distort mouth or sandals. */
 `;
 document.head.append(poseStyle);
+
+/* Build front-facing speaking frames from the approved hands-down character.
+   Only the mouth region is softly composited; no full-image swapping or movement. */
+window.kawanNeutralMouthFrames=[frames[4],frames[4],frames[4],frames[4],frames[4]];
+const neutralImages=[frames[4],...mouthFrames].map(src=>{const im=new Image();im.src=src;return im});
+Promise.all(neutralImages.map(im=>im.decode?.().catch(()=>{})||Promise.resolve())).then(()=>{
+ const base=neutralImages[0],w=base.naturalWidth,h=base.naturalHeight;
+ if(w!==315||h!==627)return;
+ const result=[frames[4]];
+ for(let i=1;i<5;i++){
+  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+  const ctx=canvas.getContext('2d');if(!ctx)return;
+  ctx.drawImage(base,0,0);
+  const layer=document.createElement('canvas');layer.width=w;layer.height=h;
+  const lc=layer.getContext('2d');if(!lc)return;
+  lc.drawImage(neutralImages[i+1],-13,1);
+  lc.globalCompositeOperation='destination-in';
+  lc.save();lc.translate(157,237);lc.scale(24,16);
+  const fade=lc.createRadialGradient(0,0,0,0,0,1);
+  fade.addColorStop(0,'rgba(0,0,0,1)');fade.addColorStop(.70,'rgba(0,0,0,1)');
+  fade.addColorStop(1,'rgba(0,0,0,0)');
+  lc.fillStyle=fade;lc.beginPath();lc.arc(0,0,1,0,Math.PI*2);lc.fill();lc.restore();
+  ctx.drawImage(layer,0,0);result.push(canvas.toDataURL('image/png'));
+ }
+ window.kawanNeutralMouthFrames=result;
+}).catch(()=>{});
+
 let poseTick=0;
 function pose(mode){
  if(!character)return;
@@ -30,7 +52,7 @@ function pose(mode){
  if(mode)character.classList.add('kawan-'+mode);
  if(typeof frames!=='undefined'){
    // Resting pose is frame 4 (both hands down). During thinking the approved half-gesture is frame 5.
-   characterImage.src=frames[mode==='thinking'?5:4];
+   characterImage.src=frames[4];
  }
  // No full-body shakes or bobbing: pose changes only between approved drawings.
  poseTick++;
