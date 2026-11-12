@@ -37,8 +37,8 @@ function sayAnswer(answer){
  const count=replyCounter,utter=new SpeechSynthesisUtterance(answer);
  const voice=chosenVoice();if(voice){utter.voice=voice;utter.lang=voice.lang}else utter.lang='en-AU';
  utter.rate=.95;utter.pitch=1.06;
- utter.onstart=()=>{if(count!==replyCounter)return;img.src=frames[4];place(0);figure.classList.add('conversation','speaking');status.textContent='Kawan is answering…';let beat=0;replyTimer=setInterval(()=>{if(count!==replyCounter)return;const shape=[1,2,3,2,4,1,0,2][beat++%8];talk.src=mouthFrames[shape]},125)};
- const finish=()=>{if(count!==replyCounter)return;clearInterval(replyTimer);replyTimer=0;talk.src=mouthFrames[0];figure.classList.remove('speaking');status.textContent='Kawan is ready for another question.'};
+ utter.onstart=()=>{if(count!==replyCounter)return;img.src=(window.kawanNeutralMouthFrames?.[0]||frames[4]);place(0);figure.classList.remove('conversation','speaking');status.textContent='Kawan is answering…';let beat=0;replyTimer=setInterval(()=>{if(count!==replyCounter)return;const shape=[1,2,3,2,4,1,0,2][beat++%8];img.src=(window.kawanNeutralMouthFrames?.[shape]||frames[4])},125)};
+ const finish=()=>{if(count!==replyCounter)return;clearInterval(replyTimer);replyTimer=0;img.src=frames[4];talk.src=mouthFrames[0];figure.classList.remove('speaking','conversation');status.textContent='Kawan is ready for another question.'};
  utter.onend=finish;utter.onerror=()=>{finish();status.textContent='Speech not available on this device. Answer shown in text.'};
  try{synth.speak(utter)}catch(e){finish();status.textContent='Speech not available on this device. Answer shown in text.'}
 }
@@ -51,4 +51,4 @@ const micBtn=document.getElementById('mic');
 if(!MicRecognition){micBtn.disabled=true;micBtn.title='Voice input is not supported in this browser';micBtn.textContent='🎤 Voice input unavailable'}
 else micBtn.onclick=()=>{try{if(recognition){recognition.stop();recognition=null;return}recognition=new MicRecognition();recognition.lang='en-AU';recognition.interimResults=false;recognition.maxAlternatives=1;micBtn.textContent='🎤 Listening…';recognition.onresult=e=>ask(e.results[0][0].transcript);recognition.onerror=()=>{status.textContent='Microphone unavailable. Type your question instead.'};recognition.onend=()=>{recognition=null;micBtn.textContent='🎤 Ask by voice'};recognition.start()}catch(e){micBtn.textContent='🎤 Ask by voice';status.textContent='Microphone unavailable. Type your question instead.'}};
 
-</script><script src="/kawan-test/interactive.js?v=3" defer></script></body></html>
+</script><script src="/kawan-test/interactive.js?v=4" defer></script></body></html>
