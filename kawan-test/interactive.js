@@ -165,11 +165,12 @@ toolbar.querySelector('#kawan-reset').onclick=()=>{
 };
 if(mic&&!('SpeechRecognition' in window)&&!('webkitSpeechRecognition' in window))mic.dataset.unavailable='true';
 if(mic){mic.addEventListener('click',()=>{if(!mic.disabled)pose('listening')},true)}
-// Maintain a consistent listening pose after browser narration, without disturbing the greeting.
-if(window.speechSynthesis) {
-  const previous=window.speechSynthesis.onvoiceschanged;
-  // Voice selection remains controlled by the main page, not this visual enhancement.
-}
+const poseStatusObserver=new MutationObserver(()=>{
+ const state=statusEl.textContent||'';
+ if(/ready for another question/i.test(state)&&character?.classList.contains('kawan-answering'))pose('nodding');
+ else if(/ready to help/i.test(state)&&!character?.classList.contains('kawan-thinking'))pose('listening');
+});
+poseStatusObserver.observe(statusEl,{childList:true,characterData:true,subtree:true});
 
 updateLinks();
 })();
