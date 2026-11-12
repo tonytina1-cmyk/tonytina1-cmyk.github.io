@@ -19,30 +19,45 @@ poseStyle.textContent=`
 `;
 document.head.append(poseStyle);
 
-/* Build front-facing speaking frames from the approved hands-down character.
-   Only the mouth region is softly composited; no full-image swapping or movement. */
+/* Prepare talking frames using the approved hands-down image.
+   Remove the drawn smile in the small mouth area, then draw the active phoneme.
+   This avoids showing both the smile and the speaking mouth at once. */
 window.kawanNeutralMouthFrames=[frames[4],frames[4],frames[4],frames[4],frames[4]];
-const neutralImages=[frames[4],...mouthFrames].map(src=>{const im=new Image();im.src=src;return im});
-Promise.all(neutralImages.map(im=>im.decode?.().catch(()=>{})||Promise.resolve())).then(()=>{
- const base=neutralImages[0],w=base.naturalWidth,h=base.naturalHeight;
+const neutralBase=new Image();neutralBase.src=frames[4];
+Promise.resolve(neutralBase.decode?.().catch(()=>{})).then(()=>{
+ const w=neutralBase.naturalWidth,h=neutralBase.naturalHeight;
  if(w!==315||h!==627)return;
- const result=[frames[4]];
- for(let i=1;i<5;i++){
+ const sourceCanvas=document.createElement('canvas');sourceCanvas.width=w;sourceCanvas.height=h;
+ const sourceCtx=sourceCanvas.getContext('2d',{willReadFrequently:true});if(!sourceCtx)return;
+ sourceCtx.drawImage(neutralBase,0,0);
+ const original=sourceCtx.getImageData(0,0,w,h);
+ const mouths=[];
+ const widths=[7,12,16,19,15],heights=[1.5,3,5,7,4];
+ for(let shape=0;shape<5;shape++){
   const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
   const ctx=canvas.getContext('2d');if(!ctx)return;
-  ctx.drawImage(base,0,0);
-  const layer=document.createElement('canvas');layer.width=w;layer.height=h;
-  const lc=layer.getContext('2d');if(!lc)return;
-  lc.drawImage(neutralImages[i+1],-13,1);
-  lc.globalCompositeOperation='destination-in';
-  lc.save();lc.translate(157,237);lc.scale(24,16);
-  const fade=lc.createRadialGradient(0,0,0,0,0,1);
-  fade.addColorStop(0,'rgba(0,0,0,1)');fade.addColorStop(.70,'rgba(0,0,0,1)');
-  fade.addColorStop(1,'rgba(0,0,0,0)');
-  lc.fillStyle=fade;lc.beginPath();lc.arc(0,0,1,0,Math.PI*2);lc.fill();lc.restore();
-  ctx.drawImage(layer,0,0);result.push(canvas.toDataURL('image/png'));
+  const image=sourceCtx.createImageData(w,h);image.data.set(original.data);
+  const pixels=image.data,src=original.data;
+  for(let y=231;y<249;y++)for(let x=131;x<192;x++){
+    const dx=(x-160)/33,dy=(y-239)/10.5,v=dx*dx+dy*dy;
+    if(v>=1)continue;
+    const fade=Math.min(1,Math.max(0,(1-v)/.25)),t=(y-231)/18;
+    const p=4*(y*w+x),upper=4*(232*w+x),lower=4*(249*w+x);
+    for(let c=0;c<3;c++){
+      const skin=src[upper+c]*(1-t)+src[lower+c]*t;
+      pixels[p+c]=Math.round(src[p+c]*(1-fade)+skin*fade);
+    }
+  }
+  ctx.putImageData(image,0,0);
+  ctx.save();
+  ctx.fillStyle='#562d2d';ctx.strokeStyle='#8e5348';ctx.lineWidth=.9;
+  const cx=159,cy=239,rx=widths[shape]/2,ry=heights[shape]/2;
+  ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+  if(shape>=3){ctx.strokeStyle='#c47565';ctx.lineWidth=.85;ctx.beginPath();ctx.ellipse(cx,cy+ry/2,Math.max(1,rx-2),Math.max(.6,ry/3),0,0,Math.PI);ctx.stroke()}
+  ctx.restore();
+  mouths.push(canvas.toDataURL('image/png'));
  }
- window.kawanNeutralMouthFrames=result;
+ window.kawanNeutralMouthFrames=mouths;
 }).catch(()=>{});
 
 let poseTick=0;
