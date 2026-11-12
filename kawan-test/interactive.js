@@ -10,6 +10,34 @@ const statusEl=document.getElementById('status');
 const formButton=form?.querySelector('button[type=submit]');
 if(!input||!form||!log||!statusEl)return;
 const history=[];
+const character=document.getElementById('character');
+const characterImage=document.getElementById('kawan');
+const questionField=document.getElementById('question');
+const poseStyle=document.createElement('style');
+poseStyle.textContent=`
+/* Animate the approved artwork as a single unit: no new limb rig, no altered sandals */
+.character.kawan-listening img{animation:kawanListen 2.6s ease-in-out infinite;transform-origin:50% 86%}
+.character.kawan-thinking img{animation:kawanThink 1.8s ease-in-out infinite;transform-origin:50% 86%}
+.character.kawan-answering img{animation:kawanAnswer 2.1s ease-in-out infinite;transform-origin:50% 86%}
+.character.kawan-nodding img{animation:kawanNod 1.05s ease-in-out 1;transform-origin:50% 86%}
+@keyframes kawanListen{0%,100%{transform:rotate(0deg)}45%{transform:rotate(-2deg) translateY(-2px)}}
+@keyframes kawanThink{0%,100%{transform:rotate(0deg) translateY(0)}35%{transform:rotate(2.8deg) translateY(1px)}70%{transform:rotate(-1.7deg) translateY(-1px)}}
+@keyframes kawanAnswer{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1.6deg) translateY(-2px)}}
+@keyframes kawanNod{0%,100%{transform:rotate(0deg)}28%{transform:rotate(-2.5deg)}58%{transform:rotate(2.5deg)}80%{transform:rotate(-1deg)}}
+@media(prefers-reduced-motion:reduce){.character.kawan-listening img,.character.kawan-thinking img,.character.kawan-answering img,.character.kawan-nodding img{animation:none!important}}
+`;
+document.head.append(poseStyle);
+let poseTick=0;
+function pose(mode){
+ if(!character)return;
+ character.classList.remove('kawan-listening','kawan-thinking','kawan-answering','kawan-nodding');
+ if(mode)character.classList.add('kawan-'+mode);
+ if(mode==='nodding'){const tick=++poseTick;setTimeout(()=>{if(tick===poseTick&&character.classList.contains('kawan-nodding'))pose('listening')},1100)}
+ else poseTick++;
+}
+questionField.addEventListener('focus',()=>{if(!busy)pose('listening')});
+questionField.addEventListener('blur',()=>{if(!busy&&character?.classList.contains('kawan-listening'))pose(null)});
+
 let busy=false;
 let pending=null;
 let lastAnswer='';
@@ -46,6 +74,13 @@ function setBusy(value){
 }
 function safetyReply(question,answer){
  const text=String(answer||'').trim();
+ if(/\b(?:send|message|contact|text|whatsapp|email|write to|reach|talk to)\b/i.test(question)&&/\bbudi|buddy\b/i.test(question)){
+   return "I can prepare a message for Budi. Tap 'Ask Budi on WhatsApp' or 'Email Budi' below to open your enquiry draft. Review it and press Send yourself — I can't send it automatically.";
+ }
+ if(/\b(?:send|message|contact|text|whatsapp|email)\b/i.test(question)&&/\b(?:him|her|driver)\b/i.test(question)&&history.some(m=>/\bbudi\b/i.test(m.content))){
+   return "I can prepare a message for Budi. Use the WhatsApp or Email button below to open a draft, check the details and send it yourself.";
+ }
+
  if(/\b(?:booked|booking confirmed|confirmed your|your driver will|budi will be waiting)\b/i.test(text))
  return 'I can help prepare your enquiry, but I cannot confirm a booking or a driver. Please use the WhatsApp or Email Budi buttons for confirmation.';
  if(/\b(?:elephant|gajah)\b/i.test(question)&&/\b(?:ride|riding|mount|safari)\b/i.test(question)){
@@ -82,6 +117,7 @@ async function liveAnswer(q){
 async function submitQuestion(text){
  const q=String(text||'').trim().slice(0,600);
  if(!q||busy)return;
+ pose('thinking');
  if(typeof stopReply==='function')stopReply();
  if(typeof audio!=='undefined'){audio.pause();try{audio.currentTime=0}catch(e){}}
  setBusy(true);
@@ -96,6 +132,7 @@ async function submitQuestion(text){
    addBubble(answer);
    history.push({role:'assistant',content:answer});
    lastAnswer=answer;
+   pose('answering');
    if(typeof sayAnswer==='function')sayAnswer(answer);
    else statusEl.textContent='Kawan answered in text.';
  }catch(err){
@@ -104,24 +141,35 @@ async function submitQuestion(text){
    const answer=offlineAnswer(q);
    addBubble(answer);
    lastAnswer=answer;
+   pose('answering');
    statusEl.textContent=err?.name==='AbortError'?'AI reply timed out. You can retry or contact Budi.':/Too many messages|429/i.test(String(err?.message))?'Too many messages just now — try again shortly.':'Live AI temporarily unavailable. Limited answers only.';
    if(typeof sayAnswer==='function')sayAnswer(answer);
  }finally{
    setBusy(false);
    updateLinks();
+   // After the spoken reply finishes, the existing speech handler leaves the character steady.
+   // A brief nod offers acknowledgment without replacing any approved artwork.
+   if(!spokenReplies||muted||!window.speechSynthesis)pose('nodding');
  }
 }
 ask=submitQuestion;
 form.onsubmit=e=>{e.preventDefault();const q=input.value;input.value='';submitQuestion(q)};
 const quickButtons=document.querySelectorAll('[data-q]');
 quickButtons.forEach(el=>{el.onclick=()=>submitQuestion(el.dataset.q)});
-toolbar.querySelector('#kawan-stop').onclick=()=>{if(typeof stopReply==='function')stopReply();if(typeof audio!=='undefined')audio.pause();if(typeof figure!=='undefined')figure.classList.remove('speaking');statusEl.textContent='Speech stopped.'};
+toolbar.querySelector('#kawan-stop').onclick=()=>{pose('listening');if(typeof stopReply==='function')stopReply();if(typeof audio!=='undefined')audio.pause();if(typeof figure!=='undefined')figure.classList.remove('speaking');statusEl.textContent='Speech stopped.'};
 toolbar.querySelector('#kawan-reset').onclick=()=>{
  if(pending)pending.abort();
  if(typeof stopReply==='function')stopReply();
- history.length=0;log.replaceChildren();addBubble("Hi, I'm Kawan, TBT's AI Bali travel buddy. What would you like to explore?");
+ history.length=0;pose('listening');log.replaceChildren();addBubble("Hi, I'm Kawan, TBT's AI Bali travel buddy. What would you like to explore?");
  lastAnswer='';setBusy(false);updateLinks();statusEl.textContent='New conversation started.';
 };
 if(mic&&!('SpeechRecognition' in window)&&!('webkitSpeechRecognition' in window))mic.dataset.unavailable='true';
+if(mic){mic.addEventListener('click',()=>{if(!mic.disabled)pose('listening')},true)}
+// Maintain a consistent listening pose after browser narration, without disturbing the greeting.
+if(window.speechSynthesis) {
+  const previous=window.speechSynthesis.onvoiceschanged;
+  // Voice selection remains controlled by the main page, not this visual enhancement.
+}
+
 updateLinks();
 })();
