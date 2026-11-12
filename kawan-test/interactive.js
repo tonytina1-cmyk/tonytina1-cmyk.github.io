@@ -15,16 +15,12 @@ const characterImage=document.getElementById('kawan');
 const questionField=document.getElementById('question');
 const poseStyle=document.createElement('style');
 poseStyle.textContent=`
-/* Animate the approved artwork as a single unit: no new limb rig, no altered sandals */
-.character.kawan-listening img{animation:kawanListen 2.6s ease-in-out infinite;transform-origin:50% 86%}
-.character.kawan-thinking img{animation:kawanThink 1.8s ease-in-out infinite;transform-origin:50% 86%}
-.character.kawan-answering img{animation:kawanAnswer 2.1s ease-in-out infinite;transform-origin:50% 86%}
-.character.kawan-nodding img{animation:kawanNod 1.05s ease-in-out 1;transform-origin:50% 86%}
-@keyframes kawanListen{0%,100%{transform:rotate(0deg)}45%{transform:rotate(-2deg) translateY(-2px)}}
-@keyframes kawanThink{0%,100%{transform:rotate(0deg) translateY(0)}35%{transform:rotate(2.8deg) translateY(1px)}70%{transform:rotate(-1.7deg) translateY(-1px)}}
-@keyframes kawanAnswer{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1.6deg) translateY(-2px)}}
-@keyframes kawanNod{0%,100%{transform:rotate(0deg)}28%{transform:rotate(-2.5deg)}58%{transform:rotate(2.5deg)}80%{transform:rotate(-1deg)}}
-@media(prefers-reduced-motion:reduce){.character.kawan-listening img,.character.kawan-thinking img,.character.kawan-answering img,.character.kawan-nodding img{animation:none!important}}
+/* Conversation poses use the already-approved Kawan artwork: no shaking or bouncing. */
+.character.conversation.speaking img.talk{
+  mask-image:radial-gradient(ellipse 7.5% 2.7% at 54.3% 37.5%,black 62%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 7.5% 2.7% at 54.3% 37.5%,black 62%,transparent 100%);
+  transform:translate(-4.12%,.48%);
+}
 `;
 document.head.append(poseStyle);
 let poseTick=0;
@@ -32,8 +28,12 @@ function pose(mode){
  if(!character)return;
  character.classList.remove('kawan-listening','kawan-thinking','kawan-answering','kawan-nodding');
  if(mode)character.classList.add('kawan-'+mode);
- if(mode==='nodding'){const tick=++poseTick;setTimeout(()=>{if(tick===poseTick&&character.classList.contains('kawan-nodding'))pose('listening')},1100)}
- else poseTick++;
+ if(typeof frames!=='undefined'){
+   // Resting pose is frame 4 (both hands down). During thinking the approved half-gesture is frame 5.
+   characterImage.src=frames[mode==='thinking'?5:4];
+ }
+ // No full-body shakes or bobbing: pose changes only between approved drawings.
+ poseTick++;
 }
 questionField.addEventListener('focus',()=>{if(!busy)pose('listening')});
 questionField.addEventListener('blur',()=>{if(!busy&&character?.classList.contains('kawan-listening'))pose(null)});
