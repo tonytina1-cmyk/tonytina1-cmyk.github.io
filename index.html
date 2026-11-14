@@ -663,7 +663,44 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
 .kawan-site-intro button:focus-visible{outline:3px solid #ad8a47;outline-offset:3px}
 @media(max-width:640px){.kawan-site-intro{padding:16px 0}.kawan-site-intro .inner{flex-direction:column;align-items:stretch;padding:20px}.kawan-site-intro button{width:100%}}
 </style>
-</head>
+<style id="tbt-home-refresh-preview">
+/* Homepage preview only: kept off the public main branch. */
+:root{--gold:#e1c58d;--radius:22px}
+.hero{min-height:600px}
+.hero-shade{background:linear-gradient(90deg,rgba(12,36,29,.86),rgba(12,36,29,.40) 66%,rgba(12,36,29,.14))}
+.hero-grid{padding:115px 0 92px}
+.hero-copy{max-width:690px}
+.hero h1{font-size:clamp(46px,6.5vw,82px);letter-spacing:-.035em;line-height:1.03}
+.hero .lead{max-width:600px;font-size:clamp(17px,2vw,20px)}
+.tbt-home-shortcuts{background:#fffaf0;padding:46px 0 55px}
+.tbt-home-shortcuts .shortcuts-head{text-align:center;margin-bottom:23px}
+.tbt-home-shortcuts h2{font-family:"Playfair Display",serif;font-size:clamp(29px,3.4vw,43px);line-height:1.15;margin:4px 0 8px}
+.tbt-home-shortcuts .shortcuts-head p:last-child{color:var(--muted);margin:0}
+.shortcut-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.shortcut{background:#f8f3e9;border:1px solid #dfd3bf;border-radius:20px;padding:23px 16px;text-decoration:none;display:flex;min-height:155px;flex-direction:column;align-items:flex-start;justify-content:space-between;transition:transform .2s,box-shadow .2s}
+.shortcut:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.shortcut .icon{font-size:30px}
+.shortcut strong{display:block;font-size:17px;line-height:1.3}
+.shortcut small{display:block;color:#687a71;margin-top:5px;font-size:12px}
+.shortcut .more{color:#176b4d;font-weight:700;margin-top:10px}
+#services{padding:64px 0 72px}
+#services .tour-grid.home-choices{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+#services .tour-grid.home-choices .tour-card{min-width:0;min-height:0;padding:15px 15px 21px}
+#services .tour-grid.home-choices .tour-card h3{font-size:24px}
+#services .tour-grid.home-choices .tour-card p{font-size:13px}
+#services .tour-grid.home-choices .tour-preview-details,
+#services .tour-grid.home-choices .tbt-tour-contact-row{display:none}
+#services .tour-grid.home-choices .card-link{margin-top:15px}
+#why{padding-top:55px;padding-bottom:65px}
+#booking-questions{display:none}
+#tbt-fast-boats{display:none}
+.tbt-travel-extras{background:#f8f3e9;padding:58px 0}
+.tbt-travel-extras .extras-panel{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;background:#fffaf0;border:1px solid #dfd3bf;border-radius:25px;padding:clamp(23px,4vw,42px)}
+.tbt-travel-extras h2{font-family:"Playfair Display",serif;font-size:clamp(28px,3.2vw,40px);line-height:1.15;margin:4px 0 12px}
+.tbt-travel-extras p{max-width:600px;color:#687a71;margin:0}
+@media(max-width:970px){#services .tour-grid.home-choices{grid-template-columns:repeat(2,minmax(0,1fr))}.shortcut-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.hero{min-height:550px}.hero-grid{padding:94px 0 72px}.tbt-home-shortcuts{padding:32px 0 42px}.shortcut{padding:17px 13px;min-height:150px}.shortcut strong{font-size:15px}.shortcut small{font-size:11px}#services .tour-grid.home-choices{gap:11px}#services .tour-grid.home-choices .tour-card{padding:12px}#services .tour-grid.home-choices .tour-card h3{font-size:20px}#services .tour-grid.home-choices .tour-card p{font-size:12px}.tbt-travel-extras{padding:35px 0}}
+</style></head>
 <body><a class="skip" href="#main">Skip to content</a><header class="site-header" id="top">
     <div class="shell nav-wrap">
       <a class="brand" href="/" aria-label="TBT Tours & Travel home">
@@ -690,15 +727,21 @@ header .brand,header .brand small,header .brand-copy,header .nav a,.site-header 
       <div class="shell hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">PRIVATE BALI TOURS • CULTURE • LOCAL KNOWLEDGE</p>
-          <h1>Explore Bali with Budi.</h1>
-          <p class="lead">Private tours, airport transfers and a day planned around you. Book directly with your friendly local driver.</p>
+          <h1>Discover Bali with Budi.</h1>
+          <p class="lead">Local private drivers, unforgettable tours and easy airport transfers. Explore Bali your way with Budi and the TBT team.</p>
           <div class="hero-actions">
             <a class="btn btn-book" href="/tours.html">Explore Tours</a>
-            <a class="btn btn-ghost" href="/plan-trip.html">Book with Budi</a>
+            <a class="btn btn-ghost" href="/plan-trip.html">Book a Driver</a>
           </div>
 </div>
       </div>
     </section>
+<section class="tbt-home-shortcuts" aria-labelledby="tbt-shortcuts-title"><div class="shell"><div class="shortcuts-head"><p class="eyebrow dark">YOUR BALI, MADE EASY</p><h2 id="tbt-shortcuts-title">What can we help you with?</h2><p>Find the right experience in one tap.</p></div><div class="shortcut-grid">
+<a class="shortcut" href="/bali-airport-transfers/"><span class="icon" aria-hidden="true">✈️</span><span><strong>Airport Transfers</strong><small>Arrivals, departures and private pickup</small></span><span class="more">View transfers →</span></a>
+<a class="shortcut" href="/tours.html"><span class="icon" aria-hidden="true">🌴</span><span><strong>Tours &amp; Experiences</strong><small>Flexible days with local drivers</small></span><span class="more">Explore tours →</span></a>
+<a class="shortcut" href="/fast-boats.html"><span class="icon" aria-hidden="true">⛴️</span><span><strong>Island Transfers</strong><small>Boat journeys and harbour transport</small></span><span class="more">See options →</span></a>
+<a class="shortcut" href="/bali-travel-faq.html"><span class="icon" aria-hidden="true">🧳</span><span><strong>Travel Essentials</strong><small>Useful Bali tips and arrival information</small></span><span class="more">Travel help →</span></a>
+</div></div></section>
 <section class="kawan-site-intro" id="kawan-site-intro" aria-labelledby="kawan-site-title">
   <div class="shell inner">
     <div class="intro-copy">
@@ -746,7 +789,7 @@ document.addEventListener('DOMContentLoaded',function(){
     </div>
     <div class="traditional-bali-close-wrap"><button class="traditional-bali-close" type="button">Close</button></div><a class="btn btn-wa traditional-bali-cta" data-lead-source="traditional_bali_options" href="https://wa.me/6285738148276?text=Hi%20Budi%2C%20I%27d%20like%20to%20ask%20about%20traditional%20Bali%20experiences%20such%20as%20temples%2C%20melukat%2C%20cooking%2C%20silver%20making%20or%20batik." target="_blank" rel="noopener">Ask Budi about local experiences</a>
   </div>
-</div></section><section class="reviews-section" id="reviews"><div class="shell reviews-wrap"><div class="reviews-copy"><p class="eyebrow dark">GUEST EXPERIENCES</p><h2>See what travellers say about TBT.</h2><p>Read recent guest feedback or leave a review after your trip.</p></div><div class="review-card-stack"><div class="google-review-card"><div class="google-brand"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div><div class="review-stars">★★★★★</div><p>TBT BALI TOURS (By Budi Bali driver) is a verified Google Business Profile.</p><div class="review-actions"><a class="btn btn-dark" href="https://maps.google.com/maps?cid=6387751195367336511" target="_blank" rel="noopener">Read Google Reviews</a><a class="btn btn-book" href="https://search.google.com/local/writereview?placeid=ChIJ8dbhzcNwNo0RP2pyUd7ZpVg" target="_blank" rel="noopener">Leave a Review</a></div></div></div></div></section><section id="tbt-fast-boats" class="soft" aria-labelledby="tbt-fast-boats-title" style="padding:35px 0">
+</div></section><section class="reviews-section" id="reviews"><div class="shell reviews-wrap"><div class="reviews-copy"><p class="eyebrow dark">GUEST EXPERIENCES</p><h2>See what travellers say about TBT.</h2><p>Read recent guest feedback or leave a review after your trip.</p></div><div class="review-card-stack"><div class="google-review-card"><div class="google-brand"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div><div class="review-stars">★★★★★</div><p>TBT BALI TOURS (By Budi Bali driver) is a verified Google Business Profile.</p><div class="review-actions"><a class="btn btn-dark" href="https://maps.google.com/maps?cid=6387751195367336511" target="_blank" rel="noopener">Read Google Reviews</a><a class="btn btn-book" href="https://search.google.com/local/writereview?placeid=ChIJ8dbhzcNwNo0RP2pyUd7ZpVg" target="_blank" rel="noopener">Leave a Review</a></div></div></div></div></section><section class="tbt-travel-extras" aria-labelledby="tbt-travel-extras-title"><div class="shell"><div class="extras-panel"><div style="flex:1 1 280px"><p class="eyebrow dark">MORE THAN TOURS</p><h2 id="tbt-travel-extras-title">Everything you need for Bali</h2><p>Island transfers, helpful travel information and more ideas to make your trip easier. New services will be added as they become available.</p></div><a class="btn btn-book" href="/fast-boats.html">Explore Travel Extras</a></div></div></section><section id="tbt-fast-boats" class="soft" aria-labelledby="tbt-fast-boats-title" style="padding:35px 0">
   <div class="shell" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px;background:#fffaf0;border:1px solid var(--line);border-radius:24px;padding:clamp(22px,4vw,34px)">
     <div style="flex:1 1 280px"><p class="eyebrow dark">BALI TRAVEL EXTRAS</p><h2 id="tbt-fast-boats-title" style="font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,34px);margin:0 0 8px">Fast boats &amp; island transfers</h2><p style="color:var(--muted);margin:0">Travelling to Nusa Penida, Lembongan or the Gili Islands? See how TBT can help.</p></div>
     <a class="btn btn-book" href="/fast-boats.html" data-lead-source="home_fast_boats_page">View Fast Boat Options</a>
